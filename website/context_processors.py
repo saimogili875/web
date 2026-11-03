@@ -52,8 +52,8 @@ CATEGORIES_DATA = [
             {'num': '3.2', 'title': 'Content and social', 'count': 4, 'desc': 'AI-generated content and social media campaign automation.', 'icon': 'i-mega', 'tags': ['Content', 'Social']},
             {'num': '3.3', 'title': 'SEO and local SEO', 'count': 3, 'desc': 'Search engine optimization to rank higher on Google Maps and search.', 'icon': 'i-search', 'tags': ['SEO', 'Ranking']},
             {'num': '3.4', 'title': 'Lead generation', 'count': 3, 'desc': 'Targeted acquisition campaigns to capture high-intent local leads.', 'icon': 'i-target', 'tags': ['Leads', 'Acquisition']},
-            {'num': '3.5', 'title': 'Lead follow-up', 'count': 3, 'desc': 'Automated follow-ups on WhatsApp and SMS to nurture prospects.', 'icon': 'i-send', 'tags': ['Pilot', 'Automation']},
-            {'num': '3.6', 'title': 'AI calling agent', 'count': 3, 'desc': 'Autonomous AI voice agents for appointment booking and customer outreach.', 'icon': 'i-phone', 'tags': ['Pilot', 'AI Voice']},
+            {'num': '3.5', 'title': 'Lead follow-up', 'count': 3, 'desc': 'Automated follow-ups on WhatsApp and SMS to nurture prospects.', 'icon': 'i-send', 'tags': ['WhatsApp', 'Automation']},
+            {'num': '3.6', 'title': 'AI calling agent', 'count': 3, 'desc': 'Autonomous AI voice agents for appointment booking and customer outreach.', 'icon': 'i-phone', 'tags': ['Voice AI', 'Bookings']},
             {'num': '3.7', 'title': 'Reporting', 'count': 3, 'desc': 'Real-time dashboards tracking marketing ROAS and growth metrics.', 'icon': 'i-trend', 'tags': ['Metrics', 'ROAS']},
         ]
     },
@@ -90,3 +90,4 @@ def studio_context(request):
         'DEFAULT_WA_URL': default_wa_url,
         'CATEGORIES': CATEGORIES_DATA,
     }
+

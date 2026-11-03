@@ -174,4 +174,120 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
   }
+
+  // 5. Popular Builds Row (Scroll Reveal, Marquee Drift & Sub-Card Filtering)
+  (function initPopularBuilds() {
+    var cards = document.querySelectorAll('.stack-card');
+    if (!cards.length) return;
+
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // a. Scroll Reveal with IntersectionObserver (60ms stagger)
+    if ('IntersectionObserver' in window && !reduceMotion) {
+      var revealObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            var chips = entry.target.querySelectorAll('.popular-chip');
+            chips.forEach(function (chip, idx) {
+              if (!chip.classList.contains('revealed')) {
+                setTimeout(function () {
+                  chip.classList.add('revealed');
+                }, idx * 60);
+              }
+            });
+          }
+        });
+      }, { threshold: 0.15 });
+
+      cards.forEach(function (card) {
+        revealObserver.observe(card);
+      });
+    } else {
+      // Show immediately if prefers-reduced-motion
+      document.querySelectorAll('.popular-chip').forEach(function (chip) {
+        chip.classList.add('revealed');
+      });
+    }
+
+    // b. Horizontal Marquee Drift (Pauses on hover/touch, never traps vertical scroll)
+    var tracks = document.querySelectorAll('.popular-chips-track');
+    tracks.forEach(function (track) {
+      var isPaused = false;
+      var isTouching = false;
+
+      if (!reduceMotion) {
+        function drift() {
+          // Drift only when visible, not paused, not touching, and not actively filtered
+          if (!isPaused && !isTouching && !track.dataset.filterActive) {
+            track.scrollLeft += 0.45;
+            if (track.scrollLeft >= track.scrollWidth - track.clientWidth - 2) {
+              track.scrollLeft = 0;
+            }
+          }
+          requestAnimationFrame(drift);
+        }
+        requestAnimationFrame(drift);
+
+        // Pause on hover
+        track.addEventListener('mouseenter', function () { isPaused = true; });
+        track.addEventListener('mouseleave', function () { isPaused = false; });
+
+        // Pause on touch
+        track.addEventListener('touchstart', function () { isTouching = true; }, { passive: true });
+        track.addEventListener('touchend', function () {
+          setTimeout(function () { isTouching = false; }, 1400);
+        }, { passive: true });
+      }
+    });
+
+    // c. Sub-Card Tap Interaction: Highlights matching chips & scrolls to first one
+    cards.forEach(function (card) {
+      var subCards = card.querySelectorAll('.subcard-toggle');
+      var chips = card.querySelectorAll('.popular-chip');
+      var track = card.querySelector('.popular-chips-track');
+
+      subCards.forEach(function (subCard) {
+        subCard.addEventListener('click', function (e) {
+          // If clicked directly to filter
+          e.preventDefault();
+          var subCode = subCard.getAttribute('data-sub');
+          var wasActive = subCard.classList.contains('active');
+
+          // Reset all sub-cards in this card
+          subCards.forEach(function (sc) { sc.classList.remove('active'); });
+
+          if (wasActive) {
+            // Tap again to clear
+            chips.forEach(function (ch) {
+              ch.classList.remove('highlighted', 'dimmed');
+            });
+            if (track) delete track.dataset.filterActive;
+          } else {
+            // Activate this sub-card
+            subCard.classList.add('active');
+            if (track) track.dataset.filterActive = 'true';
+
+            var firstMatch = null;
+            chips.forEach(function (ch) {
+              if (ch.getAttribute('data-sub') === subCode) {
+                ch.classList.add('highlighted');
+                ch.classList.remove('dimmed');
+                if (!firstMatch) firstMatch = ch;
+              } else {
+                ch.classList.remove('highlighted');
+                ch.classList.add('dimmed');
+              }
+            });
+
+            // Scroll track to the first matching chip
+            if (track && firstMatch) {
+              var targetScroll = firstMatch.offsetLeft - track.offsetLeft - 10;
+              track.scrollTo({ left: Math.max(0, targetScroll), behavior: 'smooth' });
+            }
+          }
+        });
+      });
+    });
+  })();
 });
+
