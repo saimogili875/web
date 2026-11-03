@@ -53,56 +53,97 @@ document.addEventListener('DOMContentLoaded', function () {
     }, 4500);
   }
 
-  // 3. Sticky Card-Stack Effect
+  // 3. Sticky Card-Stack Effect, Complete Disappear & Dynamic Background Colors
   (function initCardStack() {
     var cards = Array.from(document.querySelectorAll('.stack-card'));
     if (!cards.length) return;
 
     var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var isVerySmallScreen = window.innerWidth <= 480;
-    var ticking = false;
+    var backdropLayers = [
+      document.querySelector('.backdrop-layer.bg-cat-1'),
+      document.querySelector('.backdrop-layer.bg-cat-2'),
+      document.querySelector('.backdrop-layer.bg-cat-3'),
+      document.querySelector('.backdrop-layer.bg-cat-4')
+    ];
 
-    function measure() {
-      // Turn off card stack sticky effect on very small screens to prevent lag
-      if (window.innerWidth <= 480) {
-        cards.forEach(function (c) {
-          c.classList.add('no-stick');
-          c.style.transform = '';
-          c.style.setProperty('--dim', '0');
-        });
-        return;
-      }
-
-      cards.forEach(function (c) {
-        c.classList.remove('no-stick');
-        var top = parseFloat(getComputedStyle(c).top) || 0;
-        // If card height is taller than viewport room, disable sticky
-        if (c.offsetHeight > window.innerHeight - top - 20) {
-          c.classList.add('no-stick');
+    function setBackdrop(activeIdx) {
+      backdropLayers.forEach(function (layer, idx) {
+        if (!layer) return;
+        if (idx === activeIdx) {
+          layer.classList.add('active');
+        } else {
+          layer.classList.remove('active');
         }
       });
-      update();
     }
+
+    var ticking = false;
 
     function update() {
       ticking = false;
-      if (reduce || window.innerWidth <= 480) return;
+      var vh = window.innerHeight;
 
+      // 1. DYNAMIC BACKGROUND COLOR SWITCHING
+      // "before coming of 2. ODOO-STYLE ERP there should be colour with coming and entrance"
+      var card1 = cards[0];
+      var card2 = cards[1];
+      var card3 = cards[2];
+      var card4 = cards[3];
+
+      if (card4 && card4.getBoundingClientRect().top < vh * 0.75) {
+        setBackdrop(3); // Category 4: Emerald
+      } else if (card3 && card3.getBoundingClientRect().top < vh * 0.75) {
+        setBackdrop(2); // Category 3: Magenta
+      } else if (card2 && card2.getBoundingClientRect().top < vh * 0.75) {
+        setBackdrop(1); // Category 2: Sapphire Blue (switches before Card 2 reaches sticky position)
+      } else {
+        setBackdrop(0); // Category 1: Purple
+      }
+
+      if (reduce || window.innerWidth <= 480) {
+        return;
+      }
+
+      // 2. COMPLETE DISAPPEARANCE OF PREVIOUS CARDS
+      // "and that 2. ODOO-STYLE ERP should maintain some distance and completely should be disappear man"
       cards.forEach(function (card, i) {
         var next = cards[i + 1];
-        if (!next || card.classList.contains('no-stick')) {
+        if (!next) {
+          card.style.opacity = '1';
           card.style.transform = '';
-          card.style.setProperty('--dim', '0');
+          card.style.visibility = 'visible';
+          card.style.pointerEvents = 'auto';
           return;
         }
 
-        var stickyTop = parseFloat(getComputedStyle(card).top) || 0;
+        var stickyTop = parseFloat(getComputedStyle(card).top) || 86;
         var nextTop = next.getBoundingClientRect().top;
-        var p = 1 - (nextTop - stickyTop) / card.offsetHeight;
-        p = Math.max(0, Math.min(1, p));
 
-        card.style.transform = 'scale(' + (1 - p * 0.06).toFixed(4) + ')';
-        card.style.setProperty('--dim', (p * 0.45).toFixed(3));
+        // Transition window: as next card moves from (stickyTop + 360px) up to (stickyTop + 20px)
+        var fadeStart = stickyTop + 360;
+        var fadeEnd = stickyTop + 20;
+
+        if (nextTop >= fadeStart) {
+          // Next card is far below: current card is 100% visible
+          card.style.opacity = '1';
+          card.style.transform = 'scale(1) translateY(0)';
+          card.style.visibility = 'visible';
+          card.style.pointerEvents = 'auto';
+        } else if (nextTop <= fadeEnd) {
+          // Next card has docked: current card COMPLETELY DISAPPEARS
+          card.style.opacity = '0';
+          card.style.transform = 'scale(0.92) translateY(-24px)';
+          card.style.visibility = 'hidden';
+          card.style.pointerEvents = 'none';
+        } else {
+          // In transition: smooth fade and subtle lift
+          var p = (fadeStart - nextTop) / (fadeStart - fadeEnd);
+          p = Math.max(0, Math.min(1, p));
+          card.style.opacity = (1 - p).toFixed(3);
+          card.style.transform = 'scale(' + (1 - p * 0.08).toFixed(4) + ') translateY(' + (-p * 24).toFixed(1) + 'px)';
+          card.style.visibility = 'visible';
+          card.style.pointerEvents = (p > 0.8) ? 'none' : 'auto';
+        }
       });
     }
 
@@ -114,8 +155,8 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', measure);
-    measure();
+    window.addEventListener('resize', update);
+    update();
   })();
 
   // 4. Contact Form AJAX Submission with Instant Feedback
@@ -175,115 +216,98 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // 5. Popular Builds Row (Scroll Reveal, Marquee Drift & Sub-Card Filtering)
+  // 5. Popular Builds Infinite Marquee (Continuous Loop, Hover/Touch Pause & Sub-Card Filtering)
   (function initPopularBuilds() {
     var cards = document.querySelectorAll('.stack-card');
     if (!cards.length) return;
 
     var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // a. Scroll Reveal with IntersectionObserver (60ms stagger)
-    if ('IntersectionObserver' in window && !reduceMotion) {
-      var revealObserver = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            var chips = entry.target.querySelectorAll('.popular-chip');
-            chips.forEach(function (chip, idx) {
-              if (!chip.classList.contains('revealed')) {
-                setTimeout(function () {
-                  chip.classList.add('revealed');
-                }, idx * 60);
-              }
-            });
-          }
-        });
-      }, { threshold: 0.15 });
-
-      cards.forEach(function (card) {
-        revealObserver.observe(card);
-      });
-    } else {
-      // Show immediately if prefers-reduced-motion
-      document.querySelectorAll('.popular-chip').forEach(function (chip) {
-        chip.classList.add('revealed');
-      });
-    }
-
-    // b. Horizontal Marquee Drift (Pauses on hover/touch, never traps vertical scroll)
+    // Convert each popular-chips-track into a seamless continuous marquee
     var tracks = document.querySelectorAll('.popular-chips-track');
     tracks.forEach(function (track) {
-      var isPaused = false;
-      var isTouching = false;
+      var chips = Array.from(track.querySelectorAll('.popular-chip'));
+      if (!chips.length) return;
 
-      if (!reduceMotion) {
-        function drift() {
-          // Drift only when visible, not paused, not touching, and not actively filtered
-          if (!isPaused && !isTouching && !track.dataset.filterActive) {
-            track.scrollLeft += 0.45;
-            if (track.scrollLeft >= track.scrollWidth - track.clientWidth - 2) {
-              track.scrollLeft = 0;
-            }
-          }
-          requestAnimationFrame(drift);
+      var inner = document.createElement('div');
+      inner.className = 'popular-marquee-inner';
+
+      var group1 = document.createElement('div');
+      group1.className = 'popular-marquee-group';
+      chips.forEach(function (chip) {
+        chip.classList.add('revealed');
+        group1.appendChild(chip);
+      });
+
+      var group2 = group1.cloneNode(true);
+      group2.setAttribute('aria-hidden', 'true');
+
+      inner.appendChild(group1);
+      inner.appendChild(group2);
+      track.innerHTML = '';
+      track.appendChild(inner);
+
+      // Pause on hover
+      track.addEventListener('mouseenter', function () {
+        track.classList.add('is-paused');
+      });
+      track.addEventListener('mouseleave', function () {
+        if (!track.dataset.filterActive) {
+          track.classList.remove('is-paused');
         }
-        requestAnimationFrame(drift);
+      });
 
-        // Pause on hover
-        track.addEventListener('mouseenter', function () { isPaused = true; });
-        track.addEventListener('mouseleave', function () { isPaused = false; });
-
-        // Pause on touch
-        track.addEventListener('touchstart', function () { isTouching = true; }, { passive: true });
-        track.addEventListener('touchend', function () {
-          setTimeout(function () { isTouching = false; }, 1400);
-        }, { passive: true });
-      }
+      // Pause on touch
+      track.addEventListener('touchstart', function () {
+        track.classList.add('is-paused');
+      }, { passive: true });
+      track.addEventListener('touchend', function () {
+        setTimeout(function () {
+          if (!track.dataset.filterActive) {
+            track.classList.remove('is-paused');
+          }
+        }, 1200);
+      }, { passive: true });
     });
 
-    // c. Sub-Card Tap Interaction: Highlights matching chips & scrolls to first one
+    // Sub-Card Tap Interaction: Highlights matching chips across both marquee groups
     cards.forEach(function (card) {
       var subCards = card.querySelectorAll('.subcard-toggle');
-      var chips = card.querySelectorAll('.popular-chip');
       var track = card.querySelector('.popular-chips-track');
 
       subCards.forEach(function (subCard) {
         subCard.addEventListener('click', function (e) {
-          // If clicked directly to filter
           e.preventDefault();
           var subCode = subCard.getAttribute('data-sub');
           var wasActive = subCard.classList.contains('active');
 
-          // Reset all sub-cards in this card
           subCards.forEach(function (sc) { sc.classList.remove('active'); });
+          var allChips = card.querySelectorAll('.popular-chip');
 
           if (wasActive) {
-            // Tap again to clear
-            chips.forEach(function (ch) {
+            allChips.forEach(function (ch) {
               ch.classList.remove('highlighted', 'dimmed');
             });
-            if (track) delete track.dataset.filterActive;
+            if (track) {
+              delete track.dataset.filterActive;
+              track.classList.remove('is-paused');
+            }
           } else {
-            // Activate this sub-card
             subCard.classList.add('active');
-            if (track) track.dataset.filterActive = 'true';
+            if (track) {
+              track.dataset.filterActive = 'true';
+              track.classList.add('is-paused'); // pause marquee while inspecting filtered sub-card
+            }
 
-            var firstMatch = null;
-            chips.forEach(function (ch) {
+            allChips.forEach(function (ch) {
               if (ch.getAttribute('data-sub') === subCode) {
                 ch.classList.add('highlighted');
                 ch.classList.remove('dimmed');
-                if (!firstMatch) firstMatch = ch;
               } else {
                 ch.classList.remove('highlighted');
                 ch.classList.add('dimmed');
               }
             });
-
-            // Scroll track to the first matching chip
-            if (track && firstMatch) {
-              var targetScroll = firstMatch.offsetLeft - track.offsetLeft - 10;
-              track.scrollTo({ left: Math.max(0, targetScroll), behavior: 'smooth' });
-            }
           }
         });
       });

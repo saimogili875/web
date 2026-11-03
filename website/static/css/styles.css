@@ -31,11 +31,12 @@
 html {
   scroll-behavior: smooth;
   font-size: 16px;
+  background-color: #0d0a21;
 }
 
 body {
   font-family: 'Montserrat', system-ui, -apple-system, sans-serif;
-  background-color: var(--bg-deep);
+  background-color: transparent;
   color: var(--text-main);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
@@ -45,14 +46,73 @@ body {
   position: relative;
 }
 
-/* Fixed gradient layer behind content */
+/* Remove static gradient layer so dynamic backdrop shines through */
 body::before {
-  content: "";
+  display: none;
+}
+
+/* Dynamic Atmospheric Backdrop for the 4 Categories */
+.dynamic-backdrop {
   position: fixed;
   inset: 0;
+  pointer-events: none;
   z-index: -1;
-  background: linear-gradient(135deg, #1A1642 0%, #100E25 100%);
+  overflow: hidden;
+  background-color: #0b091f;
 }
+
+.backdrop-layer {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity;
+}
+
+.backdrop-layer.active {
+  opacity: 1;
+}
+
+/* 4 distinct background color entries */
+/* 1. Purple/Violet for Websites & Apps */
+.bg-cat-1 {
+  background: 
+    radial-gradient(ellipse 90% 70% at 50% 25%, rgba(168, 85, 247, 0.35) 0%, transparent 65%),
+    radial-gradient(circle at 85% 75%, rgba(121, 40, 202, 0.24) 0%, transparent 45%),
+    #13102D;
+}
+
+/* 2. Electric Sapphire Blue for Odoo-Style ERP */
+.bg-cat-2 {
+  background: 
+    radial-gradient(ellipse 90% 70% at 50% 25%, rgba(59, 130, 246, 0.40) 0%, transparent 65%),
+    radial-gradient(circle at 15% 75%, rgba(29, 78, 216, 0.28) 0%, transparent 45%),
+    #081226;
+}
+
+/* 3. Deep Magenta/Plum for AI Marketing */
+.bg-cat-3 {
+  background: 
+    radial-gradient(ellipse 90% 70% at 50% 25%, rgba(236, 72, 153, 0.35) 0%, transparent 65%),
+    radial-gradient(circle at 85% 75%, rgba(190, 24, 93, 0.25) 0%, transparent 45%),
+    #1F0C27;
+}
+
+/* 4. Deep Emerald/Forest for Domain AI Agents */
+.bg-cat-4 {
+  background: 
+    radial-gradient(ellipse 90% 70% at 50% 25%, rgba(16, 185, 129, 0.35) 0%, transparent 65%),
+    radial-gradient(circle at 15% 75%, rgba(4, 120, 87, 0.25) 0%, transparent 45%),
+    #051D18;
+}
+
+/* When a page has data-theme, set initial active layer */
+body[data-theme="cat-2"] .backdrop-layer.bg-cat-2 { opacity: 1; }
+body[data-theme="cat-3"] .backdrop-layer.bg-cat-3 { opacity: 1; }
+body[data-theme="cat-4"] .backdrop-layer.bg-cat-4 { opacity: 1; }
+body[data-theme="cat-2"] .backdrop-layer.bg-cat-1,
+body[data-theme="cat-3"] .backdrop-layer.bg-cat-1,
+body[data-theme="cat-4"] .backdrop-layer.bg-cat-1 { opacity: 0; }
 
 /* Accessible Skip Link */
 .skip-link {
@@ -580,14 +640,15 @@ textarea:focus-visible {
 
 .stack-card {
   position: sticky;
+  top: 86px;
   border-radius: var(--radius-card);
   padding: 36px;
-  margin-bottom: 60px;
+  margin-bottom: 45vh;
   box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.45), 0 30px 70px rgba(0, 0, 0, 0.6);
   border: 1px solid rgba(255, 255, 255, 0.15);
   transform-origin: top center;
-  will-change: transform, filter;
-  transition: border-color 0.3s;
+  will-change: transform, opacity;
+  transition: border-color 0.3s, opacity 0.25s ease-out, transform 0.25s ease-out;
 }
 
 .stack-card:hover {
@@ -595,7 +656,7 @@ textarea:focus-visible {
 }
 
 #card-1 {
-  top: 90px;
+  top: 86px;
   background: #1A1642;
   border-color: rgba(168, 85, 247, 0.45);
   z-index: 1;
@@ -603,7 +664,7 @@ textarea:focus-visible {
   --c2: #7928CA;
 }
 #card-2 {
-  top: 115px;
+  top: 86px;
   background: #100E25;
   border-color: rgba(59, 130, 246, 0.45);
   z-index: 2;
@@ -611,7 +672,7 @@ textarea:focus-visible {
   --c2: #1D4ED8;
 }
 #card-3 {
-  top: 140px;
+  top: 86px;
   background: #23123C;
   border-color: rgba(236, 72, 153, 0.45);
   z-index: 3;
@@ -619,9 +680,10 @@ textarea:focus-visible {
   --c2: #BE185D;
 }
 #card-4 {
-  top: 165px;
+  top: 86px;
   background: #0A2D23;
   border-color: rgba(16, 185, 129, 0.45);
+  margin-bottom: 60px;
   z-index: 4;
   --c: #10B981;
   --c2: #047857;
@@ -635,12 +697,15 @@ textarea:focus-visible {
 @media (max-width: 768px) {
   .stack-card {
     padding: 20px;
-    margin-bottom: 30px;
+    margin-bottom: 30vh;
+    top: 70px;
   }
-  #card-1 { top: 75px; }
-  #card-2 { top: 90px; }
-  #card-3 { top: 105px; }
-  #card-4 { top: 120px; }
+  #card-1, #card-2, #card-3, #card-4 {
+    top: 70px;
+  }
+  #card-4 {
+    margin-bottom: 40px;
+  }
 }
 
 .cat-head {
@@ -798,24 +863,46 @@ textarea:focus-visible {
 .popular-chips-track {
   display: flex;
   align-items: center;
-  gap: 8px;
-  overflow-x: auto;
-  overflow-y: hidden;
+  overflow: hidden;
+  position: relative;
   white-space: nowrap;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  scroll-snap-type: x proximity;
   flex: 1 1 auto;
   height: 100%;
   overscroll-behavior-x: contain;
   touch-action: pan-x pan-y;
-  cursor: grab;
+  cursor: pointer;
+  mask-image: linear-gradient(to right, transparent 0, black 28px, black calc(100% - 28px), transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0, black 28px, black calc(100% - 28px), transparent 100%);
 }
-.popular-chips-track:active {
-  cursor: grabbing;
+
+.popular-marquee-inner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: max-content;
+  animation: marquee-infinite 32s linear infinite;
+  will-change: transform;
 }
-.popular-chips-track::-webkit-scrollbar {
-  display: none;
+
+.popular-marquee-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+@keyframes marquee-infinite {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-50% - 5px));
+  }
+}
+
+.popular-chips-track:hover .popular-marquee-inner,
+.popular-chips-track.is-paused .popular-marquee-inner {
+  animation-play-state: paused;
 }
 
 .popular-chip {
@@ -825,16 +912,15 @@ textarea:focus-visible {
   padding: 5px 12px;
   border-radius: 999px;
   border: 1px solid color-mix(in srgb, var(--c) 42%, transparent);
-  background: color-mix(in srgb, var(--c) 10%, rgba(255, 255, 255, 0.03));
+  background: color-mix(in srgb, var(--c) 12%, rgba(255, 255, 255, 0.04));
   color: #FFFFFF;
   font-size: 12px;
   font-weight: 600;
   white-space: nowrap;
   flex: 0 0 auto;
-  scroll-snap-align: start;
-  opacity: 0;
-  transform: translateY(10px);
-  transition: opacity 0.35s ease, transform 0.35s ease, border-color 0.2s, background 0.2s, box-shadow 0.2s;
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.25s ease, transform 0.25s ease, border-color 0.2s, background 0.2s, box-shadow 0.2s;
   user-select: none;
 }
 
@@ -868,6 +954,12 @@ textarea:focus-visible {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .popular-marquee-inner {
+    animation: none !important;
+  }
+  .popular-chips-track {
+    overflow-x: auto;
+  }
   .popular-chip {
     opacity: 1 !important;
     transform: none !important;
