@@ -1,0 +1,123 @@
+[
+  {
+    "id": "proto-10",
+    "name": "Namma Kirana Quick Mart",
+    "type": "E-commerce",
+    "industry": "Grocery & Retail",
+    "description": "WhatsApp-integrated daily essentials catalog with quick basket builder, pin-code delivery checks, and instant UPI order dispatch.",
+    "demoUrl": "#demo-kirana-grocery",
+    "reelUrl": "https://instagram.com/reel/#kirana",
+    "image": "assets/prototypes/kirana.svg",
+    "day": "Day 48",
+    "badge": "Latest Reel"
+  },
+  {
+    "id": "proto-09",
+    "name": "SmileCraft Dental Care",
+    "type": "Business site",
+    "industry": "Healthcare",
+    "description": "Clean dentist booking site with doctor profiles, procedure pricing estimates, automated WhatsApp slot confirmation, and emergency call triggers.",
+    "demoUrl": "#demo-dentist",
+    "reelUrl": "https://instagram.com/reel/#dentist",
+    "image": "assets/prototypes/dentist.svg",
+    "day": "Day 47",
+    "badge": "Trending"
+  },
+  {
+    "id": "proto-08",
+    "name": "CarePath Lab & Diagnostics",
+    "type": "SaaS",
+    "industry": "Healthcare",
+    "description": "Home test collection booking system, digital test package catalog, and secure patient report lookup with SMS notifications.",
+    "demoUrl": "#demo-diagnostic-lab",
+    "reelUrl": "https://instagram.com/reel/#diagnostic",
+    "image": "assets/prototypes/diagnostic.svg",
+    "day": "Day 46",
+    "badge": "High Demand"
+  },
+  {
+    "id": "proto-07",
+    "name": "Vidya Mandir School Portal",
+    "type": "Institution portal",
+    "industry": "Education",
+    "description": "Parent information desk, online admissions inquiry funnel, school fee schedule downloads, and annual academic calendar showcase.",
+    "demoUrl": "#demo-school",
+    "reelUrl": "https://instagram.com/reel/#school",
+    "image": "assets/prototypes/school.svg",
+    "day": "Day 45",
+    "badge": "Institution"
+  },
+  {
+    "id": "proto-06",
+    "name": "Crumb & Crust Artisanal Bakery",
+    "type": "E-commerce",
+    "industry": "Food & Beverage",
+    "description": "Custom cake pre-ordering engine with flavor customizer, pickup slot booking, and integrated Instagram story promo showcase.",
+    "demoUrl": "#demo-bakery",
+    "reelUrl": "https://instagram.com/reel/#bakery",
+    "image": "assets/prototypes/bakery.svg",
+    "day": "Day 44",
+    "badge": "Popular"
+  },
+  {
+    "id": "proto-05",
+    "name": "Pulse Fitness Studio & Gym",
+    "type": "Business site",
+    "industry": "Fitness & Sports",
+    "description": "High-energy gym landing page with interactive class timetable, trainer bios, trial pass WhatsApp generator, and membership tiers.",
+    "demoUrl": "#demo-gym",
+    "reelUrl": "https://instagram.com/reel/#gym",
+    "image": "assets/prototypes/gym.svg",
+    "day": "Day 43",
+    "badge": "High Conversion"
+  },
+  {
+    "id": "proto-04",
+    "name": "Arogya Polyclinic OPD",
+    "type": "Business site",
+    "industry": "Healthcare",
+    "description": "Multi-specialty clinic appointment scheduler with doctor slot availability, patient triage form, and Google Maps directions.",
+    "demoUrl": "#demo-clinic-booking",
+    "reelUrl": "https://instagram.com/reel/#clinic",
+    "image": "assets/prototypes/clinic.svg",
+    "day": "Day 42",
+    "badge": "Essential"
+  },
+  {
+    "id": "proto-03",
+    "name": "Rankers Coaching Academy",
+    "type": "Institution portal",
+    "industry": "Education",
+    "description": "Coaching institute admissions portal with batch schedules, demo lecture bookings, scholarship test registrations, and faculty bios.",
+    "demoUrl": "#demo-coaching-centre",
+    "reelUrl": "https://instagram.com/reel/#coaching",
+    "image": "assets/prototypes/coaching.svg",
+    "day": "Day 41",
+    "badge": "Education"
+  },
+  {
+    "id": "proto-02",
+    "name": "Zaika Express Food Ordering",
+    "type": "E-commerce",
+    "industry": "Food & Beverage",
+    "description": "Direct-to-kitchen digital menu with zero commission, category filtering, table QR ordering support, and automated WhatsApp order summary.",
+    "demoUrl": "#demo-restaurant-ordering",
+    "reelUrl": "https://instagram.com/reel/#restaurant",
+    "image": "assets/prototypes/restaurant.svg",
+    "day": "Day 40",
+    "badge": "Hot"
+  },
+  {
+    "id": "proto-01",
+    "name": "Aura Unisex Salon & Spa",
+    "type": "Business site",
+    "industry": "Salon & Beauty",
+    "description": "Sleek service menu, stylist selection, appointment slot reservation, package discounts, and instant WhatsApp booking confirmation.",
+    "demoUrl": "#demo-salon",
+    "reelUrl": "https://instagram.com/reel/#salon",
+    "image": "assets/prototypes/salon.svg",
+    "day": "Day 39",
+    "badge": "Classic"
+  }
+]
+
