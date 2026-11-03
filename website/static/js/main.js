@@ -1,8 +1,71 @@
 /**
  * Arkshar Studio - Main Frontend Interactions
  */
+
+// ========================================================
+// 1. MARQUEE CONFIGURATION (EDITABLE FROM ONE CONFIG)
+// ========================================================
+const MARQUEE_CONFIG = {
+  speed: 0.6,        // pixels moved per 1px of page scroll. Higher = faster, 0.2 = slow, 1.2 = fast
+  wordGap: 40,       // px of space between one word and the next
+  fontSize: 15,      // px
+  fontWeight: 700,
+  rowBackground: "#FFFFFF",   // the scrolling strip itself is WHITE
+  rows: {
+    "card-1": { color: "#7928CA", words: [ // Customized Websites and Apps
+      "3D / interactive hero (the wow first impression)",
+      "WhatsApp button",
+      "Chatbot (instant contact)",
+      "Online payment / booking CTA",
+      "Trust: secure payments, reviews, support",
+      "Admin dashboard, billing, analytics" ]},
+    "card-2": { color: "#1D4ED8", words: [ // Odoo-style ERP
+      "Sales and CRM", "Accounting", "Inventory and Purchase", "POS",
+      "Operations", "Delivery and multi-vendor", "Industry ERPs" ]},
+    "card-3": { color: "#BE185D", words: [ // AI Marketing and Business Analysis
+      "Business analysis", "Content and social", "SEO and local SEO",
+      "Lead generation", "Lead follow-up", "AI calling agent", "Reporting" ]},
+    "card-4": { color: "#047857", words: [ // Domain AI Agents
+      "Exam agents", "Institution agent", "HR agent", "Finance agent",
+      "Healthcare agent", "Support agent", "Specialized calling agent" ]}
+  }
+};
+
+// SVG Icon Mapping for each word (reuses existing SVG sprites)
+const WORD_ICONS = {
+  "3D / interactive hero (the wow first impression)": "i-layers",
+  "WhatsApp button": "i-whatsapp",
+  "Chatbot (instant contact)": "i-bot",
+  "Online payment / booking CTA": "i-card",
+  "Trust: secure payments, reviews, support": "i-wallet",
+  "Admin dashboard, billing, analytics": "i-calc",
+  "Sales and CRM": "i-users",
+  "Accounting": "i-calc",
+  "Inventory and Purchase": "i-box",
+  "POS": "i-card",
+  "Operations": "i-flow",
+  "Delivery and multi-vendor": "i-truck",
+  "Industry ERPs": "i-factory",
+  "Business analysis": "i-chart",
+  "Content and social": "i-mega",
+  "SEO and local SEO": "i-search",
+  "Lead generation": "i-target",
+  "Lead follow-up": "i-send",
+  "AI calling agent": "i-phone",
+  "Reporting": "i-trend",
+  "Exam agents": "i-grad",
+  "Institution agent": "i-school",
+  "HR agent": "i-users",
+  "Finance agent": "i-wallet",
+  "Healthcare agent": "i-pulse",
+  "Support agent": "i-headset",
+  "Specialized calling agent": "i-phone"
+};
+
 document.addEventListener('DOMContentLoaded', function () {
+  // ========================================================
   // 1. Mobile Hamburger Menu Drawer
+  // ========================================================
   var hamburger = document.querySelector('.hamburger-toggle');
   var drawer = document.getElementById('mobile-drawer');
 
@@ -14,7 +77,6 @@ document.addEventListener('DOMContentLoaded', function () {
       document.body.style.overflow = !isOpen ? 'hidden' : '';
     });
 
-    // Close drawer when clicking a navigation link
     drawer.querySelectorAll('a').forEach(function (link) {
       link.addEventListener('click', function () {
         hamburger.setAttribute('aria-expanded', 'false');
@@ -24,7 +86,9 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
+  // ========================================================
   // 2. Hero Phone Slideshow
+  // ========================================================
   var slides = Array.from(document.querySelectorAll('.phone .slide'));
   var slideIndex = 0;
   var nextBtn = document.querySelector('.arrow.next');
@@ -53,113 +117,203 @@ document.addEventListener('DOMContentLoaded', function () {
     }, 4500);
   }
 
-  // 3. Sticky Card-Stack Effect, Complete Disappear & Dynamic Background Colors
-  (function initCardStack() {
-    var cards = Array.from(document.querySelectorAll('.stack-card'));
-    if (!cards.length) return;
+  // ========================================================
+  // 3. Build Scrolling Rows from MARQUEE_CONFIG
+  // ========================================================
+  var marqueeRows = [];
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var backdropLayers = [
-      document.querySelector('.backdrop-layer.bg-cat-1'),
-      document.querySelector('.backdrop-layer.bg-cat-2'),
-      document.querySelector('.backdrop-layer.bg-cat-3'),
-      document.querySelector('.backdrop-layer.bg-cat-4')
-    ];
+  function buildMarqueeRows() {
+    var cardIds = ['card-1', 'card-2', 'card-3', 'card-4'];
+    cardIds.forEach(function (cardId, index) {
+      var rowData = MARQUEE_CONFIG.rows[cardId];
+      if (!rowData) return;
 
-    function setBackdrop(activeIdx) {
-      backdropLayers.forEach(function (layer, idx) {
-        if (!layer) return;
-        if (idx === activeIdx) {
-          layer.classList.add('active');
-        } else {
-          layer.classList.remove('active');
+      var card = document.getElementById(cardId);
+      if (!card) return;
+
+      var track = card.querySelector('.popular-chips-track');
+      if (!track) return;
+
+      var wrap = card.querySelector('.popular-builds-wrap');
+      if (wrap) {
+        wrap.style.backgroundColor = MARQUEE_CONFIG.rowBackground;
+      }
+
+      track.innerHTML = '';
+
+      var inner = document.createElement('div');
+      inner.className = 'marquee-inner';
+
+      // Helper to create a group of words
+      function createGroup(isAriaHidden) {
+        var group = document.createElement('div');
+        group.className = 'marquee-group';
+        group.style.gap = MARQUEE_CONFIG.wordGap + 'px';
+        group.style.paddingRight = MARQUEE_CONFIG.wordGap + 'px';
+        if (isAriaHidden) {
+          group.setAttribute('aria-hidden', 'true');
         }
+
+        rowData.words.forEach(function (word) {
+          var wordEl = document.createElement('span');
+          wordEl.className = 'marquee-word';
+          wordEl.style.color = rowData.color;
+          wordEl.style.fontSize = MARQUEE_CONFIG.fontSize + 'px';
+          wordEl.style.fontWeight = MARQUEE_CONFIG.fontWeight;
+          wordEl.style.textTransform = 'uppercase';
+
+          var iconId = WORD_ICONS[word] || 'i-globe';
+          wordEl.innerHTML =
+            '<svg class="marquee-word-icon" aria-hidden="true" style="color:' +
+            rowData.color +
+            '; width: 16px; height: 16px;"><use href="#' +
+            iconId +
+            '"></use></svg><span>' +
+            word.toUpperCase() +
+            '</span>';
+
+          group.appendChild(wordEl);
+        });
+        return group;
+      }
+
+      // Append 4 identical groups for a seamless infinite loop
+      var firstGroup = createGroup(false);
+      inner.appendChild(firstGroup);
+      for (var g = 0; g < 3; g++) {
+        inner.appendChild(createGroup(true));
+      }
+
+      track.appendChild(inner);
+
+      var isPaused = false;
+      var lastOffset = 0;
+
+      track.addEventListener('mouseenter', function () { isPaused = true; });
+      track.addEventListener('mouseleave', function () { isPaused = false; });
+      track.addEventListener('touchstart', function () { isPaused = true; }, { passive: true });
+      track.addEventListener('touchend', function () { isPaused = false; }, { passive: true });
+
+      marqueeRows.push({
+        cardId: cardId,
+        index: index, // 0=odd(Card 1), 1=even(Card 2), 2=odd(Card 3), 3=even(Card 4)
+        track: track,
+        inner: inner,
+        firstGroup: firstGroup,
+        isPaused: function () { return isPaused; },
+        getLastOffset: function () { return lastOffset; },
+        setLastOffset: function (x) { lastOffset = x; }
+      });
+    });
+  }
+
+  buildMarqueeRows();
+
+  // ========================================================
+  // 4. Scroll Handler: Move Rows, Change BG & Card 2 Exit
+  // ========================================================
+  var faqSection = document.getElementById('faqs') || document.querySelector('.faq-section');
+  var card1 = document.getElementById('card-1');
+  var card2 = document.getElementById('card-2');
+  var card3 = document.getElementById('card-3');
+  var card4 = document.getElementById('card-4');
+
+  var currentBg = '';
+  var ticking = false;
+
+  function onScrollFrame() {
+    ticking = false;
+    var scrollY = window.pageYOffset || document.documentElement.scrollTop;
+    var vh = window.innerHeight;
+
+    // 1. SCROLLING ROWS MOVE WITH PAGE SCROLL
+    if (!reduceMotion && marqueeRows.length) {
+      marqueeRows.forEach(function (row) {
+        if (row.isPaused()) return;
+
+        var groupWidth = row.firstGroup.offsetWidth || 1;
+        var move = scrollY * MARQUEE_CONFIG.speed;
+        var offset = 0;
+
+        if (row.index % 2 === 0) {
+          // Odd cards (Card 1, Card 3): move LEFT
+          offset = -(move % groupWidth);
+        } else {
+          // Even cards (Card 2, Card 4): move RIGHT
+          offset = (move % groupWidth) - groupWidth;
+        }
+
+        row.setLastOffset(offset);
+        row.inner.style.transform = 'translate3d(' + offset.toFixed(2) + 'px, 0, 0)';
       });
     }
 
-    var ticking = false;
+    // 2. PAGE BACKGROUND CHANGES PER CATEGORY CARD & FAQ BLACK
+    var targetBg = '#2a1060'; // Default Card 1: purple
+    if (faqSection && faqSection.getBoundingClientRect().top < vh * 0.7) {
+      targetBg = '#000000'; // FAQ through footer is pure black
+    } else if (card4 && card4.getBoundingClientRect().top < vh * 0.65) {
+      targetBg = '#07442f'; // Card 4: green
+    } else if (card3 && card3.getBoundingClientRect().top < vh * 0.65) {
+      targetBg = '#6b0f3f'; // Card 3: pink
+    } else if (card2 && card2.getBoundingClientRect().top < vh * 0.65) {
+      targetBg = '#0b2a6b'; // Card 2: blue
+    } else {
+      targetBg = '#2a1060'; // Card 1: purple
+    }
 
-    function update() {
-      ticking = false;
-      var vh = window.innerHeight;
+    if (currentBg !== targetBg) {
+      currentBg = targetBg;
+      document.body.style.backgroundColor = targetBg;
+    }
 
-      // 1. DYNAMIC BACKGROUND COLOR SWITCHING
-      // "before coming of 2. ODOO-STYLE ERP there should be colour with coming and entrance"
-      var card1 = cards[0];
-      var card2 = cards[1];
-      var card3 = cards[2];
-      var card4 = cards[3];
+    // 3. CARD 2 (ODOO-STYLE ERP) EXIT ON SCROLL PAST
+    // After scrolling past Card 2, it must disappear completely (fade opacity to 0, scale 0.92, visibility hidden)
+    // and return when scrolling back up.
+    if (card2 && card3) {
+      var card3Top = card3.getBoundingClientRect().top;
+      var fadeStart = 450;
+      var fadeEnd = 160;
 
-      if (card4 && card4.getBoundingClientRect().top < vh * 0.75) {
-        setBackdrop(3); // Category 4: Emerald
-      } else if (card3 && card3.getBoundingClientRect().top < vh * 0.75) {
-        setBackdrop(2); // Category 3: Magenta
-      } else if (card2 && card2.getBoundingClientRect().top < vh * 0.75) {
-        setBackdrop(1); // Category 2: Sapphire Blue (switches before Card 2 reaches sticky position)
+      if (card3Top >= fadeStart) {
+        // Card 3 is still below: Card 2 is fully visible
+        card2.style.opacity = '1';
+        card2.style.transform = 'scale(1)';
+        card2.style.visibility = 'visible';
+        card2.style.pointerEvents = 'auto';
+      } else if (card3Top <= fadeEnd) {
+        // Scrolled past Card 2: completely disappeared
+        card2.style.opacity = '0';
+        card2.style.transform = 'scale(0.92)';
+        card2.style.visibility = 'hidden';
+        card2.style.pointerEvents = 'none';
       } else {
-        setBackdrop(0); // Category 1: Purple
-      }
-
-      if (reduce || window.innerWidth <= 480) {
-        return;
-      }
-
-      // 2. COMPLETE DISAPPEARANCE OF PREVIOUS CARDS
-      // "and that 2. ODOO-STYLE ERP should maintain some distance and completely should be disappear man"
-      cards.forEach(function (card, i) {
-        var next = cards[i + 1];
-        if (!next) {
-          card.style.opacity = '1';
-          card.style.transform = '';
-          card.style.visibility = 'visible';
-          card.style.pointerEvents = 'auto';
-          return;
-        }
-
-        var stickyTop = parseFloat(getComputedStyle(card).top) || 86;
-        var nextTop = next.getBoundingClientRect().top;
-
-        // Transition window: as next card moves from (stickyTop + 360px) up to (stickyTop + 20px)
-        var fadeStart = stickyTop + 360;
-        var fadeEnd = stickyTop + 20;
-
-        if (nextTop >= fadeStart) {
-          // Next card is far below: current card is 100% visible
-          card.style.opacity = '1';
-          card.style.transform = 'scale(1) translateY(0)';
-          card.style.visibility = 'visible';
-          card.style.pointerEvents = 'auto';
-        } else if (nextTop <= fadeEnd) {
-          // Next card has docked: current card COMPLETELY DISAPPEARS
-          card.style.opacity = '0';
-          card.style.transform = 'scale(0.92) translateY(-24px)';
-          card.style.visibility = 'hidden';
-          card.style.pointerEvents = 'none';
-        } else {
-          // In transition: smooth fade and subtle lift
-          var p = (fadeStart - nextTop) / (fadeStart - fadeEnd);
-          p = Math.max(0, Math.min(1, p));
-          card.style.opacity = (1 - p).toFixed(3);
-          card.style.transform = 'scale(' + (1 - p * 0.08).toFixed(4) + ') translateY(' + (-p * 24).toFixed(1) + 'px)';
-          card.style.visibility = 'visible';
-          card.style.pointerEvents = (p > 0.8) ? 'none' : 'auto';
-        }
-      });
-    }
-
-    function onScroll() {
-      if (!ticking) {
-        ticking = true;
-        requestAnimationFrame(update);
+        // Transition window
+        var p = (fadeStart - card3Top) / (fadeStart - fadeEnd);
+        p = Math.max(0, Math.min(1, p));
+        card2.style.opacity = (1 - p).toFixed(3);
+        card2.style.transform = 'scale(' + (1 - p * 0.08).toFixed(4) + ')';
+        card2.style.visibility = 'visible';
+        card2.style.pointerEvents = (p > 0.8) ? 'none' : 'auto';
       }
     }
+  }
 
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', update);
-    update();
-  })();
+  function requestTick() {
+    if (!ticking) {
+      ticking = true;
+      requestAnimationFrame(onScrollFrame);
+    }
+  }
 
-  // 4. Contact Form AJAX Submission with Instant Feedback
+  window.addEventListener('scroll', requestTick, { passive: true });
+  window.addEventListener('resize', requestTick);
+  requestTick();
+
+  // ========================================================
+  // 5. Contact Form AJAX Submission
+  // ========================================================
   var contactForm = document.getElementById('contact-form');
   var formFeedback = document.getElementById('form-feedback');
 
@@ -215,103 +369,4 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
   }
-
-  // 5. Popular Builds Infinite Marquee (Continuous Loop, Hover/Touch Pause & Sub-Card Filtering)
-  (function initPopularBuilds() {
-    var cards = document.querySelectorAll('.stack-card');
-    if (!cards.length) return;
-
-    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    // Convert each popular-chips-track into a seamless continuous marquee
-    var tracks = document.querySelectorAll('.popular-chips-track');
-    tracks.forEach(function (track) {
-      var chips = Array.from(track.querySelectorAll('.popular-chip'));
-      if (!chips.length) return;
-
-      var inner = document.createElement('div');
-      inner.className = 'popular-marquee-inner';
-
-      var group1 = document.createElement('div');
-      group1.className = 'popular-marquee-group';
-      chips.forEach(function (chip) {
-        chip.classList.add('revealed');
-        group1.appendChild(chip);
-      });
-
-      var group2 = group1.cloneNode(true);
-      group2.setAttribute('aria-hidden', 'true');
-
-      inner.appendChild(group1);
-      inner.appendChild(group2);
-      track.innerHTML = '';
-      track.appendChild(inner);
-
-      // Pause on hover
-      track.addEventListener('mouseenter', function () {
-        track.classList.add('is-paused');
-      });
-      track.addEventListener('mouseleave', function () {
-        if (!track.dataset.filterActive) {
-          track.classList.remove('is-paused');
-        }
-      });
-
-      // Pause on touch
-      track.addEventListener('touchstart', function () {
-        track.classList.add('is-paused');
-      }, { passive: true });
-      track.addEventListener('touchend', function () {
-        setTimeout(function () {
-          if (!track.dataset.filterActive) {
-            track.classList.remove('is-paused');
-          }
-        }, 1200);
-      }, { passive: true });
-    });
-
-    // Sub-Card Tap Interaction: Highlights matching chips across both marquee groups
-    cards.forEach(function (card) {
-      var subCards = card.querySelectorAll('.subcard-toggle');
-      var track = card.querySelector('.popular-chips-track');
-
-      subCards.forEach(function (subCard) {
-        subCard.addEventListener('click', function (e) {
-          e.preventDefault();
-          var subCode = subCard.getAttribute('data-sub');
-          var wasActive = subCard.classList.contains('active');
-
-          subCards.forEach(function (sc) { sc.classList.remove('active'); });
-          var allChips = card.querySelectorAll('.popular-chip');
-
-          if (wasActive) {
-            allChips.forEach(function (ch) {
-              ch.classList.remove('highlighted', 'dimmed');
-            });
-            if (track) {
-              delete track.dataset.filterActive;
-              track.classList.remove('is-paused');
-            }
-          } else {
-            subCard.classList.add('active');
-            if (track) {
-              track.dataset.filterActive = 'true';
-              track.classList.add('is-paused'); // pause marquee while inspecting filtered sub-card
-            }
-
-            allChips.forEach(function (ch) {
-              if (ch.getAttribute('data-sub') === subCode) {
-                ch.classList.add('highlighted');
-                ch.classList.remove('dimmed');
-              } else {
-                ch.classList.remove('highlighted');
-                ch.classList.add('dimmed');
-              }
-            });
-          }
-        });
-      });
-    });
-  })();
 });
-
