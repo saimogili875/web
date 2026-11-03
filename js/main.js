@@ -1,664 +1,372 @@
 /**
- * Arkshar Studio — Core JavaScript
- * Handles navigation, click tracking, dynamic prototype rendering,
- * accessible modal previews, and honest WhatsApp contact dispatch.
+ * Arkshar Studio - Main Frontend Interactions
  */
 
-/* --------------------------------------------------------------------------
-   1. CLICK TRACKER / ANALYTICS HOOK
-   -------------------------------------------------------------------------- */
-// Pluggable analytics tracker.
-// TODO: When ready, replace console.debug with Plausible or your Django analytics POST endpoint.
-window.track = function (eventName, data = {}) {
-  console.debug("[Arkshar Analytics Event]", eventName, data);
+// ========================================================
+// 1. MARQUEE CONFIGURATION (EDITABLE FROM ONE CONFIG)
+// ========================================================
+const MARQUEE_CONFIG = {
+  speed: 0.6,        // pixels moved per 1px of page scroll. Higher = faster, 0.2 = slow, 1.2 = fast
+  wordGap: 40,       // px of space between one word and the next
+  fontSize: 15,      // px
+  fontWeight: 700,
+  rowBackground: "#FFFFFF",   // the scrolling strip itself is WHITE
+  rows: {
+    "card-1": { color: "#7928CA", words: [ // Customized Websites and Apps
+      "3D / interactive hero (the wow first impression)",
+      "WhatsApp button",
+      "Chatbot (instant contact)",
+      "Online payment / booking CTA",
+      "Trust: secure payments, reviews, support",
+      "Admin dashboard, billing, analytics" ]},
+    "card-2": { color: "#1D4ED8", words: [ // Odoo-style ERP
+      "Sales and CRM", "Accounting", "Inventory and Purchase", "POS",
+      "Operations", "Delivery and multi-vendor", "Industry ERPs" ]},
+    "card-3": { color: "#BE185D", words: [ // AI Marketing and Business Analysis
+      "Business analysis", "Content and social", "SEO and local SEO",
+      "Lead generation", "Lead follow-up", "AI calling agent", "Reporting" ]},
+    "card-4": { color: "#047857", words: [ // Domain AI Agents
+      "Exam agents", "Institution agent", "HR agent", "Finance agent",
+      "Healthcare agent", "Support agent", "Specialized calling agent" ]}
+  }
 };
 
-document.addEventListener("DOMContentLoaded", () => {
-  initAnalyticsListeners();
-  initMobileNav();
-  initHeaderScroll();
-  initHomeTodayAndGrid();
-  initContactForm();
-  initModals();
-  initAccessibleKeyboardButtons();
-});
+// SVG Icon Mapping for each word (reuses existing SVG sprites)
+const WORD_ICONS = {
+  "3D / interactive hero (the wow first impression)": "i-layers",
+  "WhatsApp button": "i-whatsapp",
+  "Chatbot (instant contact)": "i-bot",
+  "Online payment / booking CTA": "i-card",
+  "Trust: secure payments, reviews, support": "i-wallet",
+  "Admin dashboard, billing, analytics": "i-calc",
+  "Sales and CRM": "i-users",
+  "Accounting": "i-calc",
+  "Inventory and Purchase": "i-box",
+  "POS": "i-card",
+  "Operations": "i-flow",
+  "Delivery and multi-vendor": "i-truck",
+  "Industry ERPs": "i-factory",
+  "Business analysis": "i-chart",
+  "Content and social": "i-mega",
+  "SEO and local SEO": "i-search",
+  "Lead generation": "i-target",
+  "Lead follow-up": "i-send",
+  "AI calling agent": "i-phone",
+  "Reporting": "i-trend",
+  "Exam agents": "i-grad",
+  "Institution agent": "i-school",
+  "HR agent": "i-users",
+  "Finance agent": "i-wallet",
+  "Healthcare agent": "i-pulse",
+  "Support agent": "i-headset",
+  "Specialized calling agent": "i-phone"
+};
 
-function initAnalyticsListeners() {
-  document.addEventListener("click", (e) => {
-    const target = e.target.closest("a, button");
-    if (!target) return;
+document.addEventListener('DOMContentLoaded', function () {
+  // ========================================================
+  // 1. Mobile Hamburger Menu Drawer
+  // ========================================================
+  var hamburger = document.querySelector('.hamburger-toggle');
+  var drawer = document.getElementById('mobile-drawer');
 
-    const href = target.getAttribute("href") || "";
-    if (href.includes("wa.me") || target.classList.contains("btn-whatsapp") || target.classList.contains("mobile-sticky-whatsapp")) {
-      window.track("whatsapp_click", {
-        href,
-        text: target.textContent.trim(),
-        location: window.location.pathname
+  if (hamburger && drawer) {
+    hamburger.addEventListener('click', function () {
+      var isOpen = hamburger.getAttribute('aria-expanded') === 'true';
+      hamburger.setAttribute('aria-expanded', !isOpen);
+      drawer.classList.toggle('open', !isOpen);
+      document.body.style.overflow = !isOpen ? 'hidden' : '';
+    });
+
+    drawer.querySelectorAll('a').forEach(function (link) {
+      link.addEventListener('click', function () {
+        hamburger.setAttribute('aria-expanded', 'false');
+        drawer.classList.remove('open');
+        document.body.style.overflow = '';
       });
-    } else if (href.startsWith("tel:") || target.classList.contains("mobile-sticky-call")) {
-      window.track("phone_call_click", {
-        href,
-        location: window.location.pathname
-      });
-    }
-  });
-}
-
-/* --------------------------------------------------------------------------
-   2. MOBILE NAVIGATION
-   -------------------------------------------------------------------------- */
-function initMobileNav() {
-  const toggleBtn = document.querySelector(".mobile-toggle");
-  const drawer = document.querySelector(".mobile-drawer");
-  if (!toggleBtn || !drawer) return;
-
-  function toggleMenu(open) {
-    const isOpen = open !== undefined ? open : toggleBtn.getAttribute("aria-expanded") !== "true";
-    toggleBtn.setAttribute("aria-expanded", String(isOpen));
-    drawer.classList.toggle("open", isOpen);
-    document.body.style.overflow = isOpen ? "hidden" : "";
-  }
-
-  toggleBtn.addEventListener("click", () => toggleMenu());
-
-  drawer.addEventListener("click", (e) => {
-    if (e.target === drawer) toggleMenu(false);
-  });
-
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && drawer.classList.contains("open")) {
-      toggleMenu(false);
-      toggleBtn.focus();
-    }
-  });
-
-  drawer.querySelectorAll(".mobile-nav-link").forEach((link) => {
-    link.addEventListener("click", () => toggleMenu(false));
-  });
-}
-
-/* --------------------------------------------------------------------------
-   3. STICKY HEADER SCROLL SHADOW
-   -------------------------------------------------------------------------- */
-function initHeaderScroll() {
-  const header = document.querySelector(".site-header");
-  if (!header) return;
-
-  window.addEventListener(
-    "scroll",
-    () => {
-      if (window.scrollY > 20) {
-        header.classList.add("scrolled");
-      } else {
-        header.classList.remove("scrolled");
-      }
-    },
-    { passive: true }
-  );
-}
-
-/* --------------------------------------------------------------------------
-   4. HOME PAGE: RENDER TODAY'S PROTOTYPE & TOP 6 GRID
-   -------------------------------------------------------------------------- */
-async function initHomeTodayAndGrid() {
-  const todayContainer = document.getElementById("today-prototype-container");
-  const gridContainer = document.getElementById("home-prototypes-grid");
-  const counterEl = document.getElementById("prototypes-built-count");
-
-  if (!todayContainer && !gridContainer) return;
-
-  try {
-    const res = await fetch("data/prototypes.json");
-    if (!res.ok) throw new Error(`HTTP error ${res.status}`);
-    const prototypes = await res.json();
-
-    // 1. Compute and show real prototype count (or "sample concepts" when sample: true)
-    const totalCount = prototypes.length;
-    const allSample = totalCount > 0 && prototypes.every((p) => p.sample === true);
-    const countLabel = allSample
-      ? `${totalCount} sample concepts`
-      : `${totalCount} prototypes built`;
-
-    if (counterEl) {
-      counterEl.textContent = countLabel;
-    }
-    document.querySelectorAll("[data-count='prototypes']").forEach((el) => {
-      el.textContent = countLabel;
     });
-
-    // 2. Pick "Today's prototype" if valid date exists; otherwise show newest item under "Latest sample"
-    const todayStr = new Date().toISOString().split("T")[0];
-    const validDated = prototypes.filter((p) => p.date && p.date.trim() !== "" && p.date <= todayStr);
-    validDated.sort((a, b) => (b.date > a.date ? 1 : -1));
-
-    let todayItem = null;
-    let isToday = false;
-
-    if (validDated.length > 0) {
-      todayItem = validDated[0];
-      isToday = true;
-    } else {
-      // If date is empty, do not choose a "Today's prototype"
-      // Show newest item under title "Latest sample" instead
-      todayItem = prototypes[0];
-      isToday = false;
-    }
-
-    // Render Today / Latest Sample Strip
-    if (todayContainer && todayItem) {
-      renderTodayStrip(todayContainer, todayItem, isToday);
-    }
-
-    // 3. Render top 6 prototypes in grid
-    if (gridContainer) {
-      const top6 = prototypes.slice(0, 6);
-      gridContainer.innerHTML = top6.map((p) => renderCardMarkup(p)).join("");
-      attachCardActionHandlers(gridContainer, prototypes);
-    }
-  } catch (err) {
-    console.error("Failed to load home prototypes:", err);
-    if (gridContainer) {
-      gridContainer.innerHTML = `
-        <div style="grid-column: 1 / -1; text-align: center; padding: 2rem; background: #fff; border-radius: 12px; border: 1px solid #E2E8F0;">
-          <p style="color: #64748B;">Could not load prototypes. Please view the <a href="catalog.html" style="color: #F59E0B; font-weight: bold; text-decoration: underline;">full catalog</a>.</p>
-        </div>
-      `;
-    }
   }
-}
 
-function renderTodayStrip(container, item, isToday = false) {
-  const hasDate = Boolean(item.date && item.date.trim());
-  const isNew = hasDate ? isWithinDays(item.date, 7) : false;
-  const realStatus =
-    item.status === "live-demo" && (!item.demoUrl || !item.demoUrl.startsWith("https://"))
-      ? "screenshot-only"
-      : item.status || "screenshot-only";
-  const statusLabel = formatStatus(realStatus);
-  const hasRealDemo = item.demoUrl && item.demoUrl.startsWith("https://");
-  const hasRealReel = item.reelUrl && item.reelUrl.trim() !== "" && item.reelUrl.startsWith("https://") && !item.reelUrl.includes("/#");
+  // ========================================================
+  // 2. Hero Phone Slideshow
+  // ========================================================
+  var slides = Array.from(document.querySelectorAll('.phone .slide'));
+  var slideIndex = 0;
+  var nextBtn = document.querySelector('.arrow.next');
+  var prevBtn = document.querySelector('.arrow.prev');
 
-  const titlePrefix = isToday ? "Today's Prototype" : "Latest sample";
-  const dateSuffix = isToday && hasDate ? ` • ${escapeHtml(item.date)}` : "";
+  function showSlide(n) {
+    if (!slides.length) return;
+    slides[slideIndex].classList.remove('on');
+    slideIndex = (n + slides.length) % slides.length;
+    slides[slideIndex].classList.add('on');
+  }
 
-  const demoButtonMarkup = hasRealDemo
-    ? `<a href="${escapeHtml(item.demoUrl)}" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg">View Live Demo</a>`
-    : `<button type="button" class="btn btn-primary btn-lg btn-quick-view" data-slug="${escapeHtml(item.slug)}">Quick View Sample</button>`;
-
-  const reelButtonMarkup = hasRealReel
-    ? `<a href="${escapeHtml(item.reelUrl)}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-lg" style="color: #fff; border-color: #CBD5E1;">Watch Reel</a>`
-    : ``;
-
-  const waAskLink = window.waLink
-    ? window.waLink(`Hi Arkshar! I saw your sample "${item.name}" and want to ask about it.`)
-    : "#";
-  const waDisabledClass = waAskLink === "#" ? " wa-disabled" : "";
-
-  container.innerHTML = `
-    <div class="latest-strip">
-      <div class="latest-strip-layout">
-        <!-- Left: Information -->
-        <div class="latest-strip-info">
-          <div class="latest-strip-tag">
-            <span class="eyebrow-dot" style="background: #FCD34D;" aria-hidden="true"></span>
-            ${escapeHtml(titlePrefix)}${dateSuffix}
-          </div>
-          <h2>${escapeHtml(item.name)}</h2>
-          <div style="display: flex; gap: 0.5rem; align-items: center; margin-bottom: 0.85rem; flex-wrap: wrap;">
-            <span class="status-badge ${escapeHtml(realStatus)}">${escapeHtml(statusLabel)}</span>
-            ${item.sample ? `<span class="sample-notice-tag">Sample concept, not a real client</span>` : ""}
-            ${isNew ? `<span class="badge-new">New</span>` : ""}
-          </div>
-          <p>${escapeHtml(item.description)}</p>
-          <div class="latest-strip-actions">
-            ${demoButtonMarkup}
-            ${reelButtonMarkup}
-            <a href="${waAskLink}" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp btn-lg${waDisabledClass}">
-              <svg width="18" height="18" aria-hidden="true"><use href="#i-whatsapp"></use></svg>
-              Ask on WhatsApp
-            </a>
-          </div>
-        </div>
-
-        <!-- Right: Screen Preview Box -->
-        <div>
-          <div class="reel-preview-card btn-quick-view" data-slug="${escapeHtml(item.slug)}" role="button" tabindex="0" aria-label="Open quick view for ${escapeHtml(item.name)}">
-            <div class="reel-aspect">
-              <img src="${escapeHtml(item.image)}" alt="${escapeHtml(item.name)} preview mockup" width="600" height="380">
-              <div class="reel-overlay-play" aria-hidden="true">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  `;
-
-  // Attach quick view click to today's preview card
-  container.querySelectorAll(".btn-quick-view").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      openQuickViewModal(item, btn);
+  if (nextBtn) {
+    nextBtn.addEventListener('click', function () {
+      showSlide(slideIndex + 1);
     });
-  });
-}
-
-function renderCardMarkup(item) {
-  const hasDate = Boolean(item.date && item.date.trim());
-  const isNew = hasDate ? isWithinDays(item.date, 7) : false;
-  const realStatus =
-    item.status === "live-demo" && (!item.demoUrl || !item.demoUrl.startsWith("https://"))
-      ? "screenshot-only"
-      : item.status || "screenshot-only";
-  const statusLabel = formatStatus(realStatus);
-  const hasRealDemo = item.demoUrl && item.demoUrl.startsWith("https://");
-  const hasRealReel = item.reelUrl && item.reelUrl.trim() !== "" && item.reelUrl.startsWith("https://") && !item.reelUrl.includes("/#");
-
-  return `
-    <article class="prototype-card" data-slug="${escapeHtml(item.slug)}">
-      <div class="prototype-media">
-        <img src="${escapeHtml(item.image)}" alt="${escapeHtml(item.name)} screen preview" loading="lazy" width="600" height="380">
-        <div class="proto-top-badge">
-          <span class="status-badge ${escapeHtml(realStatus)}">${escapeHtml(statusLabel)}</span>
-          ${isNew ? `<span class="badge-new">New</span>` : ""}
-        </div>
-      </div>
-      <div class="prototype-body">
-        <div class="prototype-header-meta">
-          <span class="prototype-industry">${escapeHtml(item.industry)}</span>
-          ${hasDate ? `<span style="font-size: 0.75rem; color: #94A3B8;">${escapeHtml(item.date)}</span>` : ""}
-        </div>
-        <h3 class="prototype-title">${escapeHtml(item.name)}</h3>
-        <p class="prototype-desc">${escapeHtml(item.description)}</p>
-        
-        ${item.sample ? `<div class="prototype-sample-footer"><span class="sample-notice-tag">Sample concept, not a real client</span></div>` : ""}
-
-        <div class="prototype-actions">
-          <button type="button" class="btn btn-secondary btn-sm btn-quick-view" data-slug="${escapeHtml(item.slug)}" style="flex: 1;" aria-label="Quick view of ${escapeHtml(item.name)}">
-            Quick View
-          </button>
-          ${
-            hasRealDemo
-              ? `<a href="${escapeHtml(item.demoUrl)}" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm" style="flex: 1;">Live Demo</a>`
-              : ""
-          }
-          ${
-            hasRealReel
-              ? `<a href="${escapeHtml(item.reelUrl)}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" aria-label="Watch Instagram reel">Reel</a>`
-              : ""
-          }
-        </div>
-      </div>
-    </article>
-  `;
-}
-
-function attachCardActionHandlers(container, list) {
-  container.querySelectorAll(".btn-quick-view").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const slug = btn.dataset.slug;
-      const found = list.find((p) => p.slug === slug);
-      if (found) {
-        openQuickViewModal(found, btn);
-      }
+  }
+  if (prevBtn) {
+    prevBtn.addEventListener('click', function () {
+      showSlide(slideIndex - 1);
     });
-  });
-}
-
-/* --------------------------------------------------------------------------
-   5. QUICK-VIEW POPUP MODAL (WITH ACCESSIBLE FOCUS TRAP)
-   -------------------------------------------------------------------------- */
-let lastFocusedElement = null;
-
-function initModals() {
-  const overlay = document.getElementById("demo-modal");
-  if (!overlay) return;
-
-  const closeBtn = overlay.querySelector(".modal-close-btn");
-  if (closeBtn) {
-    closeBtn.addEventListener("click", closeQuickViewModal);
+  }
+  if (slides.length > 1) {
+    setInterval(function () {
+      showSlide(slideIndex + 1);
+    }, 4500);
   }
 
-  overlay.addEventListener("click", (e) => {
-    if (e.target === overlay) closeQuickViewModal();
-  });
+  // ========================================================
+  // 3. Build Scrolling Rows from MARQUEE_CONFIG
+  // ========================================================
+  var marqueeRows = [];
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && overlay.classList.contains("open")) {
-      closeQuickViewModal();
-    }
-  });
+  function buildMarqueeRows() {
+    var cardIds = ['card-1', 'card-2', 'card-3', 'card-4'];
+    cardIds.forEach(function (cardId, index) {
+      var rowData = MARQUEE_CONFIG.rows[cardId];
+      if (!rowData) return;
 
-  // Check URL hash route for direct modal view (e.g. catalog.html#proto-namma-kirana)
-  checkHashRoute();
-  window.addEventListener("hashchange", checkHashRoute);
-}
+      var card = document.getElementById(cardId);
+      if (!card) return;
 
-function checkHashRoute() {
-  const hash = window.location.hash;
-  if (!hash || hash.length < 2) return;
-  const slug = hash.replace(/^#(proto-)?/, "");
-  if (!slug) return;
+      var track = card.querySelector('.popular-chips-track');
+      if (!track) return;
 
-  fetch("data/prototypes.json")
-    .then((r) => r.json())
-    .then((prototypes) => {
-      const match = prototypes.find((p) => p.slug === slug || p.id === slug);
-      if (match) {
-        openQuickViewModal(match);
+      var wrap = card.querySelector('.popular-builds-wrap');
+      if (wrap) {
+        wrap.style.backgroundColor = MARQUEE_CONFIG.rowBackground;
       }
-    })
-    .catch((e) => console.debug("Hash route lookup:", e));
-}
 
-function openQuickViewModal(item, triggerEl = null) {
-  const modal = document.getElementById("demo-modal");
-  if (!modal) return;
+      track.innerHTML = '';
 
-  lastFocusedElement = triggerEl || document.activeElement;
+      var inner = document.createElement('div');
+      inner.className = 'marquee-inner';
 
-  const titleEl = modal.querySelector("#modal-proto-title");
-  const typeEl = modal.querySelector("#modal-proto-type");
-  const imgEl = modal.querySelector("#modal-proto-img");
-  const descEl = modal.querySelector("#modal-proto-desc");
-  const waBtnEl = modal.querySelector("#modal-wa-link");
-  const statusEl = modal.querySelector("#modal-proto-status");
-  const sampleNoteEl = modal.querySelector("#modal-proto-sample");
-  const demoDirectEl = modal.querySelector("#modal-direct-demo");
+      // Helper to create a group of words
+      function createGroup(isAriaHidden) {
+        var group = document.createElement('div');
+        group.className = 'marquee-group';
+        group.style.gap = MARQUEE_CONFIG.wordGap + 'px';
+        group.style.paddingRight = MARQUEE_CONFIG.wordGap + 'px';
+        if (isAriaHidden) {
+          group.setAttribute('aria-hidden', 'true');
+        }
 
-  if (titleEl) titleEl.textContent = item.name;
-  if (typeEl) typeEl.textContent = `${item.type} • ${item.industry}`;
-  if (descEl) descEl.textContent = item.description;
+        rowData.words.forEach(function (word) {
+          var wordEl = document.createElement('span');
+          wordEl.className = 'marquee-word';
+          wordEl.style.color = rowData.color;
+          wordEl.style.fontSize = MARQUEE_CONFIG.fontSize + 'px';
+          wordEl.style.fontWeight = MARQUEE_CONFIG.fontWeight;
+          wordEl.style.textTransform = 'uppercase';
 
-  if (statusEl) {
-    statusEl.className = `status-badge ${item.status || "live-demo"}`;
-    statusEl.textContent = formatStatus(item.status);
-  }
+          var iconId = WORD_ICONS[word] || 'i-globe';
+          wordEl.innerHTML =
+            '<svg class="marquee-word-icon" aria-hidden="true" style="color:' +
+            rowData.color +
+            '; width: 16px; height: 16px;"><use href="#' +
+            iconId +
+            '"></use></svg><span>' +
+            word.toUpperCase() +
+            '</span>';
 
-  if (sampleNoteEl) {
-    sampleNoteEl.style.display = item.sample ? "inline-block" : "none";
-  }
-
-  if (imgEl) {
-    imgEl.src = item.image;
-    imgEl.alt = `${item.name} screen preview`;
-  }
-
-  // Pre-filled WhatsApp link with prototype name
-  if (waBtnEl) {
-    const msg = `Hi Arkshar! I am looking at your prototype "${item.name}" (${item.industry}). Can we build something similar for my business?`;
-    const linkUrl = window.waLink ? window.waLink(msg, waBtnEl) : "#";
-    waBtnEl.href = linkUrl;
-    if (linkUrl === "#") {
-      waBtnEl.classList.add("wa-disabled");
-    } else {
-      waBtnEl.classList.remove("wa-disabled");
-    }
-  }
-
-  // External live demo button
-  if (demoDirectEl) {
-    if (item.demoUrl && !item.demoUrl.startsWith("#")) {
-      demoDirectEl.href = item.demoUrl;
-      demoDirectEl.style.display = "inline-flex";
-    } else {
-      demoDirectEl.style.display = "none";
-    }
-  }
-
-  modal.classList.add("open");
-  modal.setAttribute("aria-hidden", "false");
-  document.body.style.overflow = "hidden";
-
-  // Focus trap
-  const closeBtn = modal.querySelector(".modal-close-btn");
-  if (closeBtn) closeBtn.focus();
-}
-
-function closeQuickViewModal() {
-  const modal = document.getElementById("demo-modal");
-  if (!modal || !modal.classList.contains("open")) return;
-
-  modal.classList.remove("open");
-  modal.setAttribute("aria-hidden", "true");
-  document.body.style.overflow = "";
-
-  // Return focus to opening element
-  if (lastFocusedElement && typeof lastFocusedElement.focus === "function") {
-    lastFocusedElement.focus();
-  }
-}
-
-// Make accessible to catalog.js
-window.openQuickViewModal = openQuickViewModal;
-window.closeQuickViewModal = closeQuickViewModal;
-
-/* --------------------------------------------------------------------------
-   6. HONEST CONTACT FORM (DISPATCH TO WHATSAPP)
-   -------------------------------------------------------------------------- */
-function initContactForm() {
-  const form = document.getElementById("quote-form");
-  if (!form) return;
-
-  // Auto-select plan from URL query ?plan=
-  const urlParams = new URLSearchParams(window.location.search);
-  const planParam = urlParams.get("plan");
-  const businessParam = urlParams.get("business") || urlParams.get("solution");
-
-  const nameInput = document.getElementById("contact-name");
-  const phoneInput = document.getElementById("contact-phone");
-  const businessSelect = document.getElementById("contact-business-type");
-  const messageInput = document.getElementById("contact-message");
-  const noticeBox = document.getElementById("form-success-alert");
-  const submitBtn = form.querySelector("button[type='submit']");
-
-  if (businessSelect && businessParam) {
-    for (let opt of businessSelect.options) {
-      if (opt.value.toLowerCase().includes(businessParam.toLowerCase())) {
-        opt.selected = true;
-        break;
-      }
-    }
-  }
-
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
-    let isValid = true;
-
-    // Validate Name
-    if (!nameInput.value.trim() || nameInput.value.trim().length < 2) {
-      setFieldError(nameInput, "Please enter your name.");
-      isValid = false;
-    } else {
-      clearFieldError(nameInput);
-    }
-
-    // Validate Phone (10-digit Indian pattern or international)
-    const phoneVal = phoneInput.value.replace(/[\s\-\(\)]/g, "");
-    const phonePattern = /^(\+91|91|0)?[6-9]\d{9}$/;
-    if (!phonePattern.test(phoneVal)) {
-      setFieldError(phoneInput, "Please enter a valid 10-digit mobile number.");
-      isValid = false;
-    } else {
-      clearFieldError(phoneInput);
-    }
-
-    // Validate Business Type
-    if (!businessSelect.value) {
-      setFieldError(businessSelect, "Please select what you are building.");
-      isValid = false;
-    } else {
-      clearFieldError(businessSelect);
-    }
-
-    // Validate Message
-    if (!messageInput.value.trim() || messageInput.value.trim().length < 10) {
-      setFieldError(messageInput, "Please write a short note about your needs (min 10 characters).");
-      isValid = false;
-    } else {
-      clearFieldError(messageInput);
-    }
-
-    if (!isValid) return;
-
-    window.track("quote_form_submit", {
-      business: businessSelect.value,
-      plan: planParam || "general"
-    });
-
-    /* ------------------------------------------------------------------------
-       DJANGO INTEGRATION NOTE:
-       When the Django backend is plugged in, replace the client WhatsApp
-       dispatch below with a standard fetch() or form POST to:
-       fetch('/api/quotes/', { method: 'POST', body: new FormData(form) })
-       ------------------------------------------------------------------------ */
-
-    // Build pre-filled WhatsApp message
-    const lines = [
-      `Hi Arkshar! I would like to request a quote.`,
-      `Name: ${nameInput.value.trim()}`,
-      `Phone: ${phoneInput.value.trim()}`,
-      `Business: ${businessSelect.value}`,
-      planParam ? `Plan: ${planParam}` : null,
-      `Details: ${messageInput.value.trim()}`
-    ].filter(Boolean);
-
-    const fullMessage = lines.join("\n");
-    const targetUrl = window.waLink ? window.waLink(fullMessage) : "#";
-    const isWaReady = targetUrl !== "#";
-
-    // Display honest feedback box
-    if (noticeBox) {
-      noticeBox.className = "form-dispatch-notice show";
-      noticeBox.innerHTML = `
-        <h4 style="color: #065F46; margin-bottom: 0.35rem;">✓ Ready to send via WhatsApp</h4>
-        <p style="color: #047857; margin-bottom: 1rem; font-size: 0.95rem;">
-          ${
-            isWaReady
-              ? "Opening WhatsApp. Please press <strong>Send</strong> there to finish."
-              : "Your quote request message is prepared. Click <strong>Copy my message</strong> below to send it to us."
-          }
-        </p>
-        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-          <a href="${targetUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp btn-sm${!isWaReady ? " wa-disabled" : ""}">
-            ${isWaReady ? "Open WhatsApp Again" : "WhatsApp"}
-          </a>
-          <button type="button" class="btn btn-secondary btn-sm" id="btn-copy-quote-msg">
-            Copy my message
-          </button>
-        </div>
-        <div id="copy-quote-feedback" style="font-size: 0.8rem; color: #047857; margin-top: 0.5rem; display: none;">
-          Copied to clipboard! You can paste it into WhatsApp directly.
-        </div>
-      `;
-
-      // Copy message button handler
-      const copyBtn = document.getElementById("btn-copy-quote-msg");
-      const copyFeedback = document.getElementById("copy-quote-feedback");
-      if (copyBtn) {
-        copyBtn.addEventListener("click", () => {
-          navigator.clipboard
-            .writeText(fullMessage)
-            .then(() => {
-              if (copyFeedback) copyFeedback.style.display = "block";
-            })
-            .catch(() => {
-              alert("Message:\n\n" + fullMessage);
-            });
+          group.appendChild(wordEl);
         });
+        return group;
       }
 
-      noticeBox.scrollIntoView({ behavior: "smooth", block: "center" });
+      // Append 4 identical groups for a seamless infinite loop
+      var firstGroup = createGroup(false);
+      inner.appendChild(firstGroup);
+      for (var g = 0; g < 3; g++) {
+        inner.appendChild(createGroup(true));
+      }
+
+      track.appendChild(inner);
+
+      var isPaused = false;
+      var lastOffset = 0;
+
+      track.addEventListener('mouseenter', function () { isPaused = true; });
+      track.addEventListener('mouseleave', function () { isPaused = false; });
+      track.addEventListener('touchstart', function () { isPaused = true; }, { passive: true });
+      track.addEventListener('touchend', function () { isPaused = false; }, { passive: true });
+
+      marqueeRows.push({
+        cardId: cardId,
+        index: index, // 0=odd(Card 1), 1=even(Card 2), 2=odd(Card 3), 3=even(Card 4)
+        track: track,
+        inner: inner,
+        firstGroup: firstGroup,
+        isPaused: function () { return isPaused; },
+        getLastOffset: function () { return lastOffset; },
+        setLastOffset: function (x) { lastOffset = x; }
+      });
+    });
+  }
+
+  buildMarqueeRows();
+
+  // ========================================================
+  // 4. Scroll Handler: Move Rows, Change BG & Card 2 Exit
+  // ========================================================
+  var faqSection = document.getElementById('faqs') || document.querySelector('.faq-section');
+  var card1 = document.getElementById('card-1');
+  var card2 = document.getElementById('card-2');
+  var card3 = document.getElementById('card-3');
+  var card4 = document.getElementById('card-4');
+
+  var currentBg = '';
+  var ticking = false;
+
+  function onScrollFrame() {
+    ticking = false;
+    var scrollY = window.pageYOffset || document.documentElement.scrollTop;
+    var vh = window.innerHeight;
+
+    // 1. SCROLLING ROWS MOVE WITH PAGE SCROLL
+    if (!reduceMotion && marqueeRows.length) {
+      marqueeRows.forEach(function (row) {
+        if (row.isPaused()) return;
+
+        var groupWidth = row.firstGroup.offsetWidth || 1;
+        var move = scrollY * MARQUEE_CONFIG.speed;
+        var offset = 0;
+
+        if (row.index % 2 === 0) {
+          // Odd cards (Card 1, Card 3): move LEFT
+          offset = -(move % groupWidth);
+        } else {
+          // Even cards (Card 2, Card 4): move RIGHT
+          offset = (move % groupWidth) - groupWidth;
+        }
+
+        row.setLastOffset(offset);
+        row.inner.style.transform = 'translate3d(' + offset.toFixed(2) + 'px, 0, 0)';
+      });
     }
 
-    // Launch WhatsApp only if live URL is configured
-    if (isWaReady) {
-      window.open(targetUrl, "_blank", "noopener,noreferrer");
+    // 2. PAGE BACKGROUND CHANGES PER CATEGORY CARD & FAQ BLACK
+    var targetBg = '#2a1060'; // Default Card 1: purple
+    if (faqSection && faqSection.getBoundingClientRect().top < vh * 0.7) {
+      targetBg = '#000000'; // FAQ through footer is pure black
+    } else if (card4 && card4.getBoundingClientRect().top < vh * 0.65) {
+      targetBg = '#07442f'; // Card 4: green
+    } else if (card3 && card3.getBoundingClientRect().top < vh * 0.65) {
+      targetBg = '#6b0f3f'; // Card 3: pink
+    } else if (card2 && card2.getBoundingClientRect().top < vh * 0.65) {
+      targetBg = '#0b2a6b'; // Card 2: blue
+    } else {
+      targetBg = '#2a1060'; // Card 1: purple
     }
-  });
 
-  [nameInput, phoneInput, businessSelect, messageInput].forEach((field) => {
-    if (!field) return;
-    field.addEventListener("input", () => clearFieldError(field));
-  });
-}
+    if (currentBg !== targetBg) {
+      currentBg = targetBg;
+      document.body.style.backgroundColor = targetBg;
+    }
 
-function setFieldError(field, msg) {
-  field.classList.add("error");
-  let errEl = field.parentElement.querySelector(".form-error-msg");
-  if (!errEl) {
-    errEl = document.createElement("div");
-    errEl.className = "form-error-msg";
-    field.parentElement.appendChild(errEl);
-  }
-  errEl.textContent = msg;
-}
+    // 3. CARD 2 (ODOO-STYLE ERP) EXIT ON SCROLL PAST
+    // After scrolling past Card 2, it must disappear completely (fade opacity to 0, scale 0.92, visibility hidden)
+    // and return when scrolling back up.
+    if (card2 && card3) {
+      var card3Top = card3.getBoundingClientRect().top;
+      var fadeStart = 450;
+      var fadeEnd = 160;
 
-function clearFieldError(field) {
-  field.classList.remove("error");
-  const errEl = field.parentElement.querySelector(".form-error-msg");
-  if (errEl) {
-    errEl.textContent = "";
-  }
-}
-
-/* --------------------------------------------------------------------------
-   7. ACCESSIBLE KEYBOARD HANDLERS FOR BUTTON-LIKE ELEMENTS
-   -------------------------------------------------------------------------- */
-function initAccessibleKeyboardButtons() {
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Enter" || e.key === " ") {
-      const target = e.target;
-      if (target && target.getAttribute("role") === "button" && target.tagName !== "BUTTON") {
-        e.preventDefault();
-        target.click();
+      if (card3Top >= fadeStart) {
+        // Card 3 is still below: Card 2 is fully visible
+        card2.style.opacity = '1';
+        card2.style.transform = 'scale(1)';
+        card2.style.visibility = 'visible';
+        card2.style.pointerEvents = 'auto';
+      } else if (card3Top <= fadeEnd) {
+        // Scrolled past Card 2: completely disappeared
+        card2.style.opacity = '0';
+        card2.style.transform = 'scale(0.92)';
+        card2.style.visibility = 'hidden';
+        card2.style.pointerEvents = 'none';
+      } else {
+        // Transition window
+        var p = (fadeStart - card3Top) / (fadeStart - fadeEnd);
+        p = Math.max(0, Math.min(1, p));
+        card2.style.opacity = (1 - p).toFixed(3);
+        card2.style.transform = 'scale(' + (1 - p * 0.08).toFixed(4) + ')';
+        card2.style.visibility = 'visible';
+        card2.style.pointerEvents = (p > 0.8) ? 'none' : 'auto';
       }
     }
-  });
-}
-
-/* --------------------------------------------------------------------------
-   UTILITIES
-   -------------------------------------------------------------------------- */
-function isWithinDays(dateStr, days) {
-  if (!dateStr) return false;
-  const d = new Date(dateStr);
-  const now = new Date();
-  const diffTime = now - d;
-  const diffDays = diffTime / (1000 * 60 * 60 * 24);
-  return diffDays >= 0 && diffDays <= days;
-}
-
-function formatStatus(status) {
-  switch (status) {
-    case "live-demo":
-      return "Live demo";
-    case "screenshot-only":
-      return "Screenshot only";
-    case "in-build":
-      return "In build";
-    default:
-      return "Live demo";
   }
-}
 
-function escapeHtml(str) {
-  if (str === undefined || str === null) return "";
-  return String(str)
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
-}
+  function requestTick() {
+    if (!ticking) {
+      ticking = true;
+      requestAnimationFrame(onScrollFrame);
+    }
+  }
 
-// Global click prevention on disabled WhatsApp links
-document.addEventListener("click", (e) => {
-  const waDisabled = e.target.closest(".wa-disabled");
-  if (waDisabled) {
-    e.preventDefault();
-    console.warn(
-      "[Arkshar] WhatsApp link clicked but WHATSAPP_NUMBER in js/config.js is still a placeholder. Set a live phone number before production."
-    );
+  window.addEventListener('scroll', requestTick, { passive: true });
+  window.addEventListener('resize', requestTick);
+  requestTick();
+
+  // ========================================================
+  // 5. Contact Form AJAX Submission
+  // ========================================================
+  var contactForm = document.getElementById('contact-form');
+  var formFeedback = document.getElementById('form-feedback');
+
+  if (contactForm) {
+    contactForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      var submitBtn = contactForm.querySelector('button[type="submit"]');
+      var originalBtnText = submitBtn.textContent;
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Submitting...';
+
+      var formData = new FormData(contactForm);
+
+      fetch(contactForm.action, {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'X-Requested-With': 'XMLHttpRequest'
+        }
+      })
+        .then(function (res) {
+          return res.json().then(function (data) {
+            return { ok: res.ok, data: data };
+          });
+        })
+        .then(function (resObj) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = originalBtnText;
+
+          if (resObj.ok && resObj.data.status === 'success') {
+            formFeedback.className = 'form-feedback success';
+            formFeedback.innerHTML =
+              resObj.data.message +
+              (resObj.data.whatsapp_url
+                ? '<br><a href="' +
+                  resObj.data.whatsapp_url +
+                  '" target="_blank" rel="noopener noreferrer" style="color: #fff; text-decoration: underline; font-weight: 800; display: inline-block; margin-top: 8px;">👉 Tap here to open WhatsApp with your pre-filled quote</a>'
+                : '');
+            contactForm.reset();
+          } else {
+            formFeedback.className = 'form-feedback error';
+            formFeedback.textContent =
+              resObj.data.message || 'Something went wrong. Please call or WhatsApp us directly.';
+          }
+        })
+        .catch(function () {
+          submitBtn.disabled = false;
+          submitBtn.textContent = originalBtnText;
+          formFeedback.className = 'form-feedback error';
+          formFeedback.textContent =
+            'Network issue. Please contact us directly via phone or WhatsApp.';
+        });
+    });
   }
 });

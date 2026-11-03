@@ -1,346 +1,770 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Arkshar - All Services & Solutions</title>
-<meta name="description" content="Customized websites and apps, Odoo-style ERP, AI marketing and business analysis, and domain AI agents by Arkshar.">
-<link rel="canonical" href="https://arkshar.com/">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://arkshar.com/">
-<meta property="og:title" content="Arkshar - All Services & Solutions">
-<meta property="og:description" content="Customized websites, Odoo-style ERP, AI marketing, and domain AI agents.">
-<meta property="og:image" content="https://arkshar.com/arkshar-logo.svg">
-<meta name="theme-color" content="#13112E">
-<link rel="icon" type="image/svg+xml" href="arkshar-logo.svg">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
-<style>
-:root{--bg-deep:#13112E;--accent-gold:#FDE68A;--neon-purple:#A855F7;--text-main:#fff;--text-muted:rgba(255,255,255,.85);--text-dim:rgba(255,255,255,.65);--radius-card:24px;--radius-btn:14px;--max-width:1050px}
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:'Montserrat',sans-serif;background-color:var(--bg-deep);color:var(--text-main);line-height:1.6;-webkit-font-smoothing:antialiased;font-size:16px;min-height:100vh;
-  /* clip (not hidden) so position:sticky keeps working */
-  overflow-x:clip}
-/* fixed gradient layer: no tiling, no repaint while scrolling */
-body::before{content:"";position:fixed;inset:0;z-index:-1;background:linear-gradient(135deg,#1A1642 0%,#100E25 100%)}
-.container{max-width:var(--max-width);width:100%;margin:0 auto;padding:0 24px}
-@media(max-width:768px){.container{padding:0 16px}}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arkshar — Ready-Made Business Websites, ERP & AI Solutions in Hyderabad</title>
+  <meta name="description" content="Arkshar builds customized websites, Odoo-style ERP systems, AI marketing, and domain AI agents for small businesses in India. Ready-made prototypes, live in days.">
+  <link rel="canonical" href="https://arkshar.com/">
+  <meta name="theme-color" content="#13112E">
 
-.site-header{position:sticky;top:0;width:100%;background:rgba(19,17,46,.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.08);z-index:1000;padding:16px 0}
-.header-content{display:flex;align-items:center;justify-content:space-between}
-.brand-logo{height:38px;width:auto;display:block;filter:drop-shadow(0 2px 8px rgba(168,85,247,.4))}
-.btn-primary{display:inline-flex;align-items:center;justify-content:center;height:42px;padding:0 22px;background:linear-gradient(135deg,#FDE68A,#F59E0B);color:#111827;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.8px;border-radius:var(--radius-btn);text-decoration:none;transition:transform .3s,box-shadow .3s;box-shadow:0 8px 25px rgba(245,158,11,.35)}
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(245,158,11,.5)}
+  <!-- Open Graph / Social Media -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://arkshar.com/">
+  <meta property="og:title" content="Arkshar — Ready-Made Business Websites, ERP &amp; AI Solutions in Hyderabad">
+  <meta property="og:description" content="Arkshar builds customized websites, Odoo-style ERP systems, AI marketing, and domain AI agents for small businesses in India. Live in days.">
+  <meta property="og:image" content="arkshar-logo.svg">
 
-.hero-section{padding:60px 0 40px;text-align:center}
-.hero-title{font-size:clamp(2.2rem,4vw,3.2rem);font-weight:800;text-transform:uppercase;letter-spacing:-1px;margin-bottom:10px}
-.hero-title span{color:var(--accent-gold)}
-.hero-subtitle{font-size:1.1rem;color:var(--text-muted);font-weight:500}
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
 
-/* STACK */
-.card-stack{position:relative;max-width:var(--max-width);margin:0 auto;padding:0 24px 120px}
-@media(max-width:768px){.card-stack{padding:0 16px 80px}}
+  <!-- Google Fonts: Montserrat (High legibility, modern geometric sans) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-.stack-card{position:sticky;border-radius:var(--radius-card);padding:40px;margin-bottom:60px;box-shadow:0 -10px 40px rgba(0,0,0,.45),0 30px 70px rgba(0,0,0,.6);border:1px solid rgba(255,255,255,.15);
-  transform-origin:top center;will-change:transform,filter;
-  /* NO transition on transform: JS drives it every scroll frame */
-  }
-#card-1{top:100px;background:#1A1642;border-color:rgba(168,85,247,.45);z-index:1}
-#card-2{top:125px;background:#100E25;border-color:rgba(59,130,246,.45);z-index:2}
-#card-3{top:150px;background:#23123C;border-color:rgba(236,72,153,.45);z-index:3}
-#card-4{top:175px;background:#0A2D23;border-color:rgba(16,185,129,.45);z-index:4}
-/* cards taller than the screen can't stack: let them scroll normally */
-.stack-card.no-stick{position:relative;top:auto!important}
-@media(max-width:768px){
- .stack-card{padding:22px;margin-bottom:40px}
- #card-1{top:80px}#card-2{top:96px}#card-3{top:112px}#card-4{top:128px}
-}
-
-.section-label{font-size:12px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--neon-purple);margin-bottom:8px;display:inline-block;background:rgba(168,85,247,.12);padding:6px 12px;border-radius:8px;border:1px solid rgba(168,85,247,.25)}
-.section-heading{font-size:28px;font-weight:800;text-transform:uppercase;letter-spacing:-.5px;margin-bottom:8px;line-height:1.15}
-@media(max-width:768px){.section-heading{font-size:22px}}
-.section-subtext{font-size:15px;color:var(--text-muted);margin-bottom:26px;font-weight:500}
-
-.cards-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;width:100%}
-@media(max-width:900px){.cards-grid{grid-template-columns:1fr;gap:12px}}
-.card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:20px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden;transition:transform .3s,border-color .3s,background .3s}
-.card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#A855F7,#FDE68A);opacity:0;transition:opacity .3s}
-.card:hover{transform:translateY(-4px);border-color:var(--accent-gold);background:rgba(255,255,255,.08)}
-.card:hover::before{opacity:1}
-.card-title{font-size:15px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
-.card-text{font-size:14px;color:var(--text-muted);margin-bottom:14px;line-height:1.5}
-.card-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto}
-.tag{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;background:rgba(168,85,247,.15);padding:4px 10px;border-radius:6px;color:var(--accent-gold);border:1px solid rgba(168,85,247,.3)}
-/* dim overlay driven by JS */
-.stack-card::after{content:"";position:absolute;inset:0;border-radius:inherit;background:#000;opacity:var(--dim,0);pointer-events:none}
-
-.whatsapp-float{position:fixed;bottom:28px;right:28px;background:linear-gradient(135deg,#25D366,#128C7E);width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 25px rgba(37,211,102,.4);z-index:1000;transition:transform .3s}
-.whatsapp-float:hover{transform:scale(1.1) rotate(10deg)}
-.whatsapp-float svg{width:34px;height:34px;fill:#fff}
-footer{border-top:1px solid rgba(255,255,255,.08);padding:36px 0;text-align:center;color:var(--text-dim);font-size:14px;background:rgba(10,8,25,.95);position:relative;z-index:5}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.stack-card{transform:none!important}}
-
-/* LOGOS / ICONS */
-#card-1{--c:#A855F7;--c2:#7928CA}#card-2{--c:#3B82F6;--c2:#1D4ED8}#card-3{--c:#EC4899;--c2:#BE185D}#card-4{--c:#10B981;--c2:#047857}
-.cat-head{display:flex;align-items:center;gap:14px;margin-bottom:14px}
-.cat-head .section-label{margin:0;color:var(--c);background:color-mix(in srgb,var(--c) 14%,transparent);border-color:color-mix(in srgb,var(--c) 35%,transparent)}
-.cat-icon{width:64px;height:64px;flex:none;border-radius:20px;display:grid;place-items:center;color:#fff;background:linear-gradient(135deg,var(--c),var(--c2));box-shadow:0 10px 30px color-mix(in srgb,var(--c) 55%,transparent),inset 0 1px 0 rgba(255,255,255,.35)}
-.cat-icon svg{width:34px;height:34px}
-.ico{width:44px;height:44px;border-radius:13px;display:grid;place-items:center;margin-bottom:14px;color:var(--c);background:color-mix(in srgb,var(--c) 15%,transparent);border:1px solid color-mix(in srgb,var(--c) 40%,transparent);transition:background .3s,color .3s,transform .3s}
-.ico svg{width:22px;height:22px}
-.card:hover .ico{color:#fff;background:linear-gradient(135deg,var(--c),var(--c2));transform:rotate(-6deg) scale(1.08)}
-@media(max-width:768px){.cat-icon{width:52px;height:52px;border-radius:16px}.cat-icon svg{width:28px;height:28px}}
-
-/* COMPACT CARDS: every stack card must fit on screen or it can't stack */
-@media(min-width:901px){.cards-grid{grid-template-columns:repeat(3,1fr)}}
-@media(max-width:900px){.cards-grid{grid-template-columns:repeat(2,1fr)}}
-.stack-card{padding:28px}
-.section-subtext{display:none}
-.cat-head{margin-bottom:12px}
-.section-heading{margin-bottom:18px}
-.card-tags{display:none}
-.card{padding:14px}
-.ico{float:left;margin:0 12px 0 0;width:40px;height:40px}
-.card-title{font-size:14px;margin:0 0 4px;overflow:hidden}
-.card-text{font-size:13px;margin:0}
-@media(max-width:768px){
- .stack-card{padding:18px}
- .cards-grid{gap:8px}
- .card{padding:8px 10px}
- .ico{width:32px;height:32px;margin:0 8px 0 0}
- .ico svg{width:18px;height:18px}
- .card-text{display:none}
- .card-title{font-size:11px;line-height:1.25;min-height:34px;display:flex;align-items:center;margin:0}
-}
-
-/* PILL NAV + HERO */
-.site-header{background:transparent;backdrop-filter:none;-webkit-backdrop-filter:none;border:0;padding:12px 0}
-.nav-pill{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:8px 10px 8px 20px;border-radius:999px;background:rgba(19,17,46,.92);border:1px solid rgba(255,255,255,.14);box-shadow:0 10px 30px rgba(0,0,0,.35)}
-.nav-links{display:flex;gap:26px}
-.nav-links a{color:var(--text-muted);text-decoration:none;font-weight:600;font-size:14px}
-.nav-links a:hover{color:var(--accent-gold)}
-@media(max-width:720px){.nav-links{display:none}}
-.hero{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:32px;padding:50px 24px 40px;min-height:70vh}
-.hero h1{font-size:clamp(2.6rem,6vw,4.6rem);font-weight:800;line-height:1.05;letter-spacing:-1.5px;margin-bottom:18px}
-.hero h1 span{color:var(--accent-gold)}
-.hero p{color:var(--text-muted);font-size:1.1rem;margin-bottom:26px;max-width:420px}
-.hero-visual{display:flex;align-items:center;justify-content:center;gap:12px}
-.arrow{width:42px;height:42px;border-radius:50%;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.06);color:#fff;font-size:26px;line-height:1;cursor:pointer;flex:none}
-.arrow:hover{border-color:var(--accent-gold);color:var(--accent-gold)}
-.phone-wrap{text-align:center}
-.phone{position:relative;width:230px;height:420px;border-radius:34px;border:6px solid #2d2766;background:#0d0b22;overflow:hidden;box-shadow:0 30px 60px rgba(0,0,0,.55),0 0 50px rgba(168,85,247,.3)}
-.slide{position:absolute;inset:0;padding:18px 14px;display:flex;flex-direction:column;gap:12px;opacity:0;transition:opacity .5s}
-.slide.on{opacity:1}
-.m-bar{height:12px;width:55%;border-radius:6px;background:rgba(255,255,255,.25)}
-.m-hero{height:130px;border-radius:14px;background:linear-gradient(135deg,#A855F7,#3B82F6)}
-.m-row,.m-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.m-row i,.m-grid i{height:80px;border-radius:12px;background:rgba(255,255,255,.1)}
-.m-grid i:nth-child(odd){background:rgba(236,72,153,.35)}
-.m-btn{margin-top:auto;text-align:center;padding:12px;border-radius:12px;font-weight:800;font-size:13px;color:#111827;background:linear-gradient(135deg,#FDE68A,#F59E0B)}
-.m-chart{height:190px;display:flex;align-items:flex-end;gap:10px;padding:10px;border-radius:14px;background:rgba(255,255,255,.06)}
-.m-chart b{flex:1;border-radius:6px 6px 0 0;background:linear-gradient(#10B981,#047857)}
-.phone-wrap figcaption{margin-top:14px;font-size:13px;color:var(--text-dim)}
-.divider{border:0;height:1px;max-width:var(--max-width);margin:0 auto 50px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.3),transparent)}
-
-/* GARUDA-STYLE LOOK: white bar, grey-to-black hero, big type */
-.site-header{background:#fff;padding:14px 0;box-shadow:0 2px 12px rgba(0,0,0,.12)}
-.nav-pill{background:transparent;border:0;box-shadow:none;padding:0}
-.nav-links{gap:14px;align-items:center}
-.nav-links a{color:#222;font-size:15px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;padding:12px 22px;border-radius:999px;border:2px solid transparent}
-.nav-links a:hover{color:#5b2d9e}
-.nav-links a.active{color:#5b2d9e;border-color:#5b2d9e}
-.site-header .btn-primary,.hero .btn-primary{background:#000;color:#fff;box-shadow:0 8px 20px rgba(0,0,0,.3);border-radius:999px;letter-spacing:3px;font-size:14px;height:54px;padding:0 34px}
-.hero-bg{background:linear-gradient(135deg,#e6e6e6 0%,#9a9a9a 40%,#0a0a0a 100%);margin-bottom:0}
-.hero{min-height:calc(100vh - 80px);padding-top:60px;padding-bottom:60px}
-.hero h1{color:#000;font-size:clamp(3.2rem,7.2vw,6.4rem);line-height:1.02;letter-spacing:-2px;text-transform:uppercase}
-.hero h1 span{color:#5b4a9b}
-.hero p{color:#2b2b2b;font-size:clamp(1.05rem,1.6vw,1.4rem);max-width:560px;margin-bottom:34px}
-.btn-outline{display:inline-flex;align-items:center;height:54px;padding:0 34px;margin:0 0 0 14px;border:2px solid #000;border-radius:999px;color:#000;font-weight:800;font-size:14px;letter-spacing:3px;text-transform:uppercase;text-decoration:none}
-.btn-outline:hover{background:#000;color:#fff}
-.arrow{border-color:rgba(255,255,255,.5);color:#fff;background:rgba(0,0,0,.35)}
-.divider{margin-top:0;margin-bottom:60px}
-.hero-bg+.divider{height:0;margin:0 auto 40px;background:none}
-
-@media(max-width:960px){
-  .nav-links{gap:8px}
-  .nav-links a{font-size:13px;letter-spacing:1px;padding:10px 16px}
-  .site-header .btn-primary{height:46px;padding:0 22px;font-size:12px;letter-spacing:1.5px}
-}
-@media(max-width:768px){
-  .hero{grid-template-columns:1fr;text-align:center;padding:30px 16px;min-height:0}
-  .hero p{margin-inline:auto}
-  .hero .btn-primary, .btn-outline{height:48px;padding:0 24px;font-size:13px;letter-spacing:2px;max-width:100%;box-sizing:border-box}
-  .btn-outline{margin:12px 0 0}
-  .phone{width:200px;height:370px}
-}
-@media(max-width:480px){
-  .site-header .btn-primary{height:40px;padding:0 16px;font-size:11px;letter-spacing:1px}
-  .hero h1{font-size:clamp(2.4rem,10vw,3.2rem)}
-  .hero .btn-primary, .btn-outline{width:100%;justify-content:center;margin:8px 0 0;padding:0 16px;font-size:12px;letter-spacing:1px}
-}
-@media(max-width:360px){
-  .phone{width:180px;height:333px}
-  .arrow{width:36px;height:36px;font-size:22px}
-  .hero-visual{gap:8px}
-}
-</style>
+  <link rel="stylesheet" href="css/styles.css">
+  
 </head>
-<body>
-<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><symbol id="i-cat1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></symbol><symbol id="i-cat2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><path d="M3.27 6.96 12 12.01l8.73-5.05M12 22.08V12"/></symbol><symbol id="i-cat3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 15l.7 1.8 1.8.7-1.8.7L19 20l-.7-1.8-1.8-.7 1.8-.7zM5 3l.5 1.3 1.3.5-1.3.5L5 6.6l-.5-1.3-1.3-.5 1.3-.5z"/></symbol><symbol id="i-cat4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="5" r="2"/><path d="M12 7v4M8 16h.01M16 16h.01"/></symbol><symbol id="i-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></symbol><symbol id="i-cart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2 2h2l2.7 12.4a2 2 0 0 0 2 1.6h9.8a2 2 0 0 0 2-1.6L22 7H5.1"/></symbol><symbol id="i-school" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6M10 10h4"/></symbol><symbol id="i-layers" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></symbol><symbol id="i-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></symbol><symbol id="i-calc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8M8 10h.01M12 10h.01M16 10h.01M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01M16 18h.01"/></symbol><symbol id="i-box" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><path d="M3.27 6.96 12 12.01l8.73-5.05M12 22.08V12"/></symbol><symbol id="i-card" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20M6 15h4"/></symbol><symbol id="i-brief" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></symbol><symbol id="i-flow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="6" height="6" rx="1"/><rect x="15" y="15" width="6" height="6" rx="1"/><path d="M6 9v3a3 3 0 0 0 3 3h6"/></symbol><symbol id="i-truck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 3h15v13H1zM16 8h4l3 3v5h-7z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></symbol><symbol id="i-factory" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20h20M4 20V10l6 4v-4l6 4V4h4v16"/></symbol><symbol id="i-chart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20V10M18 20V4M6 20v-4"/></symbol><symbol id="i-mega" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l18-5v12L3 14z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></symbol><symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></symbol><symbol id="i-target" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></symbol><symbol id="i-send" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4z"/></symbol><symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></symbol><symbol id="i-trend" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m22 7-8.5 8.5-5-5L2 17"/><path d="M16 7h6v6"/></symbol><symbol id="i-grad" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10 12 5 2 10l10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></symbol><symbol id="i-bot" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="5" r="2"/><path d="M12 7v4M8 16h.01M16 16h.01"/></symbol><symbol id="i-pulse" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.5-1.5 3-3.2 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.8 0-3 .5-4.5 2-1.5-1.5-2.7-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4 3 5.5l7 7z"/><path d="M3.2 12h6.3l.5-1 2 4.5 2-7 1.5 3.5h5.3"/></symbol><symbol id="i-wallet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12V8H6a2 2 0 0 1 0-4h12v4M4 6v12a2 2 0 0 0 2 2h14v-4"/><path d="M18 12a2 2 0 0 0 0 4h4v-4z"/></symbol><symbol id="i-headset" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a9 9 0 0 1 18 0v7a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3"/></symbol></defs></svg>
+<body data-theme="cat-1">
+  <!-- Accessible Skip Link -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
 
+  <!-- Global SVG Sprite -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="i-cat1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></symbol>
+      <symbol id="i-cat2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><path d="M3.27 6.96 12 12.01l8.73-5.05M12 22.08V12"/></symbol>
+      <symbol id="i-cat3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 15l.7 1.8 1.8.7-1.8.7L19 20l-.7-1.8-1.8-.7 1.8-.7zM5 3l.5 1.3 1.3.5-1.3.5L5 6.6l-.5-1.3-1.3-.5 1.3-.5z"/></symbol>
+      <symbol id="i-cat4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="5" r="2"/><path d="M12 7v4M8 16h.01M16 16h.01"/></symbol>
+      <symbol id="i-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></symbol>
+      <symbol id="i-cart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2 2h2l2.7 12.4a2 2 0 0 0 2 1.6h9.8a2 2 0 0 0 2-1.6L22 7H5.1"/></symbol>
+      <symbol id="i-school" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6M10 10h4"/></symbol>
+      <symbol id="i-layers" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></symbol>
+      <symbol id="i-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+      <symbol id="i-calc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8M8 10h.01M12 10h.01M16 10h.01M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01M16 18h.01"/></symbol>
+      <symbol id="i-box" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><path d="M3.27 6.96 12 12.01l8.73-5.05M12 22.08V12"/></symbol>
+      <symbol id="i-card" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20M6 15h4"/></symbol>
+      <symbol id="i-brief" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></symbol>
+      <symbol id="i-flow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="6" height="6" rx="1"/><rect x="15" y="15" width="6" height="6" rx="1"/><path d="M6 9v3a3 3 0 0 0 3 3h6"/></symbol>
+      <symbol id="i-truck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 3h15v13H1zM16 8h4l3 3v5h-7z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></symbol>
+      <symbol id="i-factory" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20h20M4 20V10l6 4v-4l6 4V4h4v16"/></symbol>
+      <symbol id="i-chart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20V10M18 20V4M6 20v-4"/></symbol>
+      <symbol id="i-mega" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l18-5v12L3 14z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></symbol>
+      <symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></symbol>
+      <symbol id="i-target" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></symbol>
+      <symbol id="i-send" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4z"/></symbol>
+      <symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></symbol>
+      <symbol id="i-trend" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m22 7-8.5 8.5-5-5L2 17"/><path d="M16 7h6v6"/></symbol>
+      <symbol id="i-grad" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10 12 5 2 10l10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></symbol>
+      <symbol id="i-bot" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="5" r="2"/><path d="M12 7v4M8 16h.01M16 16h.01"/></symbol>
+      <symbol id="i-pulse" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.5-1.5 3-3.2 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.8 0-3 .5-4.5 2-1.5-1.5-2.7-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4 3 5.5l7 7z"/><path d="M3.2 12h6.3l.5-1 2 4.5 2-7 1.5 3.5h5.3"/></symbol>
+      <symbol id="i-wallet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12V8H6a2 2 0 0 1 0-4h12v4M4 6v12a2 2 0 0 0 2 2h14v-4"/><path d="M18 12a2 2 0 0 0 0 4h4v-4z"/></symbol>
+      <symbol id="i-headset" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a9 9 0 0 1 18 0v7a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3"/></symbol>
+      <symbol id="i-whatsapp" viewBox="0 0 24 24"><path fill="currentColor" d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 14.99 3.81 13.47 3.81 11.91C3.81 7.37 7.5 3.67 12.05 3.67M9.53 7.03C9.36 7.03 9.08 7.09 8.84 7.35C8.6 7.61 7.92 8.25 7.92 9.55C7.92 10.85 8.87 12.11 9 12.28C9.13 12.45 10.84 15.09 13.46 16.22C14.08 16.49 14.57 16.65 14.95 16.77C15.57 16.97 16.14 16.94 16.58 16.88C17.08 16.8 18.11 16.25 18.32 15.65C18.54 15.06 18.54 14.55 18.47 14.44C18.41 14.33 18.24 14.27 17.98 14.14C17.72 14.01 16.45 13.38 16.21 13.29C15.98 13.2 15.81 13.16 15.64 13.42C15.47 13.68 14.99 14.25 14.84 14.42C14.7 14.59 14.55 14.61 14.29 14.48C14.04 14.35 13.21 14.08 12.22 13.2C11.45 12.51 10.93 11.66 10.78 11.4C10.63 11.15 10.76 11.01 10.89 10.88C11.01 10.76 11.15 10.58 11.28 10.43C11.41 10.28 11.45 10.17 11.54 10C11.62 9.83 11.58 9.68 11.52 9.55C11.45 9.42 10.95 8.19 10.73 7.68C10.53 7.18 10.32 7.25 10.16 7.24C10.01 7.23 9.84 7.23 9.67 7.23L9.53 7.03Z"/></symbol>
+    </defs>
+  </svg>
+
+  <!-- Reusable Navbar -->
+  
 <header class="site-header" role="banner">
   <div class="container">
-    <nav class="nav-pill" aria-label="Main">
-      <a href="index.html" aria-label="Arkshar Home" class="nav-logo"><img src="arkshar-logo.svg" alt="Arkshar" class="brand-logo" width="130" height="38"></a>
+    <nav class="nav-pill" aria-label="Main Navigation">
+      <a href="/" aria-label="Arkshar Home" class="nav-logo">
+        <img src="arkshar-logo.svg" alt="Arkshar" class="brand-logo" width="130" height="38">
+      </a>
+
+      <!-- Desktop Navigation Links -->
       <div class="nav-links">
-        <a href="#top" class="active">Home</a><a href="#services">Services</a><a href="about.html">Team</a><a href="contact.html?business=all-services">Contact</a>
+        <a href="/" class="active">Home</a>
+        <a href="/websites-apps/" class="">Websites & Apps</a>
+        <a href="/erp/" class="">ERP</a>
+        <a href="/ai-marketing/" class="">AI Marketing</a>
+        <a href="/ai-agents/" class="">AI Agents</a>
+        <a href="/#contact">Contact</a>
       </div>
-      <a href="contact.html?business=all-services" class="btn-primary">Get a quote</a>
+
+      <!-- Action Group -->
+      <div class="nav-actions">
+        <a href="/#contact" class="btn-primary">Get a quote</a>
+        
+        <!-- Mobile Hamburger Toggle -->
+        <button class="hamburger-toggle" aria-expanded="false" aria-controls="mobile-drawer" aria-label="Toggle navigation menu" type="button">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
     </nav>
   </div>
 </header>
 
-<main id="main-content">
-  <div class="hero-bg"><section class="hero container" id="top">
+<!-- Mobile Navigation Drawer -->
+<div class="mobile-drawer" id="mobile-drawer" aria-hidden="true">
+  <ul class="mobile-nav-list">
+    <li><a href="/" class="mobile-nav-link active"><span>Home</span> <span>→</span></a></li>
+    <li><a href="/websites-apps/" class="mobile-nav-link "><span>1. Websites & Apps</span> <span>→</span></a></li>
+    <li><a href="/erp/" class="mobile-nav-link "><span>2. Odoo-Style ERP</span> <span>→</span></a></li>
+    <li><a href="/ai-marketing/" class="mobile-nav-link "><span>3. AI Marketing</span> <span>→</span></a></li>
+    <li><a href="/ai-agents/" class="mobile-nav-link "><span>4. Domain AI Agents</span> <span>→</span></a></li>
+    <li><a href="/#contact" class="mobile-nav-link"><span>Contact Us</span> <span>→</span></a></li>
+  </ul>
+  <div class="mobile-drawer-actions">
+    <a href="tel:+91 98765 43210" class="mobile-action-btn btn-mobile-call">
+      <svg width="18" height="18" aria-hidden="true"><use href="#i-phone"/></svg>
+      <span>Call Now (+91 98765 43210)</span>
+    </a>
+    <a href="https://wa.me/919876543210?text=Hi%20Arkshar%21%20I%20would%20like%20to%20discuss%20a%20project." target="_blank" rel="noopener noreferrer" class="mobile-action-btn btn-mobile-wa">
+      <svg width="18" height="18" aria-hidden="true"><use href="#i-whatsapp"/></svg>
+      <span>Chat on WhatsApp</span>
+    </a>
+  </div>
+</div>
+
+
+
+  <!-- Main Content Block -->
+  <main id="main-content">
+    
+<!-- HERO SECTION -->
+<div class="hero-bg">
+  <section class="hero container" id="top">
     <div class="hero-text">
       <h1>Your<br><span>Growth</span><br>Our<br>Concern</h1>
-      <p>Elevating businesses with smart websites, ERP and AI tools that actually grow your sales.</p>
-      <a href="contact.html?business=all-services" class="btn-primary">Book a strategy call &rarr;</a>
-      <a href="#services" class="btn-outline">View services &#9654;</a>
+      <p>Elevating businesses with smart websites, ERP systems and AI tools that actually grow your sales.</p>
+      <div class="hero-cta-group">
+        <a href="#contact" class="btn-primary">Book a strategy call &rarr;</a>
+        <a href="#services" class="btn-outline">View services &#9654;</a>
+      </div>
     </div>
     <div class="hero-visual">
-      <button class="arrow prev" aria-label="Previous" type="button">&#8249;</button>
+      <button class="arrow prev" aria-label="Previous slide" type="button">&#8249;</button>
       <figure class="phone-wrap">
-        <div class="phone">
-          <div class="slide on"><div class="m-bar"></div><div class="m-hero"></div><div class="m-row"><i></i><i></i></div><div class="m-btn">Call now</div></div>
-          <div class="slide"><div class="m-bar"></div><div class="m-grid"><i></i><i></i><i></i><i></i></div><div class="m-btn">Order on WhatsApp</div></div>
-          <div class="slide"><div class="m-bar"></div><div class="m-chart"><b style="height:40%"></b><b style="height:65%"></b><b style="height:50%"></b><b style="height:85%"></b></div><div class="m-row"><i></i><i></i></div></div>
+        <div class="phone" role="region" aria-label="Mobile app preview">
+          <div class="slide on">
+            <div class="m-bar"></div>
+            <div class="m-hero"></div>
+            <div class="m-row"><i></i><i></i></div>
+            <div class="m-btn">Call now</div>
+          </div>
+          <div class="slide">
+            <div class="m-bar"></div>
+            <div class="m-grid"><i></i><i></i><i></i><i></i></div>
+            <div class="m-btn">Order on WhatsApp</div>
+          </div>
+          <div class="slide">
+            <div class="m-bar"></div>
+            <div class="m-chart">
+              <b style="height:40%"></b>
+              <b style="height:65%"></b>
+              <b style="height:50%"></b>
+              <b style="height:85%"></b>
+            </div>
+            <div class="m-row"><i></i><i></i></div>
+          </div>
         </div>
         <figcaption>Mobile-first, made for your business</figcaption>
       </figure>
-      <button class="arrow next" aria-label="Next" type="button">&#8250;</button>
+      <button class="arrow next" aria-label="Next slide" type="button">&#8250;</button>
     </div>
-  </section></div>
-  <hr class="divider" id="services">
+  </section>
+</div>
 
-  <div class="card-stack" id="stack">
+<hr class="divider" id="services">
 
-    <section class="stack-card" id="card-1">
-      <div class="cat-head"><span class="cat-icon"><svg><use href="#i-cat1"/></svg></span><div class="section-label">Category 1</div></div>
-      <h2 class="section-heading">1. Customized Websites and Apps</h2>
-      <p class="section-subtext">High-performance digital storefronts and web solutions tailored for growing enterprises.</p>
-      <div class="cards-grid">
-        <article class="card"><div><span class="ico"><svg><use href="#i-globe"/></svg></span><h3 class="card-title">1.1 Business sites (18)</h3><p class="card-text">Show your services, address, timings and a phone button.</p></div><div class="card-tags"><span class="tag">Fast on mobile</span><span class="tag">Phone button</span></div></article>
-        <article class="card"><div><span class="ico"><svg><use href="#i-cart"/></svg></span><h3 class="card-title">1.2 E-commerce and ordering (7)</h3><p class="card-text">Product catalog with a basket and instant WhatsApp order send.</p></div><div class="card-tags"><span class="tag">Catalog</span><span class="tag">WhatsApp order</span></div></article>
-        <article class="card"><div><span class="ico"><svg><use href="#i-school"/></svg></span><h3 class="card-title">1.3 Institution portals (7)</h3><p class="card-text">Admission inquiries, fee details and a notice board for colleges.</p></div><div class="card-tags"><span class="tag">Admissions</span><span class="tag">Fees</span></div></article>
-        <article class="card"><div><span class="ico"><svg><use href="#i-layers"/></svg></span><h3 class="card-title">1.4 SaaS products (7)</h3><p class="card-text">Simple online software for client dashboards and reports.</p></div><div class="card-tags"><span class="tag">Dashboards</span><span class="tag">Reports</span></div></article>
+<!-- STACK CARDS (CLICKABLE CATEGORIES) -->
+<div class="card-stack" id="stack">
+
+  <!-- Category 1: Customized Websites and Apps -->
+  <section class="stack-card" id="card-1">
+    <div class="cat-head">
+      <div class="cat-head-left">
+        <span class="cat-icon"><svg aria-hidden="true"><use href="#i-cat1"/></svg></span>
+        <div class="section-label">Category 1</div>
       </div>
-    </section>
-
-    <section class="stack-card" id="card-2">
-      <div class="cat-head"><span class="cat-icon"><svg><use href="#i-cat2"/></svg></span><div class="section-label">Category 2</div></div>
-      <h2 class="section-heading">2. Odoo-style ERP</h2>
-      <p class="section-subtext">Comprehensive business management suites designed for seamless workflows.</p>
-      <div class="cards-grid">
-        <article class="card"><div><span class="ico"><svg><use href="#i-users"/></svg></span><h3 class="card-title">2.1 Sales and CRM (4)</h3><p class="card-text">Manage pipelines, leads, and customer interactions efficiently.</p></div><div class="card-tags"><span class="tag">Pipeline</span><span class="tag">Leads</span></div></article>
-        <article class="card"><div><span class="ico"><svg><use href="#i-calc"/></svg></span><h3 class="card-title">2.2 Accounting (3)</h3><p class="card-text">Invoicing, ledgers, and financial tracking in real-time.</p></div><div class="card-tags"><span class="tag">Invoices</span><span class="tag">Ledgers</span></div></article>
-        <article class="card"><div><span class="ico"><svg><use href="#i-box"/></svg></span><h3 class="card-title">2.3 Inventory and Purchase (4)</h3><p class="card-text">Stock control, purchase orders, and supplier management.</p></div><div class="card-tags"><span class="tag">Stock</span><span class="tag">Purchases</span></div></article>
-        <article class="card"><div><span class="ico"><svg><use href="#i-card"/></svg></span><h3 class="card-title">2.4 POS (4)</h3><p class="card-text">Fast point of sale terminals for retail and outlets.</p></div><div class="card-tags"><span class="tag">Retail</span><span class="tag">Billing</span></div></article>
-        <article class="card"><div><span class="ico"><svg><use href="#i-brief"/></svg></span><h3 class="card-title">2.5 HR (4)</h3><p class="card-text">Employee management, attendance, and payroll tracking.</p></div><div class="card-tags"><span class="tag">Attendance</span><span class="tag">Payroll</span></div></article>
-        <article class="card"><div><span class="ico"><svg><use href="#i-flow"/></svg></span><h3 class="card-title">2.6 Operations (5)</h3><p class="card-text">Streamline internal business operations and project logistics.</p></div><div class="card-tags"><span class="tag">Logistics</span><span class="tag">Workflows</span></div></article>
-        <article class="card"><div><span class="ico"><svg><use href="#i-truck"/></svg></span><h3 class="card-title">2.7 Delivery and multi-vendor (3)</h3><p class="card-text">Vendor management and fulfillment tracking.</p></div><div class="card-tags"><span class="tag">Vendors</span><span class="tag">Fulfillment</span></div></article>
-        <article class="card"><div><span class="ico"><svg><use href="#i-factory"/></svg></span><h3 class="card-title">2.8 Industry ERPs (5)</h3><p class="card-text">Specialized ERP configurations tailored for specific industry verticals.</p></div><div class="card-tags"><span class="tag">Specialized</span><span class="tag">Custom</span></div></article>
+      <a href="/websites-apps/" class="cat-explore-btn">
+        <span>Explore All 4 Sub-Services</span>
+        <span>&rarr;</span>
+      </a>
+    </div>
+    <h2 class="section-heading">
+      <a href="/websites-apps/">1. Customized Websites and Apps</a>
+    </h2>
+    <p class="section-subtext">High-performance digital storefronts and web solutions tailored for growing enterprises.</p>
+    <div class="cards-grid">
+      <div class="card subcard-toggle" data-sub="1.1" role="button" tabindex="0" aria-label="Highlight popular builds for 1.1 Business sites">
+        <div>
+          <span class="ico"><svg aria-hidden="true"><use href="#i-globe"/></svg></span>
+          <h3 class="card-title">1.1 Business sites (18)</h3>
+          <p class="card-text">Show your services, address, timings and a direct phone button.</p>
+        </div>
       </div>
-    </section>
-
-    <section class="stack-card" id="card-3">
-      <div class="cat-head"><span class="cat-icon"><svg><use href="#i-cat3"/></svg></span><div class="section-label">Category 3</div></div>
-      <h2 class="section-heading">3. AI Marketing and Business Analysis</h2>
-      <p class="section-subtext">Intelligent marketing automation and data-driven business insights.</p>
-      <div class="cards-grid">
-        <article class="card"><div><span class="ico"><svg><use href="#i-chart"/></svg></span><h3 class="card-title">3.1 Business analysis (3)</h3><p class="card-text">Advanced data evaluation and strategic business insights.</p></div><div class="card-tags"><span class="tag">Analytics</span><span class="tag">Strategy</span></div></article>
-        <article class="card"><div><span class="ico"><svg><use href="#i-mega"/></svg></span><h3 class="card-title">3.2 Content and social (4)</h3><p class="card-text">AI-generated content and social media campaign management.</p></div><div class="card-tags"><span class="tag">Content</span><span class="tag">Social</span></div></article>
-        <article class="card"><div><span class="ico"><svg><use href="#i-search"/></svg></span><h3 class="card-title">3.3 SEO and local SEO (3)</h3><p class="card-text">Search engine optimization to rank higher locally and globally.</p></div><div class="card-tags"><span class="tag">SEO</span><span class="tag">Ranking</span></div></article>
-        <article class="card"><div><span class="ico"><svg><use href="#i-target"/></svg></span><h3 class="card-title">3.4 Lead generation (3)</h3><p class="card-text">Targeted acquisition campaigns to capture high-intent leads.</p></div><div class="card-tags"><span class="tag">Leads</span><span class="tag">Acquisition</span></div></article>
-        <article class="card"><div><span class="ico"><svg><use href="#i-send"/></svg></span><h3 class="card-title">3.5 Lead follow-up (3)</h3><p class="card-text">Automated follow-ups to nurture prospects into clients.</p></div><div class="card-tags"><span class="tag">Pilot</span><span class="tag">Automation</span></div></article>
-        <article class="card"><div><span class="ico"><svg><use href="#i-phone"/></svg></span><h3 class="card-title">3.6 AI calling agent (3)</h3><p class="card-text">Autonomous AI voice agents for customer outreach and support.</p></div><div class="card-tags"><span class="tag">Pilot</span><span class="tag">AI Voice</span></div></article>
-        <article class="card"><div><span class="ico"><svg><use href="#i-trend"/></svg></span><h3 class="card-title">3.7 Reporting (3)</h3><p class="card-text">Real-time dashboards tracking marketing ROAS and growth metrics.</p></div><div class="card-tags"><span class="tag">Metrics</span><span class="tag">ROAS</span></div></article>
+      <div class="card subcard-toggle" data-sub="1.2" role="button" tabindex="0" aria-label="Highlight popular builds for 1.2 E-commerce and ordering">
+        <div>
+          <span class="ico"><svg aria-hidden="true"><use href="#i-cart"/></svg></span>
+          <h3 class="card-title">1.2 E-commerce and ordering (7)</h3>
+          <p class="card-text">Product catalog with a basket and instant WhatsApp order send.</p>
+        </div>
       </div>
-    </section>
-
-    <section class="stack-card" id="card-4">
-      <div class="cat-head"><span class="cat-icon"><svg><use href="#i-cat4"/></svg></span><div class="section-label">Category 4</div></div>
-      <h2 class="section-heading">4. Domain AI Agents</h2>
-      <p class="section-subtext">Specialized vertical AI agents designed for automated industry tasks.</p>
-      <div class="cards-grid">
-        <article class="card"><div><span class="ico"><svg><use href="#i-grad"/></svg></span><h3 class="card-title">4.1 Exam agents (3)</h3><p class="card-text">Automated test generation, analytics, and student evaluation.</p></div><div class="card-tags"><span class="tag">EdTech</span><span class="tag">Analytics</span></div></article>
-        <article class="card"><div><span class="ico"><svg><use href="#i-school"/></svg></span><h3 class="card-title">4.2 Institution agent (3)</h3><p class="card-text">Campus automation and administrative support bots.</p></div><div class="card-tags"><span class="tag">Campus</span><span class="tag">Admin</span></div></article>
-        <article class="card"><div><span class="ico"><svg><use href="#i-users"/></svg></span><h3 class="card-title">4.3 HR agent (3)</h3><p class="card-text">Candidate screening, onboarding, and query resolution.</p></div><div class="card-tags"><span class="tag">Recruitment</span><span class="tag">HR</span></div></article>
-        <article class="card"><div><span class="ico"><svg><use href="#i-wallet"/></svg></span><h3 class="card-title">4.4 Finance agent (4)</h3><p class="card-text">Automated bookkeeping and financial advisory assistants.</p></div><div class="card-tags"><span class="tag">Finance</span><span class="tag">Audits</span></div></article>
-        <article class="card"><div><span class="ico"><svg><use href="#i-pulse"/></svg></span><h3 class="card-title">4.5 Healthcare agent (3)</h3><p class="card-text">Patient intake, scheduling, and clinic management support.</p></div><div class="card-tags"><span class="tag">Clinic</span><span class="tag">Support</span></div></article>
-        <article class="card"><div><span class="ico"><svg><use href="#i-headset"/></svg></span><h3 class="card-title">4.6 Support agent (2)</h3><p class="card-text">24/7 intelligent customer service and ticket routing.</p></div><div class="card-tags"><span class="tag">24/7 Support</span><span class="tag">Tickets</span></div></article>
+      <div class="card subcard-toggle" data-sub="1.3" role="button" tabindex="0" aria-label="Highlight popular builds for 1.3 Institution portals">
+        <div>
+          <span class="ico"><svg aria-hidden="true"><use href="#i-school"/></svg></span>
+          <h3 class="card-title">1.3 Institution portals (7)</h3>
+          <p class="card-text">Admission inquiries, fee details and a notice board for colleges.</p>
+        </div>
       </div>
-    </section>
+      <div class="card subcard-toggle" data-sub="1.4" role="button" tabindex="0" aria-label="Highlight popular builds for 1.4 SaaS products">
+        <div>
+          <span class="ico"><svg aria-hidden="true"><use href="#i-layers"/></svg></span>
+          <h3 class="card-title">1.4 SaaS products (7)</h3>
+          <p class="card-text">Simple online software for client dashboards, billing and reports.</p>
+        </div>
+      </div>
+    </div>
 
+    <!-- Popular builds row (Card 1) -->
+    <div class="popular-builds-wrap">
+      <div class="popular-chips-track" id="marquee-card-1" role="region" aria-label="Popular builds for Customized Websites and Apps"></div>
+    </div>
+  </section>
+
+  <!-- Category 2: Odoo-style ERP -->
+  <section class="stack-card" id="card-2">
+    <div class="cat-head">
+      <div class="cat-head-left">
+        <span class="cat-icon"><svg aria-hidden="true"><use href="#i-cat2"/></svg></span>
+        <div class="section-label">Category 2</div>
+      </div>
+      <a href="/erp/" class="cat-explore-btn">
+        <span>Explore All 8 Sub-Services</span>
+        <span>&rarr;</span>
+      </a>
+    </div>
+    <h2 class="section-heading">
+      <a href="/erp/">2. Odoo-style ERP</a>
+    </h2>
+    <p class="section-subtext">Comprehensive business management suites designed for seamless workflows.</p>
+    <div class="cards-grid">
+      <div class="card subcard-toggle" data-sub="2.1" role="button" tabindex="0" aria-label="Highlight popular builds for 2.1 Sales and CRM">
+        <div>
+          <span class="ico"><svg aria-hidden="true"><use href="#i-users"/></svg></span>
+          <h3 class="card-title">2.1 Sales and CRM (4)</h3>
+          <p class="card-text">Manage pipelines, leads, and customer interactions efficiently.</p>
+        </div>
+      </div>
+      <div class="card subcard-toggle" data-sub="2.2" role="button" tabindex="0" aria-label="Highlight popular builds for 2.2 Accounting">
+        <div>
+          <span class="ico"><svg aria-hidden="true"><use href="#i-calc"/></svg></span>
+          <h3 class="card-title">2.2 Accounting (3)</h3>
+          <p class="card-text">Invoicing, ledgers, and financial tracking in real-time.</p>
+        </div>
+      </div>
+      <div class="card subcard-toggle" data-sub="2.3" role="button" tabindex="0" aria-label="Highlight popular builds for 2.3 Inventory and Purchase">
+        <div>
+          <span class="ico"><svg aria-hidden="true"><use href="#i-box"/></svg></span>
+          <h3 class="card-title">2.3 Inventory and Purchase (4)</h3>
+          <p class="card-text">Stock control, purchase orders, and supplier management.</p>
+        </div>
+      </div>
+      <div class="card subcard-toggle" data-sub="2.4" role="button" tabindex="0" aria-label="Highlight popular builds for 2.4 POS">
+        <div>
+          <span class="ico"><svg aria-hidden="true"><use href="#i-card"/></svg></span>
+          <h3 class="card-title">2.4 POS (4)</h3>
+          <p class="card-text">Fast point of sale terminals for retail and multi-branch outlets.</p>
+        </div>
+      </div>
+      <div class="card subcard-toggle" data-sub="2.5" role="button" tabindex="0" aria-label="Highlight popular builds for 2.5 HR">
+        <div>
+          <span class="ico"><svg aria-hidden="true"><use href="#i-brief"/></svg></span>
+          <h3 class="card-title">2.5 HR (4)</h3>
+          <p class="card-text">Employee management, attendance, and payroll tracking.</p>
+        </div>
+      </div>
+      <div class="card subcard-toggle" data-sub="2.6" role="button" tabindex="0" aria-label="Highlight popular builds for 2.6 Operations">
+        <div>
+          <span class="ico"><svg aria-hidden="true"><use href="#i-flow"/></svg></span>
+          <h3 class="card-title">2.6 Operations (5)</h3>
+          <p class="card-text">Streamline internal business operations and project logistics.</p>
+        </div>
+      </div>
+      <div class="card subcard-toggle" data-sub="2.7" role="button" tabindex="0" aria-label="Highlight popular builds for 2.7 Delivery and multi-vendor">
+        <div>
+          <span class="ico"><svg aria-hidden="true"><use href="#i-truck"/></svg></span>
+          <h3 class="card-title">2.7 Delivery & multi-vendor (3)</h3>
+          <p class="card-text">Vendor management and fulfillment tracking.</p>
+        </div>
+      </div>
+      <div class="card subcard-toggle" data-sub="2.8" role="button" tabindex="0" aria-label="Highlight popular builds for 2.8 Industry ERPs">
+        <div>
+          <span class="ico"><svg aria-hidden="true"><use href="#i-factory"/></svg></span>
+          <h3 class="card-title">2.8 Industry ERPs (5)</h3>
+          <p class="card-text">Specialized ERP configurations tailored for specific verticals.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Popular builds row (Card 2) -->
+    <div class="popular-builds-wrap">
+      <div class="popular-chips-track" id="marquee-card-2" role="region" aria-label="Popular builds for Odoo-style ERP"></div>
+    </div>
+  </section>
+
+  <!-- Category 3: AI Marketing and Business Analysis -->
+  <section class="stack-card" id="card-3">
+    <div class="cat-head">
+      <div class="cat-head-left">
+        <span class="cat-icon"><svg aria-hidden="true"><use href="#i-cat3"/></svg></span>
+        <div class="section-label">Category 3</div>
+      </div>
+      <a href="/ai-marketing/" class="cat-explore-btn">
+        <span>Explore All 7 Sub-Services</span>
+        <span>&rarr;</span>
+      </a>
+    </div>
+    <h2 class="section-heading">
+      <a href="/ai-marketing/">3. AI Marketing and Business Analysis</a>
+    </h2>
+    <p class="section-subtext">Intelligent marketing automation and data-driven business insights.</p>
+    <div class="cards-grid">
+      <div class="card subcard-toggle" data-sub="3.1" role="button" tabindex="0" aria-label="Highlight popular builds for 3.1 Business analysis">
+        <div>
+          <span class="ico"><svg aria-hidden="true"><use href="#i-chart"/></svg></span>
+          <h3 class="card-title">3.1 Business analysis (3)</h3>
+          <p class="card-text">Advanced data evaluation and strategic business insights.</p>
+        </div>
+      </div>
+      <div class="card subcard-toggle" data-sub="3.2" role="button" tabindex="0" aria-label="Highlight popular builds for 3.2 Content and social">
+        <div>
+          <span class="ico"><svg aria-hidden="true"><use href="#i-mega"/></svg></span>
+          <h3 class="card-title">3.2 Content and social (4)</h3>
+          <p class="card-text">AI-generated content and social media campaign management.</p>
+        </div>
+      </div>
+      <div class="card subcard-toggle" data-sub="3.3" role="button" tabindex="0" aria-label="Highlight popular builds for 3.3 SEO and local SEO">
+        <div>
+          <span class="ico"><svg aria-hidden="true"><use href="#i-search"/></svg></span>
+          <h3 class="card-title">3.3 SEO and local SEO (3)</h3>
+          <p class="card-text">Search engine optimization to rank higher on Google Maps.</p>
+        </div>
+      </div>
+      <div class="card subcard-toggle" data-sub="3.4" role="button" tabindex="0" aria-label="Highlight popular builds for 3.4 Lead generation">
+        <div>
+          <span class="ico"><svg aria-hidden="true"><use href="#i-target"/></svg></span>
+          <h3 class="card-title">3.4 Lead generation (3)</h3>
+          <p class="card-text">Targeted acquisition campaigns to capture high-intent leads.</p>
+        </div>
+      </div>
+      <div class="card subcard-toggle" data-sub="3.5" role="button" tabindex="0" aria-label="Highlight popular builds for 3.5 Lead follow-up">
+        <div>
+          <span class="ico"><svg aria-hidden="true"><use href="#i-send"/></svg></span>
+          <h3 class="card-title">3.5 Lead follow-up (3)</h3>
+          <p class="card-text">Automated follow-ups on WhatsApp to nurture prospects.</p>
+        </div>
+      </div>
+      <div class="card subcard-toggle" data-sub="3.6" role="button" tabindex="0" aria-label="Highlight popular builds for 3.6 AI calling agent">
+        <div>
+          <span class="ico"><svg aria-hidden="true"><use href="#i-phone"/></svg></span>
+          <h3 class="card-title">3.6 AI calling agent (3)</h3>
+          <p class="card-text">Autonomous AI voice agents for bookings and outreach.</p>
+        </div>
+      </div>
+      <div class="card subcard-toggle" data-sub="3.7" role="button" tabindex="0" aria-label="Highlight popular builds for 3.7 Reporting">
+        <div>
+          <span class="ico"><svg aria-hidden="true"><use href="#i-trend"/></svg></span>
+          <h3 class="card-title">3.7 Reporting (3)</h3>
+          <p class="card-text">Real-time dashboards tracking marketing ROAS and growth.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Popular builds row (Card 3) -->
+    <div class="popular-builds-wrap">
+      <div class="popular-chips-track" id="marquee-card-3" role="region" aria-label="Popular builds for AI Marketing and Business Analysis"></div>
+    </div>
+  </section>
+
+  <!-- Category 4: Domain AI Agents -->
+  <section class="stack-card" id="card-4">
+    <div class="cat-head">
+      <div class="cat-head-left">
+        <span class="cat-icon"><svg aria-hidden="true"><use href="#i-cat4"/></svg></span>
+        <div class="section-label">Category 4</div>
+      </div>
+      <a href="/ai-agents/" class="cat-explore-btn">
+        <span>Explore All 6 Sub-Services</span>
+        <span>&rarr;</span>
+      </a>
+    </div>
+    <h2 class="section-heading">
+      <a href="/ai-agents/">4. Domain AI Agents</a>
+    </h2>
+    <p class="section-subtext">Specialized vertical AI agents designed for automated industry tasks.</p>
+    <div class="cards-grid">
+      <div class="card subcard-toggle" data-sub="4.1" role="button" tabindex="0" aria-label="Highlight popular builds for 4.1 Exam agents">
+        <div>
+          <span class="ico"><svg aria-hidden="true"><use href="#i-grad"/></svg></span>
+          <h3 class="card-title">4.1 Exam agents (3)</h3>
+          <p class="card-text">Automated test generation, instant scoring, and student analytics.</p>
+        </div>
+      </div>
+      <div class="card subcard-toggle" data-sub="4.2" role="button" tabindex="0" aria-label="Highlight popular builds for 4.2 Institution agent">
+        <div>
+          <span class="ico"><svg aria-hidden="true"><use href="#i-school"/></svg></span>
+          <h3 class="card-title">4.2 Institution agent (3)</h3>
+          <p class="card-text">Campus automation and administrative support bots.</p>
+        </div>
+      </div>
+      <div class="card subcard-toggle" data-sub="4.3" role="button" tabindex="0" aria-label="Highlight popular builds for 4.3 HR agent">
+        <div>
+          <span class="ico"><svg aria-hidden="true"><use href="#i-users"/></svg></span>
+          <h3 class="card-title">4.3 HR agent (3)</h3>
+          <p class="card-text">Candidate screening, onboarding, and query resolution.</p>
+        </div>
+      </div>
+      <div class="card subcard-toggle" data-sub="4.4" role="button" tabindex="0" aria-label="Highlight popular builds for 4.4 Finance agent">
+        <div>
+          <span class="ico"><svg aria-hidden="true"><use href="#i-wallet"/></svg></span>
+          <h3 class="card-title">4.4 Finance agent (4)</h3>
+          <p class="card-text">Automated bookkeeping, billing and financial advisory.</p>
+        </div>
+      </div>
+      <div class="card subcard-toggle" data-sub="4.5" role="button" tabindex="0" aria-label="Highlight popular builds for 4.5 Healthcare agent">
+        <div>
+          <span class="ico"><svg aria-hidden="true"><use href="#i-pulse"/></svg></span>
+          <h3 class="card-title">4.5 Healthcare agent (3)</h3>
+          <p class="card-text">Patient intake, scheduling, and clinic WhatsApp coordination.</p>
+        </div>
+      </div>
+      <div class="card subcard-toggle" data-sub="4.6" role="button" tabindex="0" aria-label="Highlight popular builds for 4.6 Support agent">
+        <div>
+          <span class="ico"><svg aria-hidden="true"><use href="#i-headset"/></svg></span>
+          <h3 class="card-title">4.6 Support agent (2)</h3>
+          <p class="card-text">24/7 intelligent customer service and ticket routing.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Popular builds row (Card 4) -->
+    <div class="popular-builds-wrap">
+      <div class="popular-chips-track" id="marquee-card-4" role="region" aria-label="Popular builds for Domain AI Agents"></div>
+    </div>
+  </section>
+
+</div>
+
+<!-- RESULTS / BUSINESS IMPACT SECTION -->
+<section class="results-section">
+  <div class="container">
+    <div class="results-header">
+      <div class="section-label" style="--c: var(--accent-saffron); margin-bottom: 12px;">Real Business Impact</div>
+      <h2>Engineered for Growth</h2>
+      <p>Clean, mobile-first technology built to deliver orders, appointments, and inquiries without third-party commission cuts.</p>
+    </div>
+    <div class="results-grid">
+      
+      <div class="result-card">
+        <div class="result-stat">100%</div>
+        <div class="result-label">Mobile-First Design</div>
+        <p class="result-desc">Engineered for fast loading on Android devices and 4G networks.</p>
+      </div>
+      
+      <div class="result-card">
+        <div class="result-stat">2-5 Days</div>
+        <div class="result-label">Rapid Turnaround</div>
+        <p class="result-desc">Ready-made functional prototypes deployed with your branding in days.</p>
+      </div>
+      
+      <div class="result-card">
+        <div class="result-stat">0% Take</div>
+        <div class="result-label">Zero Platform Commissions</div>
+        <p class="result-desc">Orders &amp; leads go directly to your WhatsApp and phone.</p>
+      </div>
+      
+      <div class="result-card">
+        <div class="result-stat">24/7 Live</div>
+        <div class="result-label">Smart AI Automation</div>
+        <p class="result-desc">Automated response agents and lead triage working around the clock.</p>
+      </div>
+      
+    </div>
   </div>
-</main>
+</section>
 
-<a href="https://wa.me/91XXXXXXXXXX?text=Hi%20Arkshar%2C%20I%20want%20a%20quote%20for%20your%20services." class="whatsapp-float" aria-label="Chat on WhatsApp">
-  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
-</a>
+<!-- FAQS SECTION -->
+<section class="faq-section" id="faqs">
+  <div class="container">
+    <div class="faq-header">
+      <div class="section-label" style="--c: var(--neon-purple); margin-bottom: 12px;">Common Questions</div>
+      <h2>Frequently Asked Questions</h2>
+      <p>Clear, direct answers for shop, clinic, restaurant and college owners.</p>
+    </div>
+    <div class="faq-list">
+      
+      <details class="faq-item" open>
+        <summary class="faq-question">How quickly can our website or app go live?</summary>
+        <div class="faq-answer">
+          <p>Because we maintain ready-made architectural prototypes for shops, clinics, restaurants, and schools, core setups can go live in 2 to 5 working days with your branding, domain, and catalog.</p>
+        </div>
+      </details>
+      
+      <details class="faq-item" >
+        <summary class="faq-question">How does WhatsApp ordering and lead capture work?</summary>
+        <div class="faq-answer">
+          <p>Customers browse products or services on your website and tap one button to generate a structured, pre-filled order or inquiry directly into your studio WhatsApp number. Zero commission, zero delays.</p>
+        </div>
+      </details>
+      
+      <details class="faq-item" >
+        <summary class="faq-question">Can we customize features, designs, and integrations?</summary>
+        <div class="faq-answer">
+          <p>Yes. Everything is built on clean HTML5, CSS3, vanilla JavaScript, Python, and Django—not bloated page builders. You can customize workflows, database schema, payment gateways, and POS.</p>
+        </div>
+      </details>
+      
+      <details class="faq-item" >
+        <summary class="faq-question">What are Domain AI Agents and AI Calling Agents?</summary>
+        <div class="faq-answer">
+          <p>Domain AI Agents are specialized chatbots and voice agents trained for specific industry workflows like student test analytics, patient clinic intake, customer ticket routing, and automated calling.</p>
+        </div>
+      </details>
+      
+      <details class="faq-item" >
+        <summary class="faq-question">Do you provide hosting, domain, and maintenance support?</summary>
+        <div class="faq-answer">
+          <p>Yes. We offer fully managed cloud hosting (on fast servers with SSL, CDN, and automated backups), monthly feature updates, bug fixes, and continuous technical support.</p>
+        </div>
+      </details>
+      
+    </div>
+  </div>
+</section>
 
-<footer><div class="container"><p>&copy; 2026 Arkshar. All rights reserved. Built for small businesses in India.</p></div></footer>
+<!-- CONTACT SECTION & FORM -->
+<section class="contact-section" id="contact">
+  <div class="container">
+    <div class="contact-layout">
+      
+      <!-- Contact Information -->
+      <div class="contact-info">
+        <div class="section-label" style="--c: var(--accent-saffron); margin-bottom: 14px;">Let's Build Together</div>
+        <h2>Request a Custom Quote</h2>
+        <p>Tell us what your business needs. We reply promptly with a live demonstration and a transparent project quote.</p>
 
-<script>
-(function(){
-  var cards=[].slice.call(document.querySelectorAll('.stack-card'));
-  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var ticking=false;
+        <div class="direct-contacts">
+          <a href="tel:+91 98765 43210" class="contact-item">
+            <div class="contact-icon">
+              <svg aria-hidden="true"><use href="#i-phone"/></svg>
+            </div>
+            <div class="contact-detail">
+              <strong>Call Us Directly</strong>
+              <span>+91 98765 43210</span>
+            </div>
+          </a>
 
-  // cards taller than the screen can't stack, so let them scroll normally
-  function measure(){
-    cards.forEach(function(c){
-      c.classList.remove('no-stick');
-      var top=parseFloat(getComputedStyle(c).top)||0;
-      if(c.offsetHeight>window.innerHeight-top-20) c.classList.add('no-stick');
-    });
-    update();
-  }
+          <a href="https://wa.me/919876543210?text=Hi%20Arkshar%21%20I%20would%20like%20to%20discuss%20a%20project." target="_blank" rel="noopener noreferrer" class="contact-item">
+            <div class="contact-icon" style="background: rgba(37, 211, 102, 0.15); color: #25D366;">
+              <svg aria-hidden="true"><use href="#i-whatsapp"/></svg>
+            </div>
+            <div class="contact-detail">
+              <strong>Chat on WhatsApp</strong>
+              <span>Fastest Response &bull; +919876543210</span>
+            </div>
+          </a>
 
-  function update(){
-    ticking=false;
-    if(reduce) return;
-    cards.forEach(function(card,i){
-      var next=cards[i+1];
-      if(!next||card.classList.contains('no-stick')){card.style.transform='';card.style.setProperty('--dim',0);return;}
-      var stickyTop=parseFloat(getComputedStyle(card).top)||0;
-      var nextTop=next.getBoundingClientRect().top;
-      // 0 = next card still far below, 1 = next card fully covering this one
-      var p=1-(nextTop-stickyTop)/card.offsetHeight;
-      p=Math.max(0,Math.min(1,p));
-      card.style.transform='scale('+(1-p*0.06).toFixed(4)+')';
-      card.style.setProperty('--dim',(p*0.45).toFixed(3));
-    });
-  }
+          <a href="mailto:hello@arkshar.com" class="contact-item">
+            <div class="contact-icon">
+              <svg aria-hidden="true"><use href="#i-send"/></svg>
+            </div>
+            <div class="contact-detail">
+              <strong>Studio Email</strong>
+              <span>hello@arkshar.com</span>
+            </div>
+          </a>
+        </div>
 
-  function onScroll(){ if(!ticking){ticking=true;requestAnimationFrame(update);} }
-  window.addEventListener('scroll',onScroll,{passive:true});
-  window.addEventListener('resize',measure);
-  window.addEventListener('load',measure);
-  measure();
-})();
+        <p style="font-size: 14px; color: var(--text-dim);">
+          📍 <strong>Base:</strong> Hitech City, Hyderabad, Telangana 500081, India
+        </p>
+      </div>
 
-(function(){
-  var slides=[].slice.call(document.querySelectorAll('.phone .slide')),i=0;
-  function go(n){slides[i].classList.remove('on');i=(n+slides.length)%slides.length;slides[i].classList.add('on');}
-  var nextBtn = document.querySelector('.arrow.next');
-  var prevBtn = document.querySelector('.arrow.prev');
-  if(nextBtn) nextBtn.onclick=function(){go(i+1)};
-  if(prevBtn) prevBtn.onclick=function(){go(i-1)};
-  setInterval(function(){go(i+1)},4000);
-})();
-</script>
+      <!-- Contact Form -->
+      <div class="contact-form-wrap">
+        <h3 style="font-size: 22px; font-weight: 800; text-transform: uppercase; margin-bottom: 20px;">Send Your Requirements</h3>
+        
+        <div class="form-feedback" id="form-feedback" role="alert"></div>
+
+        
+
+        <form action="/contact/" method="POST" id="contact-form">
+          <input type="hidden" name="csrfmiddlewaretoken" value="dRbvjmL4ciNE607f05aNza7Yl7V0apgLKUUPgd9Cv9sYwWBe98G0ugx6NQ3e2xr9">
+          <div class="form-group">
+            <label for="id_name" class="form-label">Your Name *</label>
+            <input type="text" id="id_name" name="name" class="form-control" placeholder="e.g. Rahul Sharma" required>
+          </div>
+
+          <div class="form-group">
+            <label for="id_phone" class="form-label">Phone Number / WhatsApp *</label>
+            <input type="tel" id="id_phone" name="phone" class="form-control" placeholder="e.g. 9876543210" required>
+          </div>
+
+          <div class="form-group">
+            <label for="id_service" class="form-label">Service of Interest</label>
+            <select id="id_service" name="service" class="form-control">
+              <option value="websites-apps" selected>1. Customized Websites and Apps</option>
+              <option value="erp" >2. Odoo-style ERP</option>
+              <option value="ai-marketing" >3. AI Marketing and Business Analysis</option>
+              <option value="ai-agents" >4. Domain AI Agents</option>
+              <option value="general">General Consultation / Other</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="id_message" class="form-label">Project Details / Shop Type</label>
+            <textarea id="id_message" name="message" class="form-control" placeholder="Describe your business (e.g., Dental clinic booking system, Kirana online ordering, School portal)..."></textarea>
+          </div>
+
+          <button type="submit" class="btn-primary btn-gold" style="width: 100%; height: 52px; font-size: 15px;">
+            Request a Free Quote &rarr;
+          </button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+  </main>
+
+  <!-- Reusable Footer -->
+  
+<footer class="site-footer" role="contentinfo">
+  <div class="container">
+    <div class="footer-grid">
+      <!-- Brand & Mission -->
+      <div class="footer-brand">
+        <a href="/" aria-label="Arkshar Home">
+          <img src="arkshar-logo.svg" alt="Arkshar" class="brand-logo" width="130" height="38" style="filter: brightness(0) invert(1);">
+        </a>
+        <p>Boutique software studio in Hyderabad building ready-made websites, ERP systems, AI marketing and domain AI agents for small businesses in India.</p>
+        <p style="margin-top: 12px; font-size: 13px; color: var(--accent-gold);">
+          &bull; Django &bull; Python &bull; PostgreSQL &bull; Mobile-First
+        </p>
+      </div>
+
+      <!-- Solutions -->
+      <div class="footer-col">
+        <h4>Solutions</h4>
+        <ul class="footer-links">
+          <li><a href="/websites-apps/">1. Websites & Apps</a></li>
+          <li><a href="/erp/">2. Odoo-Style ERP</a></li>
+          <li><a href="/ai-marketing/">3. AI Marketing</a></li>
+          <li><a href="/ai-agents/">4. Domain AI Agents</a></li>
+        </ul>
+      </div>
+
+      <!-- Direct Contact Details -->
+      <div class="footer-col">
+        <h4>Contact Us</h4>
+        <div class="footer-contact-info">
+          <div class="footer-contact-item">
+            <svg aria-hidden="true"><use href="#i-phone"/></svg>
+            <div>
+              <strong>Phone / WhatsApp:</strong>
+              <a href="tel:+91 98765 43210">+91 98765 43210</a>
+            </div>
+          </div>
+          <div class="footer-contact-item">
+            <svg aria-hidden="true"><use href="#i-send"/></svg>
+            <div>
+              <strong>Email:</strong>
+              <a href="mailto:hello@arkshar.com">hello@arkshar.com</a>
+            </div>
+          </div>
+          <div class="footer-contact-item">
+            <svg aria-hidden="true"><use href="#i-target"/></svg>
+            <div>
+              <strong>Studio Address:</strong>
+              <span>Hitech City, Hyderabad, Telangana 500081, India</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2026 Arkshar Studio. All rights reserved. Built for shops, clinics, restaurants and growing colleges in India.</p>
+    </div>
+  </div>
+</footer>
+
+
+
+  <!-- Floating Chatbot Widget (Claude API) -->
+  <!-- Floating Chat Bubble (above WhatsApp) -->
+<button class="chatbot-bubble" id="chatbot-bubble" aria-label="Open Arkshar AI Assistant" type="button">
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/>
+  </svg>
+  <span class="chat-unread-dot" aria-label="New message available"></span>
+</button>
+
+<!-- Interactive Chat Window -->
+<div class="chatbot-window" id="chatbot-window" role="dialog" aria-label="Arkshar AI Assistant" aria-modal="false">
+  <div class="chat-header">
+    <div class="chat-header-title">
+      <div class="chat-avatar">A</div>
+      <div class="chat-status-text">
+        <strong>Arkshar Studio AI</strong>
+        <span>● Powered by Claude &bull; Hyderabad</span>
+      </div>
+    </div>
+    <button class="chat-close-btn" id="chat-close-btn" aria-label="Close chat" type="button">&times;</button>
+  </div>
+
+  <div class="chat-messages" id="chat-messages">
+    <div class="msg msg-bot">
+      <p>Hello! I am Arkshar's AI assistant. Ask me about our <strong>Websites</strong>, <strong>ERP systems</strong>, <strong>AI marketing</strong>, or <strong>Domain agents</strong>. How can I help your business grow today?</p>
+    </div>
+  </div>
+
+  <!-- Quick Prompts Chips -->
+  <div class="chat-quick-chips">
+    <button class="chip-btn" data-query="What websites do you build?" type="button">Websites & Apps</button>
+    <button class="chip-btn" data-query="Tell me about Odoo ERP" type="button">Odoo ERP</button>
+    <button class="chip-btn" data-query="How does AI marketing work?" type="button">AI Marketing</button>
+    <button class="chip-btn" data-query="I want a custom quote" type="button">Get a Quote</button>
+  </div>
+
+  <form class="chat-input-bar" id="chat-form">
+    <input type="text" class="chat-input" id="chat-input" placeholder="Type your question or requirement..." aria-label="Your message" autocomplete="off" required>
+    <button type="submit" class="chat-send-btn" aria-label="Send message">Send</button>
+  </form>
+</div>
+
+
+
+  <!-- Floating WhatsApp Action -->
+  <a href="https://wa.me/919876543210?text=Hi%20Arkshar%21%20I%20would%20like%20to%20discuss%20a%20project." class="whatsapp-float" aria-label="Chat on WhatsApp" target="_blank" rel="noopener noreferrer">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <use href="#i-whatsapp"/>
+    </svg>
+  </a>
+
+  <!-- Mobile Bottom Quick Action Bar -->
+  <div class="mobile-bottom-bar" role="navigation" aria-label="Quick Actions">
+    <a href="tel:+91 98765 43210" class="mobile-action-btn btn-mobile-call">
+      <svg width="18" height="18" aria-hidden="true"><use href="#i-phone"/></svg>
+      <span>Call Now</span>
+    </a>
+    <a href="https://wa.me/919876543210?text=Hi%20Arkshar%21%20I%20would%20like%20to%20discuss%20a%20project." target="_blank" rel="noopener noreferrer" class="mobile-action-btn btn-mobile-wa">
+      <svg width="18" height="18" aria-hidden="true"><use href="#i-whatsapp"/></svg>
+      <span>WhatsApp</span>
+    </a>
+  </div>
+
+  <script src="js/main.js"></script>
+  <script src="js/chatbot.js"></script>
+  
 </body>
 </html>
+
