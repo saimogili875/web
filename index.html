@@ -3,56 +3,85 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Arkshar — Ready-made business apps, live in days</title>
-  <meta name="description" content="Arkshar builds ready-made websites, ERP systems, AI marketing, and domain AI agents for small businesses. One new prototype launched every working day.">
+  <title>Arkshar — Your business online. Ready-made, live in days.</title>
+  <meta name="description" content="Websites, apps and AI marketing for small businesses in Hyderabad. See a new working sample every day.">
   <meta name="theme-color" content="#0F2747">
+  <link rel="canonical" href="https://arkshar.com/">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
 
   <!-- OpenGraph / Social Meta Tags -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Arkshar — Ready-made business apps, live in days">
-  <meta property="og:description" content="Indian software studio building ready-made websites, ERP, AI marketing, and AI agents for small businesses. One prototype every working day with Instagram reels.">
-  <meta property="og:url" content="https://arkshar.studio/">
+  <meta property="og:title" content="Arkshar — Your business online. Ready-made, live in days.">
+  <meta property="og:description" content="Websites, apps and AI marketing for small businesses. See a new working sample every day.">
+  <meta property="og:url" content="https://arkshar.com/">
+  <meta property="og:image" content="https://arkshar.com/assets/og.png">
 
-  <!-- Google Fonts: Plus Jakarta Sans -->
+  <!-- Organization JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Arkshar",
+    "url": "https://arkshar.com",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Hyderabad",
+      "addressRegion": "Telangana",
+      "addressCountry": "IN"
+    }
+  }
+  </script>
+
+  <!-- Google Fonts: 400, 600, 800 -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
   <a href="#main-content" class="skip-link">Skip to main content</a>
 
+  <!-- REUSABLE SVG SPRITE -->
+  <svg style="display: none;" aria-hidden="true">
+    <symbol id="i-whatsapp" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 14.99 3.81 13.47 3.81 11.91C3.81 7.37 7.5 3.67 12.05 3.67M9.53 7.03C9.36 7.03 9.08 7.09 8.84 7.35C8.6 7.61 7.92 8.25 7.92 9.55C7.92 10.85 8.87 12.11 9 12.28C9.13 12.45 10.84 15.09 13.46 16.22C14.08 16.49 14.57 16.65 14.95 16.77C15.57 16.97 16.14 16.94 16.58 16.88C17.08 16.8 18.11 16.25 18.32 15.65C18.54 15.06 18.54 14.55 18.47 14.44C18.41 14.33 18.24 14.27 17.98 14.14C17.72 14.01 16.45 13.38 16.21 13.29C15.98 13.2 15.81 13.16 15.64 13.42C15.47 13.68 14.99 14.25 14.84 14.42C14.7 14.59 14.55 14.61 14.29 14.48C14.04 14.35 13.21 14.08 12.22 13.2C11.45 12.51 10.93 11.66 10.78 11.4C10.63 11.15 10.76 11.01 10.89 10.88C11.01 10.76 11.15 10.58 11.28 10.43C11.41 10.28 11.45 10.17 11.54 10C11.62 9.83 11.58 9.68 11.52 9.55C11.45 9.42 10.95 8.19 10.73 7.68C10.53 7.18 10.32 7.25 10.16 7.24C10.01 7.23 9.84 7.23 9.67 7.23L9.53 7.03Z"/>
+    </symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+    </symbol>
+    <symbol id="i-check" viewBox="0 0 24 24">
+      <polyline points="20 6 9 17 4 12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+  </svg>
+
   <!-- SITE HEADER -->
   <header class="site-header" role="banner">
     <div class="container header-container">
-      <a href="index.html" class="brand-wordmark" aria-label="Arkshar Studio Home">
+      <a href="index.html" class="brand-wordmark" aria-label="Arkshar Home">
         Arkshar<span class="dot">.</span>
       </a>
 
       <!-- Desktop Navigation -->
       <nav class="nav-desktop" aria-label="Main Navigation">
-        <a href="index.html" class="nav-link active" aria-current="page">Home</a>
-        <a href="catalog.html" class="nav-link">Catalog</a>
-        <a href="solutions.html" class="nav-link">Solutions</a>
-        <a href="pricing.html" class="nav-link">Pricing</a>
-        <a href="contact.html" class="nav-link">Contact</a>
+        <a href="index.html" class="nav-link active" aria-current="page" data-i18n="nav_home">Home</a>
+        <a href="catalog.html" class="nav-link" data-i18n="nav_catalog">Catalog</a>
+        <a href="solutions.html" class="nav-link" data-i18n="nav_solutions">Solutions</a>
+        <a href="pricing.html" class="nav-link" data-i18n="nav_pricing">Pricing</a>
+        <a href="about.html" class="nav-link" data-i18n="nav_about">About</a>
+        <a href="contact.html" class="nav-link" data-i18n="nav_contact">Contact</a>
       </nav>
 
       <!-- Header Action -->
       <div class="header-cta-group">
-        <a href="https://wa.me/91XXXXXXXXXX?text=Hi%20Arkshar!%20I%20am%20interested%20in%20building%20an%20app%20for%20my%20business." target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp btn-sm">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 14.99 3.81 13.47 3.81 11.91C3.81 7.37 7.5 3.67 12.05 3.67M9.53 7.03C9.36 7.03 9.08 7.09 8.84 7.35C8.6 7.61 7.92 8.25 7.92 9.55C7.92 10.85 8.87 12.11 9 12.28C9.13 12.45 10.84 15.09 13.46 16.22C14.08 16.49 14.57 16.65 14.95 16.77C15.57 16.97 16.14 16.94 16.58 16.88C17.08 16.8 18.11 16.25 18.32 15.65C18.54 15.06 18.54 14.55 18.47 14.44C18.41 14.33 18.24 14.27 17.98 14.14C17.72 14.01 16.45 13.38 16.21 13.29C15.98 13.2 15.81 13.16 15.64 13.42C15.47 13.68 14.99 14.25 14.84 14.42C14.7 14.59 14.55 14.61 14.29 14.48C14.04 14.35 13.21 14.08 12.22 13.2C11.45 12.51 10.93 11.66 10.78 11.4C10.63 11.15 10.76 11.01 10.89 10.88C11.01 10.76 11.15 10.58 11.28 10.43C11.41 10.28 11.45 10.17 11.54 10C11.62 9.83 11.58 9.68 11.52 9.55C11.45 9.42 10.95 8.19 10.73 7.68C10.53 7.18 10.32 7.25 10.16 7.24C10.01 7.23 9.84 7.23 9.67 7.23L9.53 7.03Z"/>
-          </svg>
-          WhatsApp Us
+        <a href="#" data-config="whatsapp-link" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp btn-sm">
+          <svg width="18" height="18" aria-hidden="true"><use href="#i-whatsapp"></use></svg>
+          <span data-i18n="nav_whatsapp">WhatsApp Us</span>
         </a>
 
         <!-- Mobile Menu Toggle -->
         <button type="button" class="mobile-toggle" aria-expanded="false" aria-controls="mobile-nav-drawer" aria-label="Toggle navigation menu">
-          <span></span>
-          <span></span>
-          <span></span>
+          <span></span><span></span><span></span>
         </button>
       </div>
     </div>
@@ -66,270 +95,324 @@
         <a href="catalog.html" class="mobile-nav-link">Catalog <span>→</span></a>
         <a href="solutions.html" class="mobile-nav-link">Solutions <span>→</span></a>
         <a href="pricing.html" class="mobile-nav-link">Pricing <span>→</span></a>
+        <a href="about.html" class="mobile-nav-link">About <span>→</span></a>
         <a href="contact.html" class="mobile-nav-link">Contact <span>→</span></a>
       </nav>
       <div class="mobile-drawer-footer">
-        <a href="https://wa.me/91XXXXXXXXXX?text=Hi%20Arkshar!%20I%20am%20interested%20in%20building%20an%20app%20for%20my%20business." target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp btn-block-mobile">
-          Chat on WhatsApp (+91 XXXXX XXXXX)
-        </a>
-        <a href="https://instagram.com/#" target="_blank" rel="noopener noreferrer" class="btn btn-reel btn-block-mobile">
-          Follow Reels on Instagram
+        <a href="#" data-config="whatsapp-link" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp btn-block-mobile">
+          <svg width="18" height="18" aria-hidden="true"><use href="#i-whatsapp"></use></svg>
+          Chat on WhatsApp
         </a>
       </div>
     </div>
   </div>
 
   <main id="main-content">
-    <!-- HERO SECTION -->
+    <!-- 1. HERO SECTION -->
     <section class="section hero">
       <div class="container">
         <div class="hero-content">
-          <div class="eyebrow">
+          <div class="eyebrow" data-i18n="hero_badge">
             <span class="eyebrow-dot" aria-hidden="true"></span>
             Daily Prototype Studio
           </div>
-          <h1 class="hero-title">Ready-made business apps, live in days</h1>
-          <p class="hero-subtitle lead">
-            Arkshar designs and delivers turn-key websites, ERP workflows, AI marketing, and conversational domain agents for Indian small businesses. One new live prototype released every working day with an Instagram reel.
+          <h1 class="hero-title" data-i18n="hero_title">Your business online. Ready-made, live in days.</h1>
+          <p class="hero-subtitle lead" data-i18n="hero_sub">
+            Websites, apps and AI marketing for small businesses. See a new working sample every day.
           </p>
 
           <div class="hero-actions">
-            <a href="#latest-prototype-section" class="btn btn-primary btn-lg btn-block-mobile">
+            <a href="#today-prototype-section" class="btn btn-primary btn-lg btn-block-mobile" data-i18n="hero_btn_today">
               See today's prototype
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <line x1="12" y1="5" x2="12" y2="19"></line>
-                <polyline points="19 12 12 19 5 12"></polyline>
-              </svg>
             </a>
-            <a href="https://wa.me/91XXXXXXXXXX?text=Hi%20Arkshar!%20I%20want%20to%20discuss%20an%20app%20for%20my%20business." target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp btn-lg btn-block-mobile">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 14.99 3.81 13.47 3.81 11.91C3.81 7.37 7.5 3.67 12.05 3.67M9.53 7.03C9.36 7.03 9.08 7.09 8.84 7.35C8.6 7.61 7.92 8.25 7.92 9.55C7.92 10.85 8.87 12.11 9 12.28C9.13 12.45 10.84 15.09 13.46 16.22C14.08 16.49 14.57 16.65 14.95 16.77C15.57 16.97 16.14 16.94 16.58 16.88C17.08 16.8 18.11 16.25 18.32 15.65C18.54 15.06 18.54 14.55 18.47 14.44C18.41 14.33 18.24 14.27 17.98 14.14C17.72 14.01 16.45 13.38 16.21 13.29C15.98 13.2 15.81 13.16 15.64 13.42C15.47 13.68 14.99 14.25 14.84 14.42C14.7 14.59 14.55 14.61 14.29 14.48C14.04 14.35 13.21 14.08 12.22 13.2C11.45 12.51 10.93 11.66 10.78 11.4C10.63 11.15 10.76 11.01 10.89 10.88C11.01 10.76 11.15 10.58 11.28 10.43C11.41 10.28 11.45 10.17 11.54 10C11.62 9.83 11.58 9.68 11.52 9.55C11.45 9.42 10.95 8.19 10.73 7.68C10.53 7.18 10.32 7.25 10.16 7.24C10.01 7.23 9.84 7.23 9.67 7.23L9.53 7.03Z"/>
-              </svg>
-              WhatsApp us
+            <a href="#" data-config="whatsapp-link" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp btn-lg btn-block-mobile" data-i18n="hero_btn_whatsapp">
+              <svg width="20" height="20" aria-hidden="true"><use href="#i-whatsapp"></use></svg>
+              Chat on WhatsApp
             </a>
           </div>
 
-          <div class="hero-stats-strip">
-            <div class="hero-stat-item">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-              1 New Prototype Every Working Day
-            </div>
-            <div class="hero-stat-item">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-              Paired with Instagram Reel Demos
-            </div>
-            <div class="hero-stat-item">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-              Tailored for Indian MSMEs
-            </div>
+          <div class="hero-target-strip" data-i18n="hero_for_who">
+            Made for small shops, clinics, restaurants and colleges
           </div>
         </div>
       </div>
     </section>
 
-    <!-- LATEST PROTOTYPE STRIP -->
-    <section class="section section-white" id="latest-prototype-section">
-      <div class="container">
-        <div class="latest-strip">
-          <div class="latest-strip-layout">
-            <!-- Left Info -->
-            <div class="latest-strip-info">
-              <div class="latest-strip-tag">
-                <span class="eyebrow-dot" style="background: #FCD34D;" aria-hidden="true"></span>
-                Day 48 Prototype • Today's Release
-              </div>
-              <h2>Namma Kirana Quick Mart</h2>
-              <p>
-                A high-speed essentials catalog designed for local grocery shops and daily marts. Includes instant WhatsApp order routing, pin-code delivery validation, and seamless UPI QR checkout without commissions.
-              </p>
-              <div class="latest-strip-actions">
-                <button type="button" class="btn btn-primary btn-lg" id="strip-demo-btn" aria-label="Explore Namma Kirana demo">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                    <polyline points="15 3 21 3 21 9"></polyline>
-                    <line x1="10" y1="14" x2="21" y2="3"></line>
-                  </svg>
-                  Explore Live Demo
-                </button>
-                <a href="https://instagram.com/reel/#kirana" target="_blank" rel="noopener noreferrer" class="btn btn-reel btn-lg" aria-label="Watch Instagram Reel for Namma Kirana">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                    <path d="M8 5v14l11-7z"/>
-                  </svg>
-                  Watch Reel on Instagram
-                </a>
-              </div>
-            </div>
-
-            <!-- Right: Interactive Reel / Mockup Placeholder -->
-            <div>
-              <div class="reel-preview-card" id="play-strip-reel-btn" role="button" tabindex="0" aria-label="Click to preview Day 48 prototype reel">
-                <div class="reel-aspect">
-                  <img src="assets/prototypes/kirana.svg" alt="Namma Kirana Prototype preview screen" width="600" height="380">
-                  <div class="reel-badge-top">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069z"/>
-                    </svg>
-                    Reel #Day48
-                  </div>
-                  <div class="reel-overlay-play">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                      <path d="M8 5v14l11-7z"/>
-                    </svg>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+    <!-- 2. TODAY'S PROTOTYPE (DYNAMICALLY RENDERED FROM JSON) -->
+    <section class="section section-white" id="today-prototype-section">
+      <div class="container" id="today-prototype-container">
+        <!-- Renders dynamically via js/main.js based on newest non-future date -->
       </div>
     </section>
 
-    <!-- 4 PRODUCT-LINE CARDS -->
-    <section class="section section-subtle" id="product-lines-section">
+    <!-- 3. WHO IT IS FOR -->
+    <section class="section section-subtle">
       <div class="container">
         <div class="section-header">
-          <div class="eyebrow">Studio Capabilities</div>
-          <h2>4 Specialized Product Lines</h2>
-          <p class="lead">Built on modern, modular architectures tailored for Indian businesses seeking speed and performance.</p>
+          <div class="eyebrow">Who It Is For</div>
+          <h2>Made for everyday local businesses</h2>
+          <p class="lead">Simple tools designed to bring you orders and bookings on your phone.</p>
         </div>
 
-        <div class="product-grid">
-          <!-- Card 1 -->
-          <article class="product-card">
-            <div class="product-icon-wrap" aria-hidden="true">💻</div>
-            <h3>Custom Websites and Apps</h3>
-            <p>High-converting business websites, catalogs, and booking flows built to load in milliseconds on 4G/5G mobile devices.</p>
-            <div class="product-sub-list">
-              <span class="product-sub-item">Business sites & portfolios</span>
-              <span class="product-sub-item">E-commerce with UPI checkouts</span>
-              <span class="product-sub-item">Client inquiry & booking funnels</span>
-            </div>
-            <a href="solutions.html#custom-websites" class="product-card-link">
-              Explore websites
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-            </a>
-          </article>
-
-          <!-- Card 2 -->
-          <article class="product-card">
-            <div class="product-icon-wrap" aria-hidden="true">📊</div>
-            <h3>Odoo-style ERP</h3>
-            <p>Clean operational hubs that centralize sales, stock management, GST-compliant invoicing, and multi-staff billing without bloat.</p>
-            <div class="product-sub-list">
-              <span class="product-sub-item">POS & retail counter billing</span>
-              <span class="product-sub-item">Real-time inventory & alerts</span>
-              <span class="product-sub-item">GST invoice & ledger reports</span>
-            </div>
-            <a href="solutions.html#odoo-erp" class="product-card-link">
-              Explore ERP systems
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-            </a>
-          </article>
-
-          <!-- Card 3 -->
-          <article class="product-card">
-            <div class="product-icon-wrap" aria-hidden="true">📈</div>
-            <h3>AI Marketing</h3>
-            <p>Autonomous marketing engines that generate local social media posts, manage review responses, and run automated WhatsApp campaigns.</p>
-            <div class="product-sub-list">
-              <span class="product-sub-item">Daily Instagram reel scripts</span>
-              <span class="product-sub-item">Google Business SEO booster</span>
-              <span class="product-sub-item">Automated WhatsApp broadcasts</span>
-            </div>
-            <a href="solutions.html#ai-marketing" class="product-card-link">
-              Explore AI marketing
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-            </a>
-          </article>
-
-          <!-- Card 4 -->
-          <article class="product-card">
-            <div class="product-icon-wrap" aria-hidden="true">🤖</div>
-            <h3>Domain AI Agents</h3>
-            <p>Trained AI agents connected to your WhatsApp number to answer customer queries, schedule slots, and take orders 24/7 in English and regional languages.</p>
-            <div class="product-sub-list">
-              <span class="product-sub-item">24/7 WhatsApp customer agent</span>
-              <span class="product-sub-item">Appointment booking assistant</span>
-              <span class="product-sub-item">Automated invoice & order taker</span>
-            </div>
-            <a href="solutions.html#domain-ai-agents" class="product-card-link">
-              Explore AI agents
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-            </a>
-          </article>
+        <div class="who-grid">
+          <div class="who-card">
+            <div class="who-icon" aria-hidden="true">🛒</div>
+            <h3>Local Shops & Retail</h3>
+            <p>Kirana stores, bakeries, and clothing shops wanting a digital catalog with WhatsApp orders.</p>
+          </div>
+          <div class="who-card">
+            <div class="who-icon" aria-hidden="true">🩺</div>
+            <h3>Clinics & Doctors</h3>
+            <p>Dentists, polyclinics, and diagnostic labs needing patient slot booking and Google location.</p>
+          </div>
+          <div class="who-card">
+            <div class="who-icon" aria-hidden="true">🍲</div>
+            <h3>Restaurants & Cafes</h3>
+            <p>Food outlets wanting direct QR table ordering without food delivery app cuts.</p>
+          </div>
+          <div class="who-card">
+            <div class="who-icon" aria-hidden="true">🏫</div>
+            <h3>Colleges & Academies</h3>
+            <p>Schools, coaching centres, and institutes needing admission forms and notice boards.</p>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- SHORT PROTOTYPE GRID (6 NEWEST) -->
+    <!-- 4. THE 4 SECTORS: LINES 1 & 3 FIRST (AVAILABLE NOW), LINES 2 & 4 BELOW (COMING SOON) -->
+    <section class="section section-white" id="services-section">
+      <div class="container">
+        <div class="section-header">
+          <div class="eyebrow">What We Build</div>
+          <h2>Four Focused Product Sectors</h2>
+          <p class="lead">Two available right now, and two coming soon.</p>
+        </div>
+
+        <!-- Available Now (Lines 1 & 3) -->
+        <div class="available-sectors-grid">
+          <!-- Sector 1: Customized Websites and Apps -->
+          <article class="sector-card-launch">
+            <div class="sector-header">
+              <h3>1. Customized Websites and Apps</h3>
+              <span class="badge-available">Available now</span>
+            </div>
+            <p style="color: #64748B; font-size: 0.95rem;">
+              Fast-loading websites and simple web apps that work smoothly on budget phones.
+            </p>
+            <div class="sector-subitems-list">
+              <div class="sector-subitem">
+                <strong>Business sites</strong>
+                <span class="desc">Show your services, address, timings and phone button.</span>
+              </div>
+              <div class="sector-subitem">
+                <strong>E-commerce and ordering</strong>
+                <span class="desc">Product catalog with basket and instant WhatsApp order send.</span>
+              </div>
+              <div class="sector-subitem">
+                <strong>Institution portals</strong>
+                <span class="desc">Admission inquiries, fee details, and notice board for colleges.</span>
+              </div>
+              <div class="sector-subitem">
+                <strong>SaaS products</strong>
+                <span class="desc">Simple online software for client dashboards or reports.</span>
+              </div>
+            </div>
+            <a href="contact.html?business=websites" class="btn btn-primary btn-block-mobile" style="margin-top: auto;">
+              Get a quote
+            </a>
+          </article>
+
+          <!-- Sector 3: AI Marketing and Business Analysis -->
+          <article class="sector-card-launch">
+            <div class="sector-header">
+              <h3>2. AI Marketing and Business Analysis</h3>
+              <span class="badge-available">Available now</span>
+            </div>
+            <p style="color: #64748B; font-size: 0.95rem;">
+              Smart marketing helpers that bring in customer leads and manage reviews.
+            </p>
+            <div class="sector-subitems-list">
+              <div class="sector-subitem">
+                <strong>Business analysis</strong>
+                <span class="desc">Simple breakdown of what sells best and what customers ask for.</span>
+              </div>
+              <div class="sector-subitem">
+                <strong>Content and social</strong>
+                <span class="desc">Ready-to-use Instagram reel scripts and post ideas for your shop.</span>
+              </div>
+              <div class="sector-subitem">
+                <strong>SEO and local SEO</strong>
+                <span class="desc">Rank higher when local people search "near me" on Google.</span>
+              </div>
+              <div class="sector-subitem">
+                <strong>Lead generation</strong>
+                <span class="desc">Capture inquiry forms from Facebook, Instagram and your website.</span>
+              </div>
+              <div class="sector-subitem">
+                <strong>Lead follow-up <span class="badge-pilot">Pilot</span></strong>
+                <span class="desc">Automated friendly WhatsApp follow-ups for open inquiries.</span>
+              </div>
+              <div class="sector-subitem">
+                <strong>AI calling agent <span class="badge-pilot">Pilot</span></strong>
+                <span class="desc">Automated telephone reminder calls for patient appointments.</span>
+              </div>
+              <div class="sector-subitem">
+                <strong>Reporting</strong>
+                <span class="desc">Weekly summary of visitor numbers and inquiries sent to WhatsApp.</span>
+              </div>
+            </div>
+            <a href="contact.html?business=marketing" class="btn btn-primary btn-block-mobile" style="margin-top: auto;">
+              Get a quote
+            </a>
+          </article>
+        </div>
+
+        <!-- Coming Soon (Lines 2 & 4) -->
+        <div style="margin-top: 2rem;">
+          <h3 style="font-size: 1.15rem; color: #64748B; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1rem; text-align: center;">
+            In Development • Coming Soon
+          </h3>
+          <div class="coming-soon-grid">
+            <!-- Sector 2: Odoo-style ERP -->
+            <article class="sector-card-soon">
+              <div class="sector-header">
+                <h3>Odoo-style ERP</h3>
+                <span class="badge-coming-soon">Coming soon</span>
+              </div>
+              <p style="color: #64748B; font-size: 0.9rem; margin-bottom: 1rem;">
+                Modular business management modules currently in development.
+              </p>
+              <ul style="font-size: 0.875rem; color: #475569; display: grid; grid-template-columns: 1fr 1fr; gap: 0.4rem; margin-bottom: 1.25rem;">
+                <li>• CRM</li>
+                <li>• Accounting</li>
+                <li>• Inventory & Purchase</li>
+                <li>• POS billing</li>
+                <li>• HR & Attendance</li>
+                <li>• Operations</li>
+                <li>• Multi-vendor delivery</li>
+                <li>• Industry ERPs</li>
+              </ul>
+              <a href="#" data-wa-message="Hi Arkshar, please notify me when your Odoo-style ERP is ready." target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" style="margin-top: auto;">
+                Tell me when it is ready
+              </a>
+            </article>
+
+            <!-- Sector 4: Domain AI Agents -->
+            <article class="sector-card-soon">
+              <div class="sector-header">
+                <h3>Domain AI Agents</h3>
+                <span class="badge-coming-soon">Coming soon</span>
+              </div>
+              <p style="color: #64748B; font-size: 0.9rem; margin-bottom: 1rem;">
+                Specialized WhatsApp conversational helpers currently being tested.
+              </p>
+              <ul style="font-size: 0.875rem; color: #475569; display: grid; grid-template-columns: 1fr 1fr; gap: 0.4rem; margin-bottom: 1.25rem;">
+                <li>• Exam agents (UPSC)</li>
+                <li>• Institution</li>
+                <li>• HR</li>
+                <li>• Finance</li>
+                <li>• Healthcare</li>
+                <li>• Support</li>
+              </ul>
+              <a href="#" data-wa-message="Hi Arkshar, please notify me when your Domain AI Agents are ready." target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" style="margin-top: auto;">
+                Tell me when it is ready
+              </a>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. REAL PROOF (PLACEHOLDER FOR REAL CLIENT WORK) -->
+    <section class="section section-subtle">
+      <div class="container">
+        <div class="section-header text-left" style="max-width: 720px; margin-bottom: 2rem;">
+          <div class="eyebrow">Real Proof</div>
+          <h2>Live Projects (with client permission)</h2>
+          <p class="lead">
+            We only showcase client work when given explicit permission. Placeholder cards below will be updated as case studies launch.
+          </p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;" class="live-projects-grid">
+          <div style="border: 2px dashed #CBD5E1; border-radius: 12px; padding: 1.75rem; background: #FFFFFF;">
+            <div class="sample-notice-tag" style="margin-bottom: 0.5rem;">Placeholder • Case Study #1</div>
+            <h3 style="font-size: 1.15rem; color: #0F2747; margin-bottom: 0.35rem;">[Project name], [type], link or screenshot</h3>
+            <p style="font-size: 0.9rem; color: #64748B; margin: 0;">
+              Reserved for real client work. Once approved, live links and workflow details will appear here.
+            </p>
+          </div>
+
+          <div style="border: 2px dashed #CBD5E1; border-radius: 12px; padding: 1.75rem; background: #FFFFFF;">
+            <div class="sample-notice-tag" style="margin-bottom: 0.5rem;">Placeholder • Case Study #2</div>
+            <h3 style="font-size: 1.15rem; color: #0F2747; margin-bottom: 0.35rem;">[Project name], [type], link or screenshot</h3>
+            <p style="font-size: 0.9rem; color: #64748B; margin: 0;">
+              Reserved for real client work. Once approved, live links and workflow details will appear here.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROTOTYPES SHOWCASE (6 NEWEST) -->
     <section class="section section-white">
       <div class="container">
         <div class="section-header">
-          <div class="eyebrow">Fresh Releases</div>
-          <h2>Latest Working Prototypes</h2>
-          <p class="lead">Every working day we publish a tested prototype with an Instagram reel so you can test before ordering.</p>
+          <div class="eyebrow">
+            <span id="prototypes-built-count">Prototypes</span>
+          </div>
+          <h2>Explore Working Prototypes</h2>
+          <p class="lead">Test working samples built for salons, clinics, bakeries and stores.</p>
         </div>
 
         <div class="prototype-grid" id="home-prototypes-grid">
-          <!-- Populated dynamically by main.js via data/prototypes.json -->
+          <!-- Populated dynamically from data/prototypes.json -->
         </div>
 
-        <div style="text-align: center; margin-top: 3rem;">
+        <div style="text-align: center; margin-top: 2.5rem;">
           <a href="catalog.html" class="btn btn-secondary btn-lg">
-            View All Working Prototypes in Catalog
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            View All in Catalog →
           </a>
         </div>
       </div>
     </section>
 
-    <!-- HOW IT WORKS IN 3 STEPS -->
+    <!-- 6. HOW IT WORKS IN 3 STEPS -->
     <section class="section section-subtle">
       <div class="container">
         <div class="section-header">
-          <div class="eyebrow">Simple & Transparent</div>
+          <div class="eyebrow">Simple Process</div>
           <h2>How It Works in 3 Steps</h2>
-          <p class="lead">Skip months of developer delays. Get custom software configured and live in days.</p>
+          <p class="lead">No technical headache. We handle the setup for you.</p>
         </div>
 
         <div class="steps-grid">
-          <!-- Step 1 -->
           <div class="step-card">
             <div class="step-number-badge">1</div>
             <h3>Pick</h3>
-            <p>
-              Browse our catalog of daily prototypes or watch our Instagram reels. Choose the design and workflow that matches your business model.
-            </p>
+            <p>Browse our catalog or watch a sample reel. Choose a design that fits what your business sells.</p>
           </div>
-
-          <!-- Step 2 -->
           <div class="step-card">
             <div class="step-number-badge">2</div>
             <h3>Customize</h3>
-            <p>
-              Share your business details, logo, catalog, and WhatsApp contact. We configure domain setup, colors, workflows, and integrations.
-            </p>
+            <p>Send your shop name, logo, menu or catalog, and phone number over WhatsApp.</p>
           </div>
-
-          <!-- Step 3 -->
           <div class="step-card">
             <div class="step-number-badge">3</div>
             <h3>Go live</h3>
-            <p>
-              We launch your app on your domain, configure your WhatsApp notifications, hand over control, and provide ongoing monthly support.
-            </p>
+            <p>We set it up on your web domain, connect your WhatsApp button, and hand over control.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- PLANS PREVIEW -->
+    <!-- 7. PLANS (NO PRICES) -->
     <section class="section section-white">
       <div class="container">
         <div class="section-header">
-          <div class="eyebrow">Transparent Value</div>
-          <h2>Flexible Delivery Plans</h2>
-          <p class="lead">Choose between rapid ready-made deployments or full bespoke software engineering.</p>
+          <div class="eyebrow">Flexible Plans</div>
+          <h2>Simple Project Plans</h2>
+          <p class="lead">Every project is quoted openly based on what your business needs.</p>
         </div>
 
         <div class="pricing-grid">
@@ -337,122 +420,172 @@
           <div class="pricing-card">
             <div class="pricing-header">
               <h3 class="pricing-plan-name">Starter</h3>
-              <p class="pricing-tagline">Ideal for independent shops and professionals needing a quick digital presence.</p>
-              <div class="pricing-price-box">
-                <div class="pricing-price-callout">Contact us for pricing</div>
-                <div class="pricing-price-sub">Turnkey delivery in 3 to 5 working days</div>
+              <p class="pricing-tagline">For single shops, clinics and individual consultants.</p>
+              <div class="pricing-quote-box">
+                <div class="pricing-quote-callout">Get a quote</div>
+                <div style="font-size: 0.85rem; color: #64748B;">Ready in 3 to 5 working days</div>
               </div>
             </div>
             <ul class="pricing-features-list">
               <li class="pricing-feature-item">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                <span>Ready-made prototype customization</span>
+                <svg width="18" height="18" aria-hidden="true"><use href="#i-check"></use></svg>
+                <span>Ready-made prototype customized with your branding</span>
               </li>
               <li class="pricing-feature-item">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                <span>Mobile-first responsive frontend</span>
+                <svg width="18" height="18" aria-hidden="true"><use href="#i-check"></use></svg>
+                <span>Mobile-friendly layout that loads fast on Android</span>
               </li>
               <li class="pricing-feature-item">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                <span>Direct WhatsApp inquiry & order flow</span>
+                <svg width="18" height="18" aria-hidden="true"><use href="#i-check"></use></svg>
+                <span>Direct WhatsApp button for instant inquiries</span>
               </li>
               <li class="pricing-feature-item">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                <span>Custom domain connection & SSL</span>
+                <svg width="18" height="18" aria-hidden="true"><use href="#i-check"></use></svg>
+                <span>Domain connection and secure HTTPS padlock</span>
               </li>
             </ul>
-            <a href="contact.html?plan=starter" class="btn btn-secondary">Contact for Starter Quote</a>
+            <a href="contact.html?plan=starter" class="btn btn-secondary">Get a quote</a>
           </div>
 
           <!-- Growth -->
           <div class="pricing-card featured">
-            <span class="pricing-featured-badge">Most Popular</span>
+
             <div class="pricing-header">
               <h3 class="pricing-plan-name">Growth</h3>
-              <p class="pricing-tagline">For clinics, academies, and stores that need custom operations and ERP features.</p>
-              <div class="pricing-price-box">
-                <div class="pricing-price-callout">Contact us for pricing</div>
-                <div class="pricing-price-sub">Turnkey delivery in 7 to 10 working days</div>
+              <p class="pricing-tagline">For busy clinics, bakeries, and coaching academies.</p>
+              <div class="pricing-quote-box">
+                <div class="pricing-quote-callout">Get a quote</div>
+                <div style="font-size: 0.85rem; color: #64748B;">Ready in 7 to 10 working days</div>
               </div>
             </div>
             <ul class="pricing-features-list">
               <li class="pricing-feature-item">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                <span>Everything in Starter plan</span>
+                <svg width="18" height="18" aria-hidden="true"><use href="#i-check"></use></svg>
+                <span>Everything included in Starter plan</span>
               </li>
               <li class="pricing-feature-item">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                <span>Odoo-style lightweight ERP or POS hub</span>
+                <svg width="18" height="18" aria-hidden="true"><use href="#i-check"></use></svg>
+                <span>Product ordering basket or doctor appointment slot scheduler</span>
               </li>
               <li class="pricing-feature-item">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                <span>Inventory, customer history, & invoices</span>
+                <svg width="18" height="18" aria-hidden="true"><use href="#i-check"></use></svg>
+                <span>Automated WhatsApp order confirmation message</span>
               </li>
               <li class="pricing-feature-item">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                <span>Automated WhatsApp booking & alerts</span>
+                <svg width="18" height="18" aria-hidden="true"><use href="#i-check"></use></svg>
+                <span>Google Business Profile and local search link</span>
               </li>
             </ul>
-            <a href="contact.html?plan=growth" class="btn btn-primary">Contact for Growth Quote</a>
+            <a href="contact.html?plan=growth" class="btn btn-primary">Get a quote</a>
           </div>
 
           <!-- Full -->
           <div class="pricing-card">
             <div class="pricing-header">
               <h3 class="pricing-plan-name">Full</h3>
-              <p class="pricing-tagline">Complete multi-branch architecture, custom AI marketing, and intelligent WhatsApp agents.</p>
-              <div class="pricing-price-box">
-                <div class="pricing-price-callout">Contact us for pricing</div>
-                <div class="pricing-price-sub">Custom delivery timeline</div>
+              <p class="pricing-tagline">For multi-doctor clinics, colleges, and larger stores.</p>
+              <div class="pricing-quote-box">
+                <div class="pricing-quote-callout">Get a quote</div>
+                <div style="font-size: 0.85rem; color: #64748B;">Custom delivery timeline</div>
               </div>
             </div>
             <ul class="pricing-features-list">
               <li class="pricing-feature-item">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <svg width="18" height="18" aria-hidden="true"><use href="#i-check"></use></svg>
                 <span>Everything in Growth plan</span>
               </li>
               <li class="pricing-feature-item">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                <span>24/7 WhatsApp Conversational AI Agent</span>
+                <svg width="18" height="18" aria-hidden="true"><use href="#i-check"></use></svg>
+                <span>Custom database dashboard for staff</span>
               </li>
               <li class="pricing-feature-item">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                <span>Autonomous AI Social & Review Marketing</span>
+                <svg width="18" height="18" aria-hidden="true"><use href="#i-check"></use></svg>
+                <span>Social post templates and local SEO package</span>
               </li>
               <li class="pricing-feature-item">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                <span>Dedicated account manager & SLA support</span>
+                <svg width="18" height="18" aria-hidden="true"><use href="#i-check"></use></svg>
+                <span>Direct WhatsApp access to the developer</span>
               </li>
             </ul>
-            <a href="contact.html?plan=full" class="btn btn-secondary">Contact for Full Quote</a>
+            <a href="contact.html?plan=full" class="btn btn-secondary">Get a quote</a>
           </div>
-        </div>
-
-        <div style="text-align: center; margin-top: 2rem;">
-          <a href="pricing.html" class="nav-link" style="display: inline-flex; align-items: center; gap: 0.35rem; font-weight: 700;">
-            View full pricing breakdown & monthly maintenance plans →
-          </a>
         </div>
       </div>
     </section>
 
-    <!-- CONTACT CALL TO ACTION -->
+    <!-- 8. ABOUT ME PREVIEW -->
+    <section class="section section-subtle">
+      <div class="container">
+        <div style="background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 16px; padding: 2rem; max-width: 760px; margin: 0 auto; display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap;">
+          <img src="assets/about/me.jpg" onerror="this.src='assets/about/me-fallback.svg'" alt="[Your first name] photo placeholder" width="80" height="80" style="border-radius: 50%; object-fit: cover; border: 2px solid #F59E0B;">
+          <div style="flex: 1; min-width: 240px;">
+            <div style="font-size: 0.8rem; font-weight: 700; color: #B45309; text-transform: uppercase;">About the Studio</div>
+            <h3 style="font-size: 1.25rem; margin-bottom: 0.25rem;">Built by <span class="placeholder-tag">[Your first name]</span> in Hyderabad</h3>
+            <p style="font-size: 0.95rem; color: #64748B; margin: 0;">
+              B.Tech student & full-stack developer (Django, Python, PostgreSQL). Building one ready-made prototype every working day for small businesses.
+            </p>
+          </div>
+          <a href="about.html" class="btn btn-secondary btn-sm">Read full story →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. FAQ SECTION (SIMPLE WORDS) -->
+    <section class="section section-white">
+      <div class="container">
+        <div class="section-header">
+          <div class="eyebrow">Common Questions</div>
+          <h2>Frequently Asked Questions</h2>
+          <p class="lead">Clear answers in plain language.</p>
+        </div>
+
+        <div class="faq-list">
+          <div class="faq-item">
+            <h3 class="faq-question">How fast will my site be ready?</h3>
+            <p class="faq-answer">
+              Because we build on ready-made prototype structures, starter sites are typically customized and live in 3 to 5 working days after receiving your details.
+            </p>
+          </div>
+
+          <div class="faq-item">
+            <h3 class="faq-question">Do I need any technical knowledge to use this?</h3>
+            <p class="faq-answer">
+              None. We configure everything for you. When a customer taps the order or booking button on your site, it opens a pre-filled WhatsApp message on your phone.
+            </p>
+          </div>
+
+          <div class="faq-item">
+            <h3 class="faq-question">Can I use my own web domain and phone number?</h3>
+            <p class="faq-answer">
+              Yes. We connect your custom domain (like yourshop.com) and link all buttons to your existing WhatsApp mobile number.
+            </p>
+          </div>
+
+          <div class="faq-item">
+            <h3 class="faq-question">Can I test a sample before deciding?</h3>
+            <p class="faq-answer">
+              Yes. Browse our free prototype catalog or message us on WhatsApp with your business type. We will share a live sample you can test on your phone.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10. FINAL WHATSAPP CALL TO ACTION -->
     <section class="section section-navy">
       <div class="container">
         <div class="cta-strip">
-          <h2>Have an app idea for your business?</h2>
+          <h2>Ready to bring your business online?</h2>
           <p>
-            Tell us your business requirements or show us any prototype from our daily catalog. We will provide a transparent estimate and delivery plan.
+            Message us on WhatsApp. Tell us what your shop, clinic or college needs and we will get back to you with a matching sample.
           </p>
           <div class="cta-actions">
-            <a href="https://wa.me/91XXXXXXXXXX?text=Hi%20Arkshar!%20I%20want%20to%20discuss%20an%20app%20for%20my%20business." target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp btn-lg btn-block-mobile">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 14.99 3.81 13.47 3.81 11.91C3.81 7.37 7.5 3.67 12.05 3.67M9.53 7.03C9.36 7.03 9.08 7.09 8.84 7.35C8.6 7.61 7.92 8.25 7.92 9.55C7.92 10.85 8.87 12.11 9 12.28C9.13 12.45 10.84 15.09 13.46 16.22C14.08 16.49 14.57 16.65 14.95 16.77C15.57 16.97 16.14 16.94 16.58 16.88C17.08 16.8 18.11 16.25 18.32 15.65C18.54 15.06 18.54 14.55 18.47 14.44C18.41 14.33 18.24 14.27 17.98 14.14C17.72 14.01 16.45 13.38 16.21 13.29C15.98 13.2 15.81 13.16 15.64 13.42C15.47 13.68 14.99 14.25 14.84 14.42C14.7 14.59 14.55 14.61 14.29 14.48C14.04 14.35 13.21 14.08 12.22 13.2C11.45 12.51 10.93 11.66 10.78 11.4C10.63 11.15 10.76 11.01 10.89 10.88C11.01 10.76 11.15 10.58 11.28 10.43C11.41 10.28 11.45 10.17 11.54 10C11.62 9.83 11.58 9.68 11.52 9.55C11.45 9.42 10.95 8.19 10.73 7.68C10.53 7.18 10.32 7.25 10.16 7.24C10.01 7.23 9.84 7.23 9.67 7.23L9.53 7.03Z"/>
-              </svg>
-              Chat on WhatsApp (+91 XXXXX XXXXX)
+            <a href="#" data-config="whatsapp-link" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp btn-lg btn-block-mobile">
+              <svg width="20" height="20" aria-hidden="true"><use href="#i-whatsapp"></use></svg>
+              Chat on WhatsApp
             </a>
             <a href="contact.html" class="btn btn-white btn-lg btn-block-mobile">
-              Submit Quote Request Form
+              Send a Quote Request
             </a>
           </div>
         </div>
@@ -460,123 +593,125 @@
     </section>
   </main>
 
-  <!-- MODAL FOR DEMO PREVIEW -->
+  <!-- QUICK VIEW MODAL (ACCESSIBLE POPUP) -->
   <div class="modal-overlay" id="demo-modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="modal-proto-title">
     <div class="modal-dialog">
       <div class="modal-header">
         <div>
-          <span id="modal-proto-type" style="font-size: 0.75rem; font-weight: 700; color: #F59E0B; text-transform: uppercase; letter-spacing: 0.05em;">Prototype Preview</span>
-          <h3 id="modal-proto-title">Prototype Demo</h3>
+          <span id="modal-proto-type" style="font-size: 0.75rem; font-weight: 700; color: #F59E0B; text-transform: uppercase;"></span>
+          <h3 id="modal-proto-title" style="margin-top: 0.2rem;">Prototype Preview</h3>
         </div>
-        <button type="button" class="modal-close-btn" aria-label="Close prototype demo preview">&times;</button>
+        <button type="button" class="modal-close-btn" aria-label="Close preview">&times;</button>
       </div>
       <div class="modal-body">
-        <div style="border-radius: 8px; overflow: hidden; background: #0B1D36; margin-bottom: 1.25rem;">
-          <img id="modal-proto-img" src="assets/prototypes/kirana.svg" alt="Prototype interactive screen preview" width="600" height="380">
+        <div style="border-radius: 8px; overflow: hidden; background: #0B1D36; margin-bottom: 1rem;">
+          <img id="modal-proto-img" src="" alt="Prototype screen view" width="600" height="380">
         </div>
-        <p style="font-size: 0.95rem; color: #475569; margin-bottom: 1.25rem;">
-          This prototype layout is ready for direct deployment. We customize colors, branding, inventory catalogs, and WhatsApp integrations within days.
-        </p>
+        <div style="display: flex; gap: 0.5rem; margin-bottom: 0.75rem; align-items: center; flex-wrap: wrap;">
+          <span id="modal-proto-status" class="status-badge"></span>
+          <span id="modal-proto-sample" class="sample-notice-tag">Sample concept, not a real client</span>
+        </div>
+        <p id="modal-proto-desc" style="font-size: 0.95rem; color: #475569; margin-bottom: 1.25rem;"></p>
         <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
-          <a id="modal-wa-link" href="https://wa.me/91XXXXXXXXXX" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp btn-block-mobile">
-            Inquire about this prototype
+          <a id="modal-wa-link" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp btn-block-mobile">
+            <svg width="18" height="18" aria-hidden="true"><use href="#i-whatsapp"></use></svg>
+            Ask about this on WhatsApp
           </a>
-          <a href="contact.html" class="btn btn-secondary btn-block-mobile">
-            Request Custom Quote
+          <a id="modal-direct-demo" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-block-mobile" style="display: none;">
+            Open Live Demo
           </a>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- FLOATING WHATSAPP BUTTON (EVERY PAGE) -->
-  <a href="https://wa.me/91XXXXXXXXXX?text=Hi%20Arkshar!%20I%20am%20viewing%20your%20website%20and%20would%20like%20to%20know%20more." target="_blank" rel="noopener noreferrer" class="floating-whatsapp" aria-label="Chat directly with Arkshar Studio on WhatsApp">
-    <span class="whatsapp-pulse" aria-hidden="true"></span>
-    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 14.99 3.81 13.47 3.81 11.91C3.81 7.37 7.5 3.67 12.05 3.67M9.53 7.03C9.36 7.03 9.08 7.09 8.84 7.35C8.6 7.61 7.92 8.25 7.92 9.55C7.92 10.85 8.87 12.11 9 12.28C9.13 12.45 10.84 15.09 13.46 16.22C14.08 16.49 14.57 16.65 14.95 16.77C15.57 16.97 16.14 16.94 16.58 16.88C17.08 16.8 18.11 16.25 18.32 15.65C18.54 15.06 18.54 14.55 18.47 14.44C18.41 14.33 18.24 14.27 17.98 14.14C17.72 14.01 16.45 13.38 16.21 13.29C15.98 13.2 15.81 13.16 15.64 13.42C15.47 13.68 14.99 14.25 14.84 14.42C14.7 14.59 14.55 14.61 14.29 14.48C14.04 14.35 13.21 14.08 12.22 13.2C11.45 12.51 10.93 11.66 10.78 11.4C10.63 11.15 10.76 11.01 10.89 10.88C11.01 10.76 11.15 10.58 11.28 10.43C11.41 10.28 11.45 10.17 11.54 10C11.62 9.83 11.58 9.68 11.52 9.55C11.45 9.42 10.95 8.19 10.73 7.68C10.53 7.18 10.32 7.25 10.16 7.24C10.01 7.23 9.84 7.23 9.67 7.23L9.53 7.03Z"/>
-    </svg>
-    <span class="btn-text">WhatsApp Us</span>
+  <!-- FLOATING WHATSAPP BUTTON (DESKTOP ONLY) -->
+  <a href="#" data-config="whatsapp-link" target="_blank" rel="noopener noreferrer" class="floating-whatsapp" aria-label="Chat directly with Arkshar on WhatsApp">
+    <svg width="24" height="24" aria-hidden="true"><use href="#i-whatsapp"></use></svg>
+    <span>WhatsApp Us</span>
   </a>
+
+  <!-- MOBILE STICKY BOTTOM BAR (UNDER 768PX) -->
+  <div class="mobile-sticky-bar" role="navigation" aria-label="Quick Actions">
+    <a href="#" data-config="whatsapp-link" target="_blank" rel="noopener noreferrer" class="mobile-sticky-btn mobile-sticky-whatsapp">
+      <svg width="18" height="18" aria-hidden="true"><use href="#i-whatsapp"></use></svg>
+      <span>WhatsApp</span>
+    </a>
+    <a href="#" data-config="phone-call" class="mobile-sticky-btn mobile-sticky-call">
+      <svg width="18" height="18" aria-hidden="true"><use href="#i-phone"></use></svg>
+      <span>Call</span>
+    </a>
+  </div>
 
   <!-- REUSABLE SITE FOOTER -->
   <footer class="site-footer" role="contentinfo">
     <div class="container">
       <div class="footer-top-grid">
-        <!-- Col 1: Brand & Positioning -->
         <div class="footer-brand-col">
           <a href="index.html" class="brand-wordmark brand-wordmark-light">
             Arkshar<span class="dot">.</span>
           </a>
           <p>
-            Arkshar is an Indian software studio engineering ready-made websites, Odoo-style ERP systems, AI marketing pipelines, and domain AI agents for small businesses.
+            Software studio based in <span data-config="city">Hyderabad, India</span>. Ready-made websites, apps and AI marketing for small businesses.
           </p>
           <div class="footer-reel-badge">
             <span class="eyebrow-dot" style="background: #F59E0B;" aria-hidden="true"></span>
-            1 New Prototype Every Working Day
+            1 new prototype every working day
           </div>
         </div>
 
-        <!-- Col 2: Navigation Links -->
         <div class="footer-col">
           <h4>Explore</h4>
           <ul class="footer-links">
             <li><a href="index.html">Home</a></li>
             <li><a href="catalog.html">Prototype Catalog</a></li>
-            <li><a href="solutions.html">Product Lines & Solutions</a></li>
-            <li><a href="pricing.html">Pricing & Maintenance Plans</a></li>
-            <li><a href="contact.html">Request a Quote</a></li>
+            <li><a href="solutions.html">Solutions</a></li>
+            <li><a href="pricing.html">Pricing</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="privacy.html">Privacy Notice</a></li>
           </ul>
         </div>
 
-        <!-- Col 3: Product Lines -->
         <div class="footer-col">
           <h4>Solutions</h4>
           <ul class="footer-links">
-            <li><a href="solutions.html#custom-websites">Custom Websites & Apps</a></li>
-            <li><a href="solutions.html#odoo-erp">Odoo-Style ERP & POS</a></li>
-            <li><a href="solutions.html#ai-marketing">Autonomous AI Marketing</a></li>
-            <li><a href="solutions.html#domain-ai-agents">Domain AI Agents</a></li>
+            <li><a href="solutions.html#customized-websites">Customized Websites & Apps</a></li>
+            <li><a href="solutions.html#ai-marketing">AI Marketing & Analysis</a></li>
+            <li><a href="solutions.html#odoo-erp">Odoo-style ERP (Coming soon)</a></li>
+            <li><a href="solutions.html#domain-ai-agents">Domain AI Agents (Coming soon)</a></li>
           </ul>
         </div>
 
-        <!-- Col 4: Contact info placeholders -->
         <div class="footer-col">
           <h4>Connect</h4>
           <div class="footer-contact-info">
             <div class="footer-contact-item">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 14.99 3.81 13.47 3.81 11.91C3.81 7.37 7.5 3.67 12.05 3.67M9.53 7.03C9.36 7.03 9.08 7.09 8.84 7.35C8.6 7.61 7.92 8.25 7.92 9.55C7.92 10.85 8.87 12.11 9 12.28C9.13 12.45 10.84 15.09 13.46 16.22C14.08 16.49 14.57 16.65 14.95 16.77C15.57 16.97 16.14 16.94 16.58 16.88C17.08 16.8 18.11 16.25 18.32 15.65C18.54 15.06 18.54 14.55 18.47 14.44C18.41 14.33 18.24 14.27 17.98 14.14C17.72 14.01 16.45 13.38 16.21 13.29C15.98 13.2 15.81 13.16 15.64 13.42C15.47 13.68 14.99 14.25 14.84 14.42C14.7 14.59 14.55 14.61 14.29 14.48C14.04 14.35 13.21 14.08 12.22 13.2C11.45 12.51 10.93 11.66 10.78 11.4C10.63 11.15 10.76 11.01 10.89 10.88C11.01 10.76 11.15 10.58 11.28 10.43C11.41 10.28 11.45 10.17 11.54 10C11.62 9.83 11.58 9.68 11.52 9.55C11.45 9.42 10.95 8.19 10.73 7.68C10.53 7.18 10.32 7.25 10.16 7.24C10.01 7.23 9.84 7.23 9.67 7.23L9.53 7.03Z"/></svg>
-              <span>WhatsApp: <a href="https://wa.me/91XXXXXXXXXX" target="_blank" rel="noopener noreferrer">+91 XXXXX XXXXX</a></span>
+              <svg width="18" height="18" aria-hidden="true"><use href="#i-whatsapp"></use></svg>
+              <span>WhatsApp: <a href="#" data-config="whatsapp-link" target="_blank" rel="noopener noreferrer" data-config="phone-display">+91 XXXXX XXXXX</a></span>
             </div>
             <div class="footer-contact-item">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069z"/></svg>
-              <span>Instagram: <a href="https://instagram.com/#" target="_blank" rel="noopener noreferrer">@arkshar.studio</a></span>
+              <span>Instagram: <a href="#" data-config="instagram" target="_blank" rel="noopener noreferrer">Follow @arkshar</a></span>
             </div>
             <div class="footer-contact-item">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-              <span>Email: <a href="mailto:hello@arkshar.studio">hello@arkshar.studio</a></span>
+              <span>Email: <a href="#" data-config="email">hello@arkshar.com</a></span>
+            </div>
+            <div class="footer-contact-item">
+              <span>Location: <span data-config="city">Hyderabad, India</span></span>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Bottom Bar -->
       <div class="footer-bottom-bar">
         <div>
-          &copy; 2026 Arkshar Studio. All rights reserved. Plain HTML/CSS/JS frontend ready for Django.
-        </div>
-        <div class="footer-social-links">
-          <a href="https://wa.me/91XXXXXXXXXX" target="_blank" rel="noopener noreferrer" class="footer-social-btn" aria-label="Arkshar on WhatsApp">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 14.99 3.81 13.47 3.81 11.91C3.81 7.37 7.5 3.67 12.05 3.67M9.53 7.03C9.36 7.03 9.08 7.09 8.84 7.35C8.6 7.61 7.92 8.25 7.92 9.55C7.92 10.85 8.87 12.11 9 12.28C9.13 12.45 10.84 15.09 13.46 16.22C14.08 16.49 14.57 16.65 14.95 16.77C15.57 16.97 16.14 16.94 16.58 16.88C17.08 16.8 18.11 16.25 18.32 15.65C18.54 15.06 18.54 14.55 18.47 14.44C18.41 14.33 18.24 14.27 17.98 14.14C17.72 14.01 16.45 13.38 16.21 13.29C15.98 13.2 15.81 13.16 15.64 13.42C15.47 13.68 14.99 14.25 14.84 14.42C14.7 14.59 14.55 14.61 14.29 14.48C14.04 14.35 13.21 14.08 12.22 13.2C11.45 12.51 10.93 11.66 10.78 11.4C10.63 11.15 10.76 11.01 10.89 10.88C11.01 10.76 11.15 10.58 11.28 10.43C11.41 10.28 11.45 10.17 11.54 10C11.62 9.83 11.58 9.68 11.52 9.55C11.45 9.42 10.95 8.19 10.73 7.68C10.53 7.18 10.32 7.25 10.16 7.24C10.01 7.23 9.84 7.23 9.67 7.23L9.53 7.03Z"/></svg>
-          </a>
-          <a href="https://instagram.com/#" target="_blank" rel="noopener noreferrer" class="footer-social-btn" aria-label="Arkshar on Instagram">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069z"/></svg>
-          </a>
+          &copy; 2026 Arkshar. All rights reserved. Plain HTML/CSS/JS frontend ready for Django.
         </div>
       </div>
     </div>
   </footer>
 
+  <script src="js/config.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>
-
