@@ -23,10 +23,24 @@ const CITY = "Hyderabad, India";
 
 /**
  * Builds a direct WhatsApp chat link with an optional pre-filled message.
+ * If WHATSAPP_NUMBER is a placeholder, returns '#' and adds 'wa-disabled' class.
  * @param {string} message - Message text to pre-fill in WhatsApp
- * @returns {string} - WhatsApp wa.me URL
+ * @param {HTMLElement} [linkElement] - Optional anchor element to apply 'wa-disabled'
+ * @returns {string} - WhatsApp wa.me URL or '#' if placeholder
  */
-function waLink(message = "") {
+function waLink(message = "", linkElement = null) {
+  const isPlaceholder =
+    !CONFIG.WHATSAPP_NUMBER ||
+    CONFIG.WHATSAPP_NUMBER.includes("X") ||
+    CONFIG.WHATSAPP_NUMBER === "91XXXXXXXXXX";
+
+  if (isPlaceholder) {
+    if (linkElement && linkElement.classList) {
+      linkElement.classList.add("wa-disabled");
+    }
+    return "#";
+  }
+
   const cleanNumber = (CONFIG.WHATSAPP_NUMBER || "").replace(/\D/g, "");
   if (!message) {
     return `https://wa.me/${cleanNumber}`;
@@ -60,12 +74,20 @@ function applyConfigToDOM() {
   // Update WhatsApp links
   document.querySelectorAll("[data-wa-message]").forEach((el) => {
     const msg = el.getAttribute("data-wa-message") || "";
-    el.setAttribute("href", waLink(msg));
+    const href = waLink(msg, el);
+    el.setAttribute("href", href);
+    if (href === "#") {
+      el.classList.add("wa-disabled");
+    }
   });
 
   // Update plain WhatsApp links with no custom message
   document.querySelectorAll("[data-config='whatsapp-link']").forEach((el) => {
-    el.setAttribute("href", waLink("Hi Arkshar! I would like to discuss a project."));
+    const href = waLink("Hi Arkshar! I would like to discuss a project.", el);
+    el.setAttribute("href", href);
+    if (href === "#") {
+      el.classList.add("wa-disabled");
+    }
   });
 
   // Update phone display text and tel: links

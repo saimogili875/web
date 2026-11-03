@@ -87,6 +87,11 @@
   padding: 0;
 }
 
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 html {
   font-family: var(--font-sans);
   font-size: 16px;
@@ -103,7 +108,6 @@ body {
   display: flex;
   flex-direction: column;
   position: relative;
-  overflow-x: hidden;
 }
 
 /* Padding on mobile so sticky bottom bar does not overlap content */
@@ -594,10 +598,27 @@ p.lead {
   font-size: 0.95rem;
   font-weight: 700;
   border-radius: var(--radius-md);
-  line-height: 1.2;
+  line-height: 1.25;
   text-align: center;
   transition: all var(--transition-normal);
-  white-space: nowrap;
+  white-space: normal;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  word-break: normal;
+  box-sizing: border-box;
+}
+
+.btn span {
+  white-space: normal;
+  overflow-wrap: anywhere;
+  max-width: 100%;
+}
+
+.wa-disabled,
+a.btn.wa-disabled,
+button.btn.wa-disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
 }
 
 .btn-lg {
@@ -1358,6 +1379,58 @@ p.lead {
 }
 
 /* --------------------------------------------------------------------------
+   14b. LIVE PROJECTS & COMING SOON GRIDS
+   -------------------------------------------------------------------------- */
+.live-projects-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+@media (min-width: 640px) {
+  .live-projects-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.live-project-card {
+  border: 2px dashed #CBD5E1;
+  border-radius: 12px;
+  padding: clamp(1rem, 3.5vw, 1.75rem);
+  background: var(--color-white);
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  box-sizing: border-box;
+}
+
+.coming-soon-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+@media (min-width: 768px) {
+  .coming-soon-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.solution-detail-card {
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  box-sizing: border-box;
+  padding: clamp(1.25rem, 4vw, 2rem);
+}
+
+/* --------------------------------------------------------------------------
    15. PRICING & PLANS (NO INVENTED PRICES)
    -------------------------------------------------------------------------- */
 .pricing-grid {
@@ -1521,6 +1594,9 @@ p.lead {
   display: grid;
   grid-template-columns: 1fr;
   gap: 2.5rem;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
 }
 
 @media (min-width: 860px) {
@@ -1534,22 +1610,49 @@ p.lead {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
 }
 
 .contact-direct-card {
   background: var(--color-white);
   border-radius: var(--radius-lg);
   border: 1px solid var(--color-border);
-  padding: 1.75rem;
+  padding: clamp(1rem, 4vw, 1.75rem);
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  box-sizing: border-box;
 }
 
 .contact-method {
   display: flex;
   align-items: flex-start;
-  gap: 1rem;
+  gap: 0.85rem;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.contact-method-text {
+  flex: 1;
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.contact-method-text h4,
+.contact-method-text p,
+.contact-method-text a {
+  max-width: 100%;
+  overflow-wrap: anywhere;
 }
 
 .contact-method-icon {

@@ -112,24 +112,41 @@ async function initHomeTodayAndGrid() {
     if (!res.ok) throw new Error(`HTTP error ${res.status}`);
     const prototypes = await res.json();
 
-    // 1. Compute and show real prototype count
+    // 1. Compute and show real prototype count (or "sample concepts" when sample: true)
     const totalCount = prototypes.length;
+    const allSample = totalCount > 0 && prototypes.every((p) => p.sample === true);
+    const countLabel = allSample
+      ? `${totalCount} sample concepts`
+      : `${totalCount} prototypes built`;
+
     if (counterEl) {
-      counterEl.textContent = `${totalCount} prototypes built`;
+      counterEl.textContent = countLabel;
     }
     document.querySelectorAll("[data-count='prototypes']").forEach((el) => {
-      el.textContent = `${totalCount} prototypes built`;
+      el.textContent = countLabel;
     });
 
-    // 2. Pick "Today's prototype": newest date <= today (or latest item if none)
+    // 2. Pick "Today's prototype" if valid date exists; otherwise show newest item under "Latest sample"
     const todayStr = new Date().toISOString().split("T")[0];
-    const validDated = prototypes.filter((p) => p.date && p.date <= todayStr);
+    const validDated = prototypes.filter((p) => p.date && p.date.trim() !== "" && p.date <= todayStr);
     validDated.sort((a, b) => (b.date > a.date ? 1 : -1));
-    const todayItem = validDated.length > 0 ? validDated[0] : prototypes[0];
 
-    // Render Today's Prototype Strip
+    let todayItem = null;
+    let isToday = false;
+
+    if (validDated.length > 0) {
+      todayItem = validDated[0];
+      isToday = true;
+    } else {
+      // If date is empty, do not choose a "Today's prototype"
+      // Show newest item under title "Latest sample" instead
+      todayItem = prototypes[0];
+      isToday = false;
+    }
+
+    // Render Today / Latest Sample Strip
     if (todayContainer && todayItem) {
-      renderTodayStrip(todayContainer, todayItem);
+      renderTodayStrip(todayContainer, todayItem, isToday);
     }
 
     // 3. Render top 6 prototypes in grid
@@ -150,11 +167,19 @@ async function initHomeTodayAndGrid() {
   }
 }
 
-function renderTodayStrip(container, item) {
-  const isNew = isWithinDays(item.date, 7);
-  const statusLabel = formatStatus(item.status);
-  const hasRealDemo = item.demoUrl && !item.demoUrl.startsWith("#");
-  const hasRealReel = item.reelUrl && item.reelUrl.trim() !== "" && !item.reelUrl.includes("/#");
+function renderTodayStrip(container, item, isToday = false) {
+  const hasDate = Boolean(item.date && item.date.trim());
+  const isNew = hasDate ? isWithinDays(item.date, 7) : false;
+  const realStatus =
+    item.status === "live-demo" && (!item.demoUrl || !item.demoUrl.startsWith("https://"))
+      ? "screenshot-only"
+      : item.status || "screenshot-only";
+  const statusLabel = formatStatus(realStatus);
+  const hasRealDemo = item.demoUrl && item.demoUrl.startsWith("https://");
+  const hasRealReel = item.reelUrl && item.reelUrl.trim() !== "" && item.reelUrl.startsWith("https://") && !item.reelUrl.includes("/#");
+
+  const titlePrefix = isToday ? "Today's Prototype" : "Latest sample";
+  const dateSuffix = isToday && hasDate ? ` • ${escapeHtml(item.date)}` : "";
 
   const demoButtonMarkup = hasRealDemo
     ? `<a href="${escapeHtml(item.demoUrl)}" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg">View Live Demo</a>`
@@ -165,8 +190,9 @@ function renderTodayStrip(container, item) {
     : ``;
 
   const waAskLink = window.waLink
-    ? window.waLink(`Hi Arkshar! I saw today's prototype "${item.name}" and want to ask about it.`)
-    : `https://wa.me/91XXXXXXXXXX`;
+    ? window.waLink(`Hi Arkshar! I saw your sample "${item.name}" and want to ask about it.`)
+    : "#";
+  const waDisabledClass = waAskLink === "#" ? " wa-disabled" : "";
 
   container.innerHTML = `
     <div class="latest-strip">
@@ -175,11 +201,11 @@ function renderTodayStrip(container, item) {
         <div class="latest-strip-info">
           <div class="latest-strip-tag">
             <span class="eyebrow-dot" style="background: #FCD34D;" aria-hidden="true"></span>
-            Today's Prototype ${item.date ? `• ${escapeHtml(item.date)}` : ""}
+            ${escapeHtml(titlePrefix)}${dateSuffix}
           </div>
           <h2>${escapeHtml(item.name)}</h2>
           <div style="display: flex; gap: 0.5rem; align-items: center; margin-bottom: 0.85rem; flex-wrap: wrap;">
-            <span class="status-badge ${escapeHtml(item.status || "live-demo")}">${escapeHtml(statusLabel)}</span>
+            <span class="status-badge ${escapeHtml(realStatus)}">${escapeHtml(statusLabel)}</span>
             ${item.sample ? `<span class="sample-notice-tag">Sample concept, not a real client</span>` : ""}
             ${isNew ? `<span class="badge-new">New</span>` : ""}
           </div>
@@ -187,7 +213,7 @@ function renderTodayStrip(container, item) {
           <div class="latest-strip-actions">
             ${demoButtonMarkup}
             ${reelButtonMarkup}
-            <a href="${waAskLink}" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp btn-lg">
+            <a href="${waAskLink}" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp btn-lg${waDisabledClass}">
               <svg width="18" height="18" aria-hidden="true"><use href="#i-whatsapp"></use></svg>
               Ask on WhatsApp
             </a>
@@ -218,24 +244,29 @@ function renderTodayStrip(container, item) {
 }
 
 function renderCardMarkup(item) {
-  const isNew = isWithinDays(item.date, 7);
-  const statusLabel = formatStatus(item.status);
-  const hasRealDemo = item.demoUrl && !item.demoUrl.startsWith("#");
-  const hasRealReel = item.reelUrl && item.reelUrl.trim() !== "" && !item.reelUrl.includes("/#");
+  const hasDate = Boolean(item.date && item.date.trim());
+  const isNew = hasDate ? isWithinDays(item.date, 7) : false;
+  const realStatus =
+    item.status === "live-demo" && (!item.demoUrl || !item.demoUrl.startsWith("https://"))
+      ? "screenshot-only"
+      : item.status || "screenshot-only";
+  const statusLabel = formatStatus(realStatus);
+  const hasRealDemo = item.demoUrl && item.demoUrl.startsWith("https://");
+  const hasRealReel = item.reelUrl && item.reelUrl.trim() !== "" && item.reelUrl.startsWith("https://") && !item.reelUrl.includes("/#");
 
   return `
     <article class="prototype-card" data-slug="${escapeHtml(item.slug)}">
       <div class="prototype-media">
         <img src="${escapeHtml(item.image)}" alt="${escapeHtml(item.name)} screen preview" loading="lazy" width="600" height="380">
         <div class="proto-top-badge">
-          <span class="status-badge ${escapeHtml(item.status || "live-demo")}">${escapeHtml(statusLabel)}</span>
+          <span class="status-badge ${escapeHtml(realStatus)}">${escapeHtml(statusLabel)}</span>
           ${isNew ? `<span class="badge-new">New</span>` : ""}
         </div>
       </div>
       <div class="prototype-body">
         <div class="prototype-header-meta">
           <span class="prototype-industry">${escapeHtml(item.industry)}</span>
-          ${item.date ? `<span style="font-size: 0.75rem; color: #94A3B8;">${escapeHtml(item.date)}</span>` : ""}
+          ${hasDate ? `<span style="font-size: 0.75rem; color: #94A3B8;">${escapeHtml(item.date)}</span>` : ""}
         </div>
         <h3 class="prototype-title">${escapeHtml(item.name)}</h3>
         <p class="prototype-desc">${escapeHtml(item.description)}</p>
@@ -356,7 +387,13 @@ function openQuickViewModal(item, triggerEl = null) {
   // Pre-filled WhatsApp link with prototype name
   if (waBtnEl) {
     const msg = `Hi Arkshar! I am looking at your prototype "${item.name}" (${item.industry}). Can we build something similar for my business?`;
-    waBtnEl.href = window.waLink ? window.waLink(msg) : `https://wa.me/91XXXXXXXXXX`;
+    const linkUrl = window.waLink ? window.waLink(msg, waBtnEl) : "#";
+    waBtnEl.href = linkUrl;
+    if (linkUrl === "#") {
+      waBtnEl.classList.add("wa-disabled");
+    } else {
+      waBtnEl.classList.remove("wa-disabled");
+    }
   }
 
   // External live demo button
@@ -487,7 +524,8 @@ function initContactForm() {
     ].filter(Boolean);
 
     const fullMessage = lines.join("\n");
-    const targetUrl = window.waLink ? window.waLink(fullMessage) : `https://wa.me/91XXXXXXXXXX`;
+    const targetUrl = window.waLink ? window.waLink(fullMessage) : "#";
+    const isWaReady = targetUrl !== "#";
 
     // Display honest feedback box
     if (noticeBox) {
@@ -495,11 +533,15 @@ function initContactForm() {
       noticeBox.innerHTML = `
         <h4 style="color: #065F46; margin-bottom: 0.35rem;">✓ Ready to send via WhatsApp</h4>
         <p style="color: #047857; margin-bottom: 1rem; font-size: 0.95rem;">
-          Opening WhatsApp. Please press <strong>Send</strong> there to finish.
+          ${
+            isWaReady
+              ? "Opening WhatsApp. Please press <strong>Send</strong> there to finish."
+              : "Your quote request message is prepared. Click <strong>Copy my message</strong> below to send it to us."
+          }
         </p>
         <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-          <a href="${targetUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp btn-sm">
-            Open WhatsApp Again
+          <a href="${targetUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp btn-sm${!isWaReady ? " wa-disabled" : ""}">
+            ${isWaReady ? "Open WhatsApp Again" : "WhatsApp"}
           </a>
           <button type="button" class="btn btn-secondary btn-sm" id="btn-copy-quote-msg">
             Copy my message
@@ -529,8 +571,10 @@ function initContactForm() {
       noticeBox.scrollIntoView({ behavior: "smooth", block: "center" });
     }
 
-    // Launch WhatsApp
-    window.open(targetUrl, "_blank");
+    // Launch WhatsApp only if live URL is configured
+    if (isWaReady) {
+      window.open(targetUrl, "_blank", "noopener,noreferrer");
+    }
   });
 
   [nameInput, phoneInput, businessSelect, messageInput].forEach((field) => {
@@ -607,3 +651,14 @@ function escapeHtml(str) {
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#039;");
 }
+
+// Global click prevention on disabled WhatsApp links
+document.addEventListener("click", (e) => {
+  const waDisabled = e.target.closest(".wa-disabled");
+  if (waDisabled) {
+    e.preventDefault();
+    console.warn(
+      "[Arkshar] WhatsApp link clicked but WHATSAPP_NUMBER in js/config.js is still a placeholder. Set a live phone number before production."
+    );
+  }
+});

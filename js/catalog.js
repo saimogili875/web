@@ -234,10 +234,12 @@
   function updateStatusBar(shownCount, totalCount) {
     const countEl = document.getElementById("catalog-count-text");
     if (countEl) {
+      const allSample = allPrototypes.length > 0 && allPrototypes.every((p) => p.sample === true);
+      const baseNoun = allSample ? "sample concepts" : "prototypes";
       if (shownCount === totalCount) {
-        countEl.textContent = `Showing all ${totalCount} prototypes`;
+        countEl.textContent = `Showing all ${totalCount} ${baseNoun}`;
       } else {
-        countEl.textContent = `Showing ${shownCount} of ${totalCount} prototypes`;
+        countEl.textContent = `Showing ${shownCount} of ${totalCount} ${baseNoun}`;
       }
     }
 
@@ -258,8 +260,13 @@
 
     if (items.length === 0) {
       const waSuggestLink = window.waLink
-        ? window.waLink(`Hi Arkshar! I searched your catalog for "${currentSearchQuery || currentIndustryFilter}" but could not find a prototype. Can you build one for my business?`)
-        : `https://wa.me/91XXXXXXXXXX`;
+        ? window.waLink(
+            `Hi Arkshar! I searched your catalog for "${
+              currentSearchQuery || currentIndustryFilter
+            }" but could not find a prototype. Can you build one for my business?`
+          )
+        : "#";
+      const waDisabledClass = waSuggestLink === "#" ? " wa-disabled" : "";
 
       container.innerHTML = `
         <div class="catalog-empty" style="grid-column: 1 / -1;">
@@ -268,7 +275,7 @@
             We build one new prototype every working day. Tell us what your shop, clinic, restaurant or college needs and we can make it next.
           </p>
           <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;">
-            <a href="${waSuggestLink}" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp">
+            <a href="${waSuggestLink}" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp${waDisabledClass}">
               <svg width="18" height="18" aria-hidden="true"><use href="#i-whatsapp"></use></svg>
               Tell us on WhatsApp
             </a>
@@ -285,24 +292,33 @@
 
     container.innerHTML = items
       .map((item) => {
-        const isNew = isWithinDays(item.date, 7);
-        const statusLabel = formatStatus(item.status);
-        const hasRealDemo = item.demoUrl && !item.demoUrl.startsWith("#");
-        const hasRealReel = item.reelUrl && item.reelUrl.trim() !== "" && !item.reelUrl.includes("/#");
+        const hasDate = Boolean(item.date && item.date.trim());
+        const isNew = hasDate ? isWithinDays(item.date, 7) : false;
+        const realStatus =
+          item.status === "live-demo" && (!item.demoUrl || !item.demoUrl.startsWith("https://"))
+            ? "screenshot-only"
+            : item.status || "screenshot-only";
+        const statusLabel = formatStatus(realStatus);
+        const hasRealDemo = item.demoUrl && item.demoUrl.startsWith("https://");
+        const hasRealReel =
+          item.reelUrl &&
+          item.reelUrl.trim() !== "" &&
+          item.reelUrl.startsWith("https://") &&
+          !item.reelUrl.includes("/#");
 
         return `
           <article class="prototype-card" data-slug="${escapeHtml(item.slug)}">
             <div class="prototype-media">
               <img src="${escapeHtml(item.image)}" alt="${escapeHtml(item.name)} screen preview" loading="lazy" width="600" height="380">
               <div class="proto-top-badge">
-                <span class="status-badge ${escapeHtml(item.status || "live-demo")}">${escapeHtml(statusLabel)}</span>
+                <span class="status-badge ${escapeHtml(realStatus)}">${escapeHtml(statusLabel)}</span>
                 ${isNew ? `<span class="badge-new">New</span>` : ""}
               </div>
             </div>
             <div class="prototype-body">
               <div class="prototype-header-meta">
                 <span class="prototype-industry">${escapeHtml(item.industry)}</span>
-                ${item.date ? `<span style="font-size: 0.75rem; color: #94A3B8;">${escapeHtml(item.date)}</span>` : ""}
+                ${hasDate ? `<span style="font-size: 0.75rem; color: #94A3B8;">${escapeHtml(item.date)}</span>` : ""}
               </div>
               <h3 class="prototype-title">${escapeHtml(item.name)}</h3>
               <p class="prototype-desc">${escapeHtml(item.description)}</p>
