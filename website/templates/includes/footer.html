@@ -1,0 +1,60 @@
+{% load static %}
+<footer class="site-footer" role="contentinfo">
+  <div class="container">
+    <div class="footer-grid">
+      <!-- Brand & Mission -->
+      <div class="footer-brand">
+        <a href="{% url 'home' %}" aria-label="Arkshar Home">
+          <img src="{% static 'arkshar-logo.svg' %}" alt="Arkshar" class="brand-logo" width="130" height="38" style="filter: brightness(0) invert(1);">
+        </a>
+        <p>Boutique software studio in Hyderabad building ready-made websites, ERP systems, AI marketing and domain AI agents for small businesses in India.</p>
+        <p style="margin-top: 12px; font-size: 13px; color: var(--accent-gold);">
+          &bull; Django &bull; Python &bull; PostgreSQL &bull; Mobile-First
+        </p>
+      </div>
+
+      <!-- Solutions -->
+      <div class="footer-col">
+        <h4>Solutions</h4>
+        <ul class="footer-links">
+          <li><a href="{% url 'websites_apps' %}">1. Websites & Apps</a></li>
+          <li><a href="{% url 'erp' %}">2. Odoo-Style ERP</a></li>
+          <li><a href="{% url 'ai_marketing' %}">3. AI Marketing</a></li>
+          <li><a href="{% url 'ai_agents' %}">4. Domain AI Agents</a></li>
+        </ul>
+      </div>
+
+      <!-- Direct Contact Details -->
+      <div class="footer-col">
+        <h4>Contact Us</h4>
+        <div class="footer-contact-info">
+          <div class="footer-contact-item">
+            <svg aria-hidden="true"><use href="#i-phone"/></svg>
+            <div>
+              <strong>Phone / WhatsApp:</strong>
+              <a href="tel:{{ STUDIO_PHONE }}">{{ STUDIO_PHONE }}</a>
+            </div>
+          </div>
+          <div class="footer-contact-item">
+            <svg aria-hidden="true"><use href="#i-send"/></svg>
+            <div>
+              <strong>Email:</strong>
+              <a href="mailto:{{ STUDIO_EMAIL }}">{{ STUDIO_EMAIL }}</a>
+            </div>
+          </div>
+          <div class="footer-contact-item">
+            <svg aria-hidden="true"><use href="#i-target"/></svg>
+            <div>
+              <strong>Studio Address:</strong>
+              <span>{{ STUDIO_ADDRESS }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2026 Arkshar Studio. All rights reserved. Built for shops, clinics, restaurants and growing colleges in India.</p>
+    </div>
+  </div>
+</footer>

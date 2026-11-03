@@ -1,0 +1,40 @@
+<!-- Floating Chat Bubble (above WhatsApp) -->
+<button class="chatbot-bubble" id="chatbot-bubble" aria-label="Open Arkshar AI Assistant" type="button">
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/>
+  </svg>
+  <span class="chat-unread-dot" aria-label="New message available"></span>
+</button>
+
+<!-- Interactive Chat Window -->
+<div class="chatbot-window" id="chatbot-window" role="dialog" aria-label="Arkshar AI Assistant" aria-modal="false">
+  <div class="chat-header">
+    <div class="chat-header-title">
+      <div class="chat-avatar">A</div>
+      <div class="chat-status-text">
+        <strong>Arkshar Studio AI</strong>
+        <span>● Powered by Claude &bull; Hyderabad</span>
+      </div>
+    </div>
+    <button class="chat-close-btn" id="chat-close-btn" aria-label="Close chat" type="button">&times;</button>
+  </div>
+
+  <div class="chat-messages" id="chat-messages">
+    <div class="msg msg-bot">
+      <p>Hello! I am Arkshar's AI assistant. Ask me about our <strong>Websites</strong>, <strong>ERP systems</strong>, <strong>AI marketing</strong>, or <strong>Domain agents</strong>. How can I help your business grow today?</p>
+    </div>
+  </div>
+
+  <!-- Quick Prompts Chips -->
+  <div class="chat-quick-chips">
+    <button class="chip-btn" data-query="What websites do you build?" type="button">Websites & Apps</button>
+    <button class="chip-btn" data-query="Tell me about Odoo ERP" type="button">Odoo ERP</button>
+    <button class="chip-btn" data-query="How does AI marketing work?" type="button">AI Marketing</button>
+    <button class="chip-btn" data-query="I want a custom quote" type="button">Get a Quote</button>
+  </div>
+
+  <form class="chat-input-bar" id="chat-form">
+    <input type="text" class="chat-input" id="chat-input" placeholder="Type your question or requirement..." aria-label="Your message" autocomplete="off" required>
+    <button type="submit" class="chat-send-btn" aria-label="Send message">Send</button>
+  </form>
+</div>

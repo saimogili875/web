@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Customized Websites and Apps — Arkshar Studio Hyderabad{% endblock %}
+{% block description %}Business sites, e-commerce ordering, college institution portals, and SaaS dashboards built for Indian businesses with Django and mobile-first design.{% endblock %}
+
+{% block content %}
+<div class="category-hero" style="--cat-color: #A855F7;">
+  <div class="container">
+    <div class="cat-breadcrumb">
+      <a href="{% url 'home' %}#services" class="back-link">&larr; Back to All Solutions</a>
+    </div>
+    <div class="section-label" style="--c: #A855F7; margin-bottom: 14px;">
+      Category 1 &bull; Available Now
+    </div>
+    <h1 class="cat-hero-title">Customized Websites and Apps</h1>
+    <p class="cat-hero-desc">High-performance digital storefronts, WhatsApp-connected product catalogs, and web solutions tailored for growing enterprises in Hyderabad and across India.</p>
+    <div class="cat-hero-actions">
+      <a href="{% url 'home' %}?service=websites-apps#contact" class="btn-primary btn-gold">
+        Get a Quote for Websites &rarr;
+      </a>
+      <a href="{{ cat_wa_url }}" target="_blank" rel="noopener noreferrer" class="btn-primary" style="background: #25D366; color: #fff;">
+        <svg width="18" height="18" aria-hidden="true" style="margin-right: 8px;"><use href="#i-whatsapp"/></svg>
+        WhatsApp Direct Quote
+      </a>
+    </div>
+  </div>
+</div>
+
+<section class="subservice-list-section" style="--cat-color: #A855F7;">
+  <div class="container">
+    <h2 style="font-size: 24px; font-weight: 800; text-transform: uppercase; margin-bottom: 24px;">
+      Available Sub-Services & Working Prototypes
+    </h2>
+    <div class="subservice-grid">
+      {% for sub in category.sub_services %}
+      <article class="subservice-card">
+        <div class="subservice-card-head">
+          <div class="subservice-ico">
+            <svg aria-hidden="true"><use href="#{{ sub.icon }}"/></svg>
+          </div>
+          <div>
+            <h3 class="subservice-title">{{ sub.num }} {{ sub.title }}</h3>
+            <span style="font-size: 13px; color: var(--accent-gold); font-weight: 700;">({{ sub.count }} Prototypes Built)</span>
+          </div>
+        </div>
+        <p class="subservice-desc">{{ sub.desc }}</p>
+        <div class="subservice-tags">
+          {% for tag in sub.tags %}
+          <span class="sub-tag">{{ tag }}</span>
+          {% endfor %}
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+
+    <!-- Bottom CTA Bar -->
+    <div style="margin-top: 50px; padding: 36px; border-radius: 20px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.12); text-align: center;">
+      <h3 style="font-size: 24px; font-weight: 800; text-transform: uppercase; margin-bottom: 10px;">Ready to deploy your customized website or app?</h3>
+      <p style="color: var(--text-muted); max-width: 550px; margin: 0 auto 24px; font-size: 16px;">
+        Pick a prototype or send us your menu, product list, or business brochure. We deploy live in 2 to 5 days.
+      </p>
+      <a href="{% url 'home' %}?service=websites-apps#contact" class="btn-primary btn-gold" style="height: 50px;">
+        Request a Free Strategy Quote &rarr;
+      </a>
+    </div>
+  </div>
+</section>
+{% endblock %}
