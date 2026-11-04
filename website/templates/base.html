@@ -23,7 +23,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}?v=2.0">
   {% block extra_css %}{% endblock %}
 </head>
 <body data-theme="{% block body_theme %}cat-1{% endblock %}">
@@ -98,7 +98,7 @@
     </a>
   </div>
 
-  <script src="{% static 'js/main.js' %}"></script>
+  <script src="{% static 'js/main.js' %}?v=2.0"></script>
   <script src="{% static 'js/chatbot.js' %}"></script>
   {% block extra_js %}{% endblock %}
 </body>

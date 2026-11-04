@@ -249,18 +249,12 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     }
 
-    // 2. PAGE BACKGROUND CHANGES PER CATEGORY CARD & FAQ BLACK
-    var targetBg = '#2a1060'; // Default Card 1: purple
+    // 2. PAGE BACKGROUND: WHITE BAND FROM AI SHOWCASE TO RESULTS, DARK FOR FAQS/FOOTER
+    var targetBg = '#FFFFFF';
     if (faqSection && faqSection.getBoundingClientRect().top < vh * 0.7) {
-      targetBg = '#000000'; // FAQ through footer is pure black
-    } else if (card4 && card4.getBoundingClientRect().top < vh * 0.65) {
-      targetBg = '#07442f'; // Card 4: green
-    } else if (card3 && card3.getBoundingClientRect().top < vh * 0.65) {
-      targetBg = '#6b0f3f'; // Card 3: pink
-    } else if (card2 && card2.getBoundingClientRect().top < vh * 0.65) {
-      targetBg = '#0b2a6b'; // Card 2: blue
+      targetBg = '#13112E'; // FAQs through footer is deep dark
     } else {
-      targetBg = '#2a1060'; // Card 1: purple
+      targetBg = '#FFFFFF'; // White band from AI solutions through Engineered for Growth
     }
 
     if (currentBg !== targetBg) {
@@ -367,6 +361,70 @@ document.addEventListener('DOMContentLoaded', function () {
           formFeedback.textContent =
             'Network issue. Please contact us directly via phone or WhatsApp.';
         });
+    });
+  }
+
+  // ========================================================
+  // 6. AI Solutions Demo Cards (Experience Arkshar AI)
+  // ========================================================
+  var aiCardsSection = document.getElementById('ai-solutions');
+  if (aiCardsSection) {
+    var pillButtons = aiCardsSection.querySelectorAll('.ai-glass-pill-btn');
+
+    pillButtons.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var panelId = btn.getAttribute('aria-controls');
+        var panel = document.getElementById(panelId);
+        if (!panel) return;
+
+        var isExpanded = btn.getAttribute('aria-expanded') === 'true';
+
+        // Close other open demo panels in the section
+        pillButtons.forEach(function (otherBtn) {
+          if (otherBtn !== btn) {
+            otherBtn.setAttribute('aria-expanded', 'false');
+            otherBtn.classList.remove('is-active');
+            var otherPanelId = otherBtn.getAttribute('aria-controls');
+            var otherPanel = document.getElementById(otherPanelId);
+            if (otherPanel) {
+              otherPanel.hidden = true;
+              otherPanel.setAttribute('hidden', '');
+            }
+          }
+        });
+
+        // Toggle this panel
+        if (isExpanded) {
+          btn.setAttribute('aria-expanded', 'false');
+          btn.classList.remove('is-active');
+          panel.hidden = true;
+          panel.setAttribute('hidden', '');
+        } else {
+          btn.setAttribute('aria-expanded', 'true');
+          btn.classList.add('is-active');
+          panel.hidden = false;
+          panel.removeAttribute('hidden');
+        }
+      });
+    });
+
+    var resetButtons = aiCardsSection.querySelectorAll('.ai-demo-reset-btn');
+    resetButtons.forEach(function (resetBtn) {
+      resetBtn.addEventListener('click', function () {
+        var card = resetBtn.closest('.ai-showcase-col') || resetBtn.closest('.ai-orb-card');
+        if (!card) return;
+        var btn = card.querySelector('.ai-glass-pill-btn');
+        var panel = card.querySelector('.ai-demo-panel');
+        if (panel) {
+          panel.hidden = true;
+          panel.setAttribute('hidden', '');
+        }
+        if (btn) {
+          btn.setAttribute('aria-expanded', 'false');
+          btn.classList.remove('is-active');
+          btn.focus();
+        }
+      });
     });
   }
 });
