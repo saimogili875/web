@@ -252,7 +252,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // 2. PAGE BACKGROUND: WHITE BAND FROM AI SHOWCASE TO RESULTS, DARK FOR FAQS/FOOTER
     var targetBg = '#FFFFFF';
     if (faqSection && faqSection.getBoundingClientRect().top < vh * 0.7) {
-      targetBg = '#13112E'; // FAQs through footer is deep dark
+      targetBg = '#000000'; // FAQs through footer is deep black
     } else {
       targetBg = '#FFFFFF'; // White band from AI solutions through Engineered for Growth
     }

@@ -1,17 +1,17 @@
 /* ========================================================
    GUHATECH STUDIO - STYLESHEET
    Senior UI/UX Color System & Component Architecture
-   Palette: Base Dark #13112E, Surface #1C1A3F, Saffron #F59E0B, Soft Violet #A78BFA
+   Palette: Base Dark #000000 (Black), Surface #111114, Saffron #F59E0B, Soft Violet #A78BFA
    Strict WCAG AA Contrast Compliance
    ======================================================== */
 
 :root {
   /* Surface Foundations */
-  --bg-deep: #13112E;              /* Base dark canvas */
-  --bg-surface: #1C1A3F;           /* Cards, containers, panels */
-  --bg-surface-elevated: #252252;  /* Elevated cards, dropdowns, headers */
-  --bg-surface-subtle: #171536;    /* Sunken elements, input background */
-  --bg-input: #171536;
+  --bg-deep: #000000;              /* Base dark canvas: pure black */
+  --bg-surface: #111114;           /* Cards, containers, panels */
+  --bg-surface-elevated: #1A1A20;  /* Elevated cards, dropdowns, headers */
+  --bg-surface-subtle: #0B0B0E;    /* Sunken elements, input background */
+  --bg-input: #0B0B0E;
 
   /* Primary Accent: Saffron for ALL main buttons & primary CTAs */
   --accent-saffron: #F59E0B;
@@ -1762,7 +1762,7 @@ textarea:focus-visible {
   outline: none;
   border-color: var(--accent-violet);
   box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.35);
-  background: #1C1944;
+  background: var(--bg-surface-elevated);
 }
 select.form-control {
   cursor: pointer;
