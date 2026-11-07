@@ -1,5 +1,5 @@
 /**
- * Arkshar Studio — Central Configuration
+ * GuhaTech Studio — Central Configuration
  * Edit these settings before launching.
  */
 
@@ -10,13 +10,13 @@ const WHATSAPP_NUMBER = "91XXXXXXXXXX";
 const PHONE_DISPLAY = "+91 XXXXX XXXXX";
 
 // Primary studio email
-const EMAIL = "hello@arkshar.com";
+const EMAIL = "hello@guhatech.com";
 
 // TODO: Replace with your real Instagram profile URL
 const INSTAGRAM_URL = "https://instagram.com/#";
 
 // Canonical site URL
-const SITE_URL = "https://arkshar.com";
+const SITE_URL = "https://guhatech.com";
 
 // Studio base city
 const CITY = "Hyderabad, India";

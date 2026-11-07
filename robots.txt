@@ -1,5 +1,5 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://arkshar.com/sitemap.xml
+Sitemap: https://guhatech.com/sitemap.xml
 

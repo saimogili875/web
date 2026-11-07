@@ -1,5 +1,5 @@
 /**
- * Arkshar Studio - Main Frontend Interactions
+ * GuhaTech Studio - Main Frontend Interactions
  */
 
 // ========================================================
@@ -365,7 +365,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // ========================================================
-  // 6. AI Solutions Demo Cards (Experience Arkshar AI)
+  // 6. AI Solutions Demo Cards (Experience GuhaTech AI)
   // ========================================================
   var aiCardsSection = document.getElementById('ai-solutions');
   if (aiCardsSection) {

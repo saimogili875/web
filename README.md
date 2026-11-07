@@ -1,6 +1,6 @@
-# Arkshar — Frontend Website
+# GuhaTech — Frontend Website
 
-Clean, modern, mobile-first frontend for **Arkshar** (`arkshar.com`), an Indian software studio based in Hyderabad that builds ready-made websites, apps, and AI marketing workflows for small businesses, and publishes one working prototype every working day with an Instagram reel.
+Clean, modern, mobile-first frontend for **GuhaTech** (`guhatech.com`), an Indian software studio based in Hyderabad that builds ready-made websites, apps, and AI marketing workflows for small businesses, and publishes one working prototype every working day with an Instagram reel.
 
 ---
 
@@ -31,7 +31,7 @@ Clean, modern, mobile-first frontend for **Arkshar** (`arkshar.com`), an Indian 
 ├── privacy.html            # Transparent privacy notice for contact form data handling
 ├── 404.html                # Friendly custom error page
 ├── robots.txt              # Search engine crawler instructions
-├── sitemap.xml             # XML sitemap for https://arkshar.com/
+├── sitemap.xml             # XML sitemap for https://guhatech.com/
 ├── favicon.svg             # Minimalist SVG monogram
 ├── css/
 │   └── styles.css          # CSS custom properties, layout grids, components, skeletons, badges
@@ -68,13 +68,13 @@ window.ARKSHAR_CONFIG = {
   PHONE_DISPLAY: "+91 XXXXX XXXXX",
 
   // Official email address
-  EMAIL: "hello@arkshar.com",
+  EMAIL: "hello@guhatech.com",
 
   // Instagram profile or reel link
   INSTAGRAM_URL: "https://instagram.com/arkshar",
 
   // Canonical website URL
-  SITE_URL: "https://arkshar.com",
+  SITE_URL: "https://guhatech.com",
 
   // Studio base city
   CITY: "Hyderabad, India"
@@ -87,7 +87,7 @@ When `WHATSAPP_NUMBER` is still `"91XXXXXXXXXX"`, a gentle developer warning is 
 
 ## 📝 How to Add a New Prototype (`data/prototypes.json`)
 
-Arkshar publishes **one prototype every working day**. To publish a new prototype, append a new JSON object to `data/prototypes.json`:
+GuhaTech publishes **one prototype every working day**. To publish a new prototype, append a new JSON object to `data/prototypes.json`:
 
 ```json
 {
@@ -97,7 +97,7 @@ Arkshar publishes **one prototype every working day**. To publish a new prototyp
   "type": "Business site",
   "industry": "Healthcare",
   "description": "Herbal therapy appointment booking flow with dosha intake form and automated WhatsApp slot reminders.",
-  "demoUrl": "https://demo.arkshar.com/ayurcare",
+  "demoUrl": "https://demo.guhatech.com/ayurcare",
   "reelUrl": "https://instagram.com/reel/example123",
   "image": "assets/prototypes/clinic.svg",
   "date": "2026-11-04",
@@ -158,7 +158,7 @@ Extract the common `<head>`, `<header>`, mobile drawer, floating WhatsApp button
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{% block title %}Arkshar — Your business online. Ready-made, live in days.{% endblock %}</title>
+  <title>{% block title %}GuhaTech — Your business online. Ready-made, live in days.{% endblock %}</title>
   <link rel="icon" type="image/svg+xml" href="{% static 'arkshar/favicon.svg' %}">
   <link rel="stylesheet" href="{% static 'arkshar/css/styles.css' %}">
   {% block extra_head %}{% endblock %}

@@ -79,7 +79,7 @@ CATEGORIES_DATA = [
 
 def studio_context(request):
     whatsapp_clean = settings.WHATSAPP_NUMBER.replace('+', '').replace(' ', '')
-    default_wa_msg = urllib.parse.quote("Hi Arkshar! I would like to discuss a project.")
+    default_wa_msg = urllib.parse.quote("Hi GuhaTech! I would like to discuss a project.")
     default_wa_url = f"https://wa.me/{whatsapp_clean}?text={default_wa_msg}"
 
     return {

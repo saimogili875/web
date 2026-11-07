@@ -1,5 +1,5 @@
 /**
- * Arkshar Studio - AI Assistant Chatbot Widget
+ * GuhaTech Studio - AI Assistant Chatbot Widget
  */
 (function () {
   var chatBubble = document.getElementById('chatbot-bubble');
@@ -71,7 +71,7 @@
     // Show typing state
     var typingDiv = document.createElement('div');
     typingDiv.className = 'msg msg-bot typing-indicator';
-    typingDiv.innerHTML = '<em>Arkshar AI is typing...</em>';
+    typingDiv.innerHTML = '<em>GuhaTech AI is typing...</em>';
     chatMessages.appendChild(typingDiv);
     chatMessages.scrollTop = chatMessages.scrollHeight;
 

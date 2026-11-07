@@ -54,8 +54,8 @@ def home(request):
         'faqs': faqs,
         'results': results,
         'selected_service': selected_service,
-        'meta_title': 'Arkshar — Ready-Made Business Websites, ERP & AI Solutions in Hyderabad',
-        'meta_description': 'Arkshar builds customized websites, Odoo-style ERP systems, AI marketing, and domain AI agents for small businesses in India. Live in days.',
+        'meta_title': 'GuhaTech — Ready-Made Business Websites, ERP & AI Solutions in Hyderabad',
+        'meta_description': 'GuhaTech builds customized websites, Odoo-style ERP systems, AI marketing, and domain AI agents for small businesses in India. Live in days.',
     }
     return render(request, 'index.html', context)
 
@@ -66,14 +66,14 @@ def category_detail(request, slug):
         return redirect('home')
 
     whatsapp_clean = settings.WHATSAPP_NUMBER.replace('+', '').replace(' ', '')
-    wa_msg = urllib.parse.quote(f"Hi Arkshar! I would like to get a quote for {cat['title']}.")
+    wa_msg = urllib.parse.quote(f"Hi GuhaTech! I would like to get a quote for {cat['title']}.")
     cat_wa_url = f"https://wa.me/{whatsapp_clean}?text={wa_msg}"
 
     context = {
         'category': cat,
         'cat_wa_url': cat_wa_url,
-        'meta_title': f"{cat['title']} — Arkshar Studio Solutions",
-        'meta_description': f"Explore {cat['title']} by Arkshar: {cat['subtext']} Ready-made for Indian businesses.",
+        'meta_title': f"{cat['title']} — GuhaTech Studio Solutions",
+        'meta_description': f"Explore {cat['title']} by GuhaTech: {cat['subtext']} Ready-made for Indian businesses.",
     }
     template_name = f"categories/{slug.replace('-', '_')}.html"
     return render(request, template_name, context)
@@ -110,9 +110,9 @@ def contact_submit(request):
 
         # Send email notification
         try:
-            subject = f"New Quote Request from {name} - Arkshar"
+            subject = f"New Quote Request from {name} - GuhaTech"
             body = (
-                f"New inquiry received on Arkshar website:\n\n"
+                f"New inquiry received on GuhaTech website:\n\n"
                 f"Name: {name}\n"
                 f"Phone: {phone}\n"
                 f"Service: {service_display}\n"
@@ -130,7 +130,7 @@ def contact_submit(request):
 
         # Build WhatsApp link for direct instant continuation
         whatsapp_clean = settings.WHATSAPP_NUMBER.replace('+', '').replace(' ', '')
-        wa_text = f"Hi Arkshar! I submitted a quote request.\nName: {name}\nPhone: {phone}\nService: {service_display}\nNote: {message}"
+        wa_text = f"Hi GuhaTech! I submitted a quote request.\nName: {name}\nPhone: {phone}\nService: {service_display}\nNote: {message}"
         wa_url = f"https://wa.me/{whatsapp_clean}?text={urllib.parse.quote(wa_text)}"
 
         success_msg = f"Thank you, {name}! Your quote request has been received. We will contact you shortly."
@@ -169,8 +169,8 @@ def chat_api(request):
     api_key = getattr(settings, 'ANTHROPIC_API_KEY', '') or os.environ.get('ANTHROPIC_API_KEY', '')
 
     system_prompt = (
-        "You are the intelligent assistant for Arkshar (arkshar.com), a software studio in Hyderabad, India. "
-        "Arkshar builds four core solutions for small businesses:\n"
+        "You are the intelligent assistant for GuhaTech (guhatech.com), a software studio in Hyderabad, India. "
+        "GuhaTech builds four core solutions for small businesses:\n"
         "1. Customized Websites and Apps (business sites, e-commerce ordering, institution portals, SaaS)\n"
         "2. Odoo-style ERP (Sales/CRM, Accounting, Inventory/Purchase, POS, HR, Operations, Multi-vendor, Industry ERPs)\n"
         "3. AI Marketing and Business Analysis (local SEO, content/social, lead gen, WhatsApp follow-ups, AI voice calling agents)\n"
@@ -225,7 +225,7 @@ def chat_api(request):
     # 2. Intelligent fallback engine when API key is unset or network error occurs
     if not bot_reply:
         if any(g in lower_msg for g in ['hi', 'hello', 'hey', 'namaste', 'start']):
-            bot_reply = "Hello! Welcome to Arkshar Studio. We build ready-made business websites, Odoo-style ERP systems, and AI automation tools in Hyderabad. Which service are you interested in today?"
+            bot_reply = "Hello! Welcome to GuhaTech Studio. We build ready-made business websites, Odoo-style ERP systems, and AI automation tools in Hyderabad. Which service are you interested in today?"
         elif any(k in lower_msg for k in ['price', 'cost', 'quote', 'charges', 'rate', 'how much']):
             bot_reply = "Our projects are priced transparently based on your exact business needs—whether it's a fast mobile website, an ERP system, or an AI marketing pipeline. Could you share your name, phone number, and business type? Or tap the WhatsApp button below to get an instant quote."
         elif any(k in lower_msg for k in ['time', 'duration', 'fast', 'quick', 'days', 'how long']):
@@ -242,7 +242,7 @@ def chat_api(request):
             bot_reply = "Thank you for asking! Arkshar specializes in websites, ERP systems, AI marketing, and custom domain agents built on Django & PostgreSQL. Tell me a bit about your business, or connect with us on WhatsApp for a quick consultation."
 
     whatsapp_clean = settings.WHATSAPP_NUMBER.replace('+', '').replace(' ', '')
-    wa_prompt = urllib.parse.quote(f"Hi Arkshar! I chatted with your website AI about {suggested_category or 'a business project'}. Can we discuss?")
+    wa_prompt = urllib.parse.quote(f"Hi GuhaTech! I chatted with your website AI about {suggested_category or 'a business project'}. Can we discuss?")
     wa_url = f"https://wa.me/{whatsapp_clean}?text={wa_prompt}"
 
     return JsonResponse({

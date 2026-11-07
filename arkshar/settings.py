@@ -134,7 +134,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Studio & Integration Config
 STUDIO_PHONE = os.environ.get('STUDIO_PHONE', '+91 98765 43210')
 WHATSAPP_NUMBER = os.environ.get('WHATSAPP_NUMBER', '919876543210')
-STUDIO_EMAIL = os.environ.get('STUDIO_EMAIL', 'hello@arkshar.com')
+STUDIO_EMAIL = os.environ.get('STUDIO_EMAIL', 'hello@guhatech.com')
 STUDIO_ADDRESS = os.environ.get('STUDIO_ADDRESS', 'Hitech City, Hyderabad, Telangana 500081, India')
 ANTHROPIC_API_KEY = os.environ.get('ANTHROPIC_API_KEY', '')
 
