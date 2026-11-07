@@ -1298,7 +1298,7 @@ textarea:focus-visible {
 
 /* ========================================================
    2. SERVICES STACK CARDS (1-4)
-   Refined per UI/UX spec: Dark Surface #1C1A3F for ALL cards,
+   Refined per UI/UX spec: Dark Surface #101010 for ALL cards,
    1px rgba(255,255,255,0.1) border, Saffron CTA, NO multicolor gradients.
    Category colors strictly for small icon/tag accents.
    Consistent 20px card radius, 8px grid spacing.
@@ -1669,7 +1669,7 @@ textarea:focus-visible {
 
 /* ========================================================
    3. RESULTS / BUSINESS IMPACT SECTION
-   Surface #1C1A3F, Saffron Stats #F59E0B, Violet Hover
+   Surface #101010, Saffron Stats #F59E0B, Violet Hover
    ======================================================== */
 .results-section {
   padding: var(--space-10) 0;
@@ -1742,7 +1742,7 @@ textarea:focus-visible {
 }
 
 /* ========================================================
-   4. FAQS SECTION (COHESIVE BASE DARK #13112E)
+   4. FAQS SECTION (BASE BLACK #000000)
    ======================================================== */
 .faq-section {
   padding: var(--space-10) 0;
@@ -1820,7 +1820,7 @@ textarea:focus-visible {
 
 /* ========================================================
    5. CONTACT FORM & SECTION
-   Dark surface #1C1A3F, input #171536, visible violet focus ring
+   Dark surface #101010, input #080808, visible violet focus ring
    Saffron submit CTA, WhatsApp green strictly for WhatsApp link
    ======================================================== */
 .contact-section {
@@ -2413,7 +2413,7 @@ textarea.form-control {
 
 /* ========================================================
    8. MOBILE BOTTOM ACTION BAR
-   Surface #1C1A3F, Saffron Call Now, WhatsApp Green WhatsApp
+   Surface #101010, Saffron Call Now, WhatsApp Green WhatsApp
    ======================================================== */
 .mobile-bottom-bar {
   display: none;
