@@ -239,7 +239,7 @@ def chat_api(request):
         elif suggested_category == 'ai-agents':
             bot_reply = "Our Domain AI Agents are automated assistants built for specific industry workflows—like exam evaluation for schools, patient booking for clinics, resume screening for HR, and 24/7 support tickets."
         else:
-            bot_reply = "Thank you for asking! Arkshar specializes in websites, ERP systems, AI marketing, and custom domain agents built on Django & PostgreSQL. Tell me a bit about your business, or connect with us on WhatsApp for a quick consultation."
+            bot_reply = "Thank you for asking! GuhaTech specializes in websites, ERP systems, AI marketing, and custom domain agents built on Django & PostgreSQL. Tell me a bit about your business, or connect with us on WhatsApp for a quick consultation."
 
     whatsapp_clean = settings.WHATSAPP_NUMBER.replace('+', '').replace(' ', '')
     wa_prompt = urllib.parse.quote(f"Hi GuhaTech! I chatted with your website AI about {suggested_category or 'a business project'}. Can we discuss?")

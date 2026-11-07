@@ -261,7 +261,7 @@
     if (items.length === 0) {
       const waSuggestLink = window.waLink
         ? window.waLink(
-            `Hi Arkshar! I searched your catalog for "${
+            `Hi GuhaTech! I searched your catalog for "${
               currentSearchQuery || currentIndustryFilter
             }" but could not find a prototype. Can you build one for my business?`
           )
@@ -270,8 +270,8 @@
 
       container.innerHTML = `
         <div class="catalog-empty" style="grid-column: 1 / -1;">
-          <h3 style="margin-bottom: 0.5rem; color: #0F2747;">Not found? Tell us your business.</h3>
-          <p style="color: #64748B; margin-bottom: 1.5rem; max-width: 500px; margin-left: auto; margin-right: auto;">
+          <h3 style="margin-bottom: 0.5rem; color: #FFFFFF;">Not found? Tell us your business.</h3>
+          <p style="color: var(--text-muted); margin-bottom: 1.5rem; max-width: 500px; margin-left: auto; margin-right: auto;">
             We build one new prototype every working day. Tell us what your shop, clinic, restaurant or college needs and we can make it next.
           </p>
           <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;">

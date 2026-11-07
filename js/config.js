@@ -61,7 +61,7 @@ const CONFIG = {
 // Check if WhatsApp number is still a placeholder (dev warning in console only)
 if (WHATSAPP_NUMBER.includes("X") || WHATSAPP_NUMBER === "91XXXXXXXXXX") {
   console.warn(
-    "%c[Arkshar Dev Warning]%c WhatsApp number is currently set to placeholder '" +
+    "%c[GuhaTech Dev Warning]%c WhatsApp number is currently set to placeholder '" +
       WHATSAPP_NUMBER +
       "'. Update WHATSAPP_NUMBER in js/config.js before production.",
     "color: #F59E0B; font-weight: bold;",
@@ -83,7 +83,7 @@ function applyConfigToDOM() {
 
   // Update plain WhatsApp links with no custom message
   document.querySelectorAll("[data-config='whatsapp-link']").forEach((el) => {
-    const href = waLink("Hi Arkshar! I would like to discuss a project.", el);
+    const href = waLink("Hi GuhaTech! I would like to discuss a project.", el);
     el.setAttribute("href", href);
     if (href === "#") {
       el.classList.add("wa-disabled");
@@ -127,5 +127,6 @@ if (document.readyState === "loading") {
 
 // Expose globally
 window.CONFIG = CONFIG;
+window.GUHATECH_CONFIG = CONFIG;
 window.ARKSHAR_CONFIG = CONFIG;
 window.waLink = waLink;

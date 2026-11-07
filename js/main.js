@@ -249,17 +249,21 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     }
 
-    // 2. PAGE BACKGROUND: WHITE BAND FROM AI SHOWCASE TO RESULTS, DARK FOR FAQS/FOOTER
-    var targetBg = '#FFFFFF';
-    if (faqSection && faqSection.getBoundingClientRect().top < vh * 0.7) {
-      targetBg = '#000000'; // FAQs through footer is deep black
-    } else {
-      targetBg = '#FFFFFF'; // White band from AI solutions through Engineered for Growth
-    }
+    // 2. PAGE BACKGROUND: WHITE BAND FROM AI SHOWCASE TO RESULTS, DARK FOR HERO & FAQS/FOOTER
+    var whiteBand = document.querySelector('.white-band-section');
+    if (whiteBand) {
+      var targetBg = '#000000';
+      var wbRect = whiteBand.getBoundingClientRect();
+      if (wbRect.top < vh * 0.7 && wbRect.bottom > vh * 0.3) {
+        targetBg = '#FFFFFF'; // White band from AI solutions through Engineered for Growth
+      } else {
+        targetBg = '#000000'; // Pure black canvas for hero, FAQs, footer
+      }
 
-    if (currentBg !== targetBg) {
-      currentBg = targetBg;
-      document.body.style.backgroundColor = targetBg;
+      if (currentBg !== targetBg) {
+        currentBg = targetBg;
+        document.body.style.backgroundColor = targetBg;
+      }
     }
 
     // 3. CARD 2 (ODOO-STYLE ERP) EXIT ON SCROLL PAST
