@@ -835,11 +835,12 @@ textarea:focus-visible {
 
 
 /* ========================================================
-   WHITE BAND SECTION (AI SHOWCASE THROUGH ENGINEERED FOR GROWTH)
+   WHITE BAND SECTION (EXPERIENCE GUHATECH AI THROUGH SERVICES)
+   Background is pure white (#FFFFFF) up to Engineered for Growth
    ======================================================== */
 .white-band-section {
-  background-color: #000000 !important;
-  color: #FFFFFF;
+  background-color: #FFFFFF !important;
+  color: #000000;
   position: relative;
   z-index: 2;
   width: 100%;
@@ -859,74 +860,37 @@ textarea:focus-visible {
 }
 
 .white-band-section .ai-showcase-panel {
-  background: #101010;
+  background: #FFFFFF;
   border-radius: var(--radius-panel);
-  border: 1px solid #2A2A2A;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.40);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
   overflow: hidden;
   position: relative;
   isolation: isolate;
   padding: 32px 36px 40px;
-  color: #FFFFFF;
+  color: #000000;
 }
 
-.white-band-section .results-section {
-  background-color: #000000;
-  border-top: 1px solid #2A2A2A;
-  border-bottom: none;
-  padding: 80px 0 100px;
+.white-band-section .ai-showcase-heading {
+  color: #000000 !important;
 }
 
-.white-band-section .results-header h2 {
-  color: #FFFFFF;
+.white-band-section .ai-showcase-live {
+  color: #333333 !important;
 }
 
-.white-band-section .results-header p {
-  color: #888888;
+.white-band-section .ai-showcase-title {
+  color: #000000 !important;
 }
 
-.white-band-section .results-header .section-label {
-  color: #D97706;
-  background: rgba(245, 158, 11, 0.12);
-  border: 1px solid rgba(245, 158, 11, 0.32);
+.white-band-section .ai-showcase-tagline {
+  color: #333333 !important;
 }
 
-.white-band-section .result-card {
-  background: #101010;
+.white-band-section .ai-btn-coming-soon {
+  background: #FFFFFF;
   border: 1px solid #2A2A2A;
-  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.30);
-  border-radius: var(--radius-card);
-  padding: 32px 22px;
-  text-align: center;
-  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
-}
-
-.white-band-section .result-card:hover {
-  transform: translateY(-4px);
-  border-color: var(--accent-saffron);
-  box-shadow: 0 14px 35px rgba(245, 158, 11, 0.16);
-}
-
-.white-band-section .result-stat {
-  font-size: 2.8rem;
-  font-weight: 800;
-  color: #D97706;
-  line-height: 1;
-  margin-bottom: 10px;
-}
-
-.white-band-section .result-label {
-  font-size: 15px;
-  font-weight: 700;
-  text-transform: uppercase;
-  margin-bottom: 8px;
-  color: #FFFFFF;
-}
-
-.white-band-section .result-desc {
-  font-size: 13.5px;
-  color: #888888;
-  line-height: 1.5;
+  color: #2A2A2A;
 }
 
 /* ========================================================
@@ -950,29 +914,29 @@ textarea:focus-visible {
 
 /* White Panel with Generous Spacing & 28px Radius */
 .ai-showcase-panel {
-  background: #101010;
+  background: #FFFFFF;
   border-radius: var(--radius-panel);
-  border: 1px solid #2A2A2A;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.40);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
   overflow: hidden;
   position: relative;
   isolation: isolate;
   padding: 32px 36px 40px;
-  color: #FFFFFF;
+  color: #000000;
 }
 
 @media (max-width: 768px) {
   .ai-showcase-panel {
-  background: #101010;
-  border-radius: var(--radius-panel);
-  border: 1px solid #2A2A2A;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.40);
-  overflow: hidden;
-  position: relative;
-  isolation: isolate;
-  padding: 32px 36px 40px;
-  color: #FFFFFF;
-}
+    background: #FFFFFF;
+    border-radius: var(--radius-panel);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
+    overflow: hidden;
+    position: relative;
+    isolation: isolate;
+    padding: 24px 20px 32px;
+    color: #000000;
+  }
 }
 
 /* Topbar Header */
@@ -981,7 +945,7 @@ textarea:focus-visible {
   align-items: center;
   justify-content: space-between;
   padding: 0 0 var(--space-4) 0;
-  border-bottom: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 @media (max-width: 768px) {
@@ -993,7 +957,7 @@ textarea:focus-visible {
 .ai-showcase-heading {
   font-size: 20px;
   font-weight: 700;
-  color: #FFFFFF;
+  color: #000000;
   letter-spacing: -0.3px;
   margin: 0;
   font-family: inherit;
@@ -1005,7 +969,7 @@ textarea:focus-visible {
   gap: 8px;
   font-size: 12.5px;
   font-weight: 700;
-  color: #888888;
+  color: #333333;
   letter-spacing: 0.5px;
   text-transform: uppercase;
 }
@@ -1152,20 +1116,17 @@ textarea:focus-visible {
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.22);
 }
 
-/* Title and description below orb (Dark text #FFFFFF) */
+/* Title and description below orb (Dark text on white) */
 .ai-showcase-title {
   margin-top: var(--space-3);
   font-size: 16.5px;
-  font-weight: 600;
-  color: #FFFFFF;
+  font-weight: 700;
+  color: #000000;
   letter-spacing: -0.2px;
 }
 
 .ai-showcase-sub {
   display: none !important;
-}
-  color: #888888;
-  line-height: 1.45;
 }
 
 /* Simulated Conversation Output - Safari [hidden] protection */
@@ -1690,7 +1651,7 @@ textarea:focus-visible {
    ======================================================== */
 .results-section {
   padding: var(--space-10) 0;
-  background: transparent;
+  background: #000000;
   border-top: 1px solid var(--border-subtle);
   border-bottom: 1px solid var(--border-subtle);
 }
@@ -3161,7 +3122,7 @@ textarea.form-control {
 
 .ai-showcase-tagline {
   font-size: 13px;
-  color: #888888;
+  color: #333333;
   line-height: 1.45;
   margin: 6px 0 10px;
   max-width: 260px;
@@ -3177,9 +3138,9 @@ textarea.form-control {
   gap: 6px;
   padding: 7px 16px;
   border-radius: 9999px;
-  background: #181818;
-  border: 1px solid #888888;
-  color: #888888;
+  background: #FFFFFF;
+  border: 1px solid #2A2A2A;
+  color: #2A2A2A;
   font-size: 12px;
   font-weight: 600;
   cursor: default;
