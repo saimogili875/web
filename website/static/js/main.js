@@ -369,66 +369,444 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // ========================================================
-  // 6. AI Solutions Demo Cards (Experience GuhaTech AI)
+  // 6. AI Solutions Showcase & Sarvam.ai-Style Voice Agent
   // ========================================================
   var aiCardsSection = document.getElementById('ai-solutions');
   if (aiCardsSection) {
-    var pillButtons = aiCardsSection.querySelectorAll('.ai-glass-pill-btn');
+    var voiceStartBtn = document.getElementById('voice-agent-start-btn');
+    var voicePanel = document.getElementById('ai-demo-voice');
+    var voiceResetBtn = document.getElementById('voice-demo-reset');
+    var voiceStatusDot = document.getElementById('voice-status-dot');
+    var voiceStatusText = document.getElementById('voice-status-text');
+    var voiceStateIndicator = document.getElementById('voice-state-indicator');
+    var voiceTranscriptBox = document.getElementById('voice-transcript-box');
+    var voiceWave = document.getElementById('voice-wave');
+    var voiceMicToggle = document.getElementById('voice-mic-toggle');
+    var voiceMicToggleLabel = document.getElementById('voice-mic-toggle-label');
+    var voicePortalLink = document.getElementById('voice-portal-link');
+    var voiceCopyPortalBtn = document.getElementById('voice-copy-portal');
+    var voiceOrbWrap = document.getElementById('voice-agent-orb-wrap');
+    var voiceBtnLabel = document.getElementById('voice-btn-label');
 
-    pillButtons.forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        var panelId = btn.getAttribute('aria-controls');
-        var panel = document.getElementById(panelId);
-        if (!panel) return;
+    // Voice State variables
+    var isActiveCall = false;
+    var isListening = false;
+    var isThinking = false;
+    var isSpeaking = false;
+    var recognition = null;
+    var synth = window.speechSynthesis || null;
+    var conversationHistory = [];
+    var currentOrderDraft = {};
 
-        var isExpanded = btn.getAttribute('aria-expanded') === 'true';
+    var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition || null;
 
-        // Close other open demo panels in the section
-        pillButtons.forEach(function (otherBtn) {
-          if (otherBtn !== btn) {
-            otherBtn.setAttribute('aria-expanded', 'false');
-            otherBtn.classList.remove('is-active');
-            var otherPanelId = otherBtn.getAttribute('aria-controls');
-            var otherPanel = document.getElementById(otherPanelId);
-            if (otherPanel) {
-              otherPanel.hidden = true;
-              otherPanel.setAttribute('hidden', '');
+    // Helper: Best Natural Speech Voice (English / Indian English / Hindi accent)
+    function getBestVoice() {
+      if (!synth || !synth.getVoices) return null;
+      var voices = synth.getVoices();
+      if (!voices || voices.length === 0) return null;
+      var v = voices.find(function(item) { return item.lang === 'en-IN' || item.lang.startsWith('en-IN'); })
+           || voices.find(function(item) { return item.lang === 'hi-IN'; })
+           || voices.find(function(item) { return item.lang.startsWith('en') && (item.name.includes('Natural') || item.name.includes('Google') || item.name.includes('Samantha') || item.name.includes('Karen') || item.name.includes('Victoria')); })
+           || voices.find(function(item) { return item.lang.startsWith('en'); })
+           || voices[0];
+      return v;
+    }
+
+    if (synth && synth.onvoiceschanged !== undefined) {
+      synth.onvoiceschanged = getBestVoice;
+    }
+
+    function setVoiceState(state) {
+      if (!voiceStatusText || !voiceStateIndicator) return;
+
+      if (voiceOrbWrap) {
+        voiceOrbWrap.classList.remove('is-speaking', 'is-listening', 'is-thinking');
+      }
+
+      if (state === 'speaking') {
+        isSpeaking = true;
+        isListening = false;
+        isThinking = false;
+        voiceStatusText.textContent = "Speaking • Agent Aria";
+        voiceStateIndicator.textContent = "Speaking";
+        voiceStateIndicator.className = "voice-state-pill state-speaking";
+        if (voiceStatusDot) voiceStatusDot.className = "ai-demo-dot dot-speaking";
+        if (voiceWave) voiceWave.classList.add('is-active');
+        if (voiceOrbWrap) voiceOrbWrap.classList.add('is-speaking');
+        if (voiceMicToggleLabel) voiceMicToggleLabel.textContent = "Tap to Interrupt";
+      } else if (state === 'listening') {
+        isSpeaking = false;
+        isListening = true;
+        isThinking = false;
+        voiceStatusText.textContent = "Listening... (Speak now)";
+        voiceStateIndicator.textContent = "Listening";
+        voiceStateIndicator.className = "voice-state-pill state-listening";
+        if (voiceStatusDot) voiceStatusDot.className = "ai-demo-dot dot-listening";
+        if (voiceWave) voiceWave.classList.remove('is-active');
+        if (voiceOrbWrap) voiceOrbWrap.classList.add('is-listening');
+        if (voiceMicToggleLabel) voiceMicToggleLabel.textContent = "Listening...";
+      } else if (state === 'thinking') {
+        isSpeaking = false;
+        isListening = false;
+        isThinking = true;
+        voiceStatusText.textContent = "Thinking...";
+        voiceStateIndicator.textContent = "Thinking";
+        voiceStateIndicator.className = "voice-state-pill state-thinking";
+        if (voiceStatusDot) voiceStatusDot.className = "ai-demo-dot dot-thinking";
+        if (voiceWave) voiceWave.classList.remove('is-active');
+        if (voiceOrbWrap) voiceOrbWrap.classList.add('is-thinking');
+        if (voiceMicToggleLabel) voiceMicToggleLabel.textContent = "Processing...";
+      } else {
+        isSpeaking = false;
+        isListening = false;
+        isThinking = false;
+        voiceStatusText.textContent = "Ready • Tap Start Speaking";
+        voiceStateIndicator.textContent = "Idle";
+        voiceStateIndicator.className = "voice-state-pill state-idle";
+        if (voiceStatusDot) voiceStatusDot.className = "ai-demo-dot";
+        if (voiceWave) voiceWave.classList.remove('is-active');
+        if (voiceMicToggleLabel) voiceMicToggleLabel.textContent = "Tap to Speak";
+      }
+    }
+
+    function appendBubble(role, text) {
+      if (!voiceTranscriptBox) return;
+      var bubble = document.createElement('div');
+      bubble.className = 'ai-bubble ' + (role === 'user' ? 'user' : 'agent');
+
+      var speaker = document.createElement('span');
+      speaker.className = 'ai-speaker';
+      speaker.textContent = role === 'user' ? 'You (Customer)' : 'AI Agent (Aria)';
+
+      var msg = document.createElement('p');
+      msg.textContent = text;
+
+      bubble.appendChild(speaker);
+      bubble.appendChild(msg);
+      voiceTranscriptBox.appendChild(bubble);
+      voiceTranscriptBox.scrollTop = voiceTranscriptBox.scrollHeight;
+    }
+
+    function speakText(text, callback) {
+      if (!synth) {
+        setVoiceState('listening');
+        if (callback) callback();
+        return;
+      }
+
+      synth.cancel();
+
+      var utterance = new SpeechSynthesisUtterance(text);
+      var selectedVoice = getBestVoice();
+      if (selectedVoice) {
+        utterance.voice = selectedVoice;
+      }
+      utterance.rate = 1.05;
+      utterance.pitch = 1.0;
+
+      utterance.onstart = function() {
+        setVoiceState('speaking');
+      };
+
+      utterance.onend = function() {
+        if (isActiveCall) {
+          setVoiceState('listening');
+          if (callback) callback();
+        } else {
+          setVoiceState('idle');
+        }
+      };
+
+      utterance.onerror = function() {
+        if (isActiveCall) {
+          setVoiceState('listening');
+          if (callback) callback();
+        } else {
+          setVoiceState('idle');
+        }
+      };
+
+      synth.speak(utterance);
+    }
+
+    function initRecognition() {
+      if (!SpeechRecognition) return null;
+      var rec = new SpeechRecognition();
+      rec.continuous = false;
+      rec.interimResults = false;
+      rec.lang = 'en-IN';
+
+      rec.onstart = function() {
+        setVoiceState('listening');
+      };
+
+      rec.onresult = function(event) {
+        if (!event.results || !event.results[0]) return;
+        var spokenText = event.results[0][0].transcript.trim();
+        if (spokenText) {
+          handleUserUtterance(spokenText);
+        }
+      };
+
+      rec.onerror = function() {
+        if (isActiveCall && !isSpeaking && !isThinking) {
+          setVoiceState('listening');
+        }
+      };
+
+      rec.onend = function() {
+        if (isActiveCall && !isSpeaking && !isThinking) {
+          setTimeout(function() {
+            if (isActiveCall && !isSpeaking && !isThinking) {
+              startListening();
             }
+          }, 400);
+        }
+      };
+
+      return rec;
+    }
+
+    function startListening() {
+      if (!isActiveCall || isSpeaking || isThinking) return;
+
+      if (!recognition) {
+        recognition = initRecognition();
+      }
+
+      if (recognition) {
+        try {
+          recognition.start();
+        } catch (e) {
+          // Already running
+        }
+      } else {
+        setVoiceState('listening');
+      }
+    }
+
+    function stopListening() {
+      if (recognition) {
+        try {
+          recognition.stop();
+        } catch (e) {}
+      }
+    }
+
+    function interruptAgent() {
+      if (synth && synth.speaking) {
+        synth.cancel();
+      }
+      setVoiceState('listening');
+      startListening();
+    }
+
+    function updatePortalUrl(url) {
+      if (!voicePortalLink) return;
+      var fullUrl = url;
+      if (url.startsWith('/')) {
+        fullUrl = window.location.origin + url;
+      }
+      voicePortalLink.href = url;
+      var displayUrl = fullUrl.replace(/^https?:\/\//, '');
+      voicePortalLink.textContent = displayUrl;
+    }
+
+    function handleUserUtterance(userText) {
+      stopListening();
+      appendBubble('user', userText);
+      conversationHistory.push({ role: 'user', content: userText });
+      setVoiceState('thinking');
+
+      fetch('/api/voice-agent/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Requested-With': 'XMLHttpRequest'
+        },
+        body: JSON.stringify({
+          message: userText,
+          history: conversationHistory,
+          order_draft: currentOrderDraft
+        })
+      })
+      .then(function(res) {
+        if (!res.ok) {
+          throw new Error('Server returned status ' + res.status);
+        }
+        return res.json();
+      })
+      .then(function(data) {
+        if (data.order_draft) {
+          currentOrderDraft = data.order_draft;
+        }
+
+        if (data.portal_url) {
+          updatePortalUrl(data.portal_url);
+        }
+
+        var botReply = data.reply || "Got it! Which color would you like: Midnight, Starlight, Space Gray, or Silver?";
+        appendBubble('agent', botReply);
+        conversationHistory.push({ role: 'assistant', content: botReply });
+
+        speakText(botReply, function() {
+          startListening();
+        });
+      })
+      .catch(function() {
+        var fallbackMsg = "Got that! Would you prefer Midnight, Starlight, Space Gray, or Silver?";
+        appendBubble('agent', fallbackMsg);
+        conversationHistory.push({ role: 'assistant', content: fallbackMsg });
+        speakText(fallbackMsg, function() {
+          startListening();
+        });
+      });
+    }
+
+    // Attach quick reply chips for fallback text testing
+    function addQuickReplyChips() {
+      var existingChips = voicePanel.querySelector('.voice-quick-chips');
+      if (existingChips) return;
+
+      var chipsWrap = document.createElement('div');
+      chipsWrap.className = 'voice-quick-chips';
+
+      var chips = [
+        '13-inch M3',
+        '15-inch M3',
+        'Midnight',
+        '512GB SSD',
+        'Rahul Sharma',
+        '9876543210',
+        'Banjara Hills, Hyderabad'
+      ];
+
+      chips.forEach(function(chipText) {
+        var chipBtn = document.createElement('button');
+        chipBtn.type = 'button';
+        chipBtn.className = 'voice-chip-btn';
+        chipBtn.textContent = chipText;
+        chipBtn.addEventListener('click', function() {
+          if (!isActiveCall) {
+            startVoiceCall();
+            setTimeout(function() {
+              handleUserUtterance(chipText);
+            }, 600);
+          } else {
+            interruptAgent();
+            handleUserUtterance(chipText);
           }
         });
+        chipsWrap.appendChild(chipBtn);
+      });
 
-        // Toggle this panel
-        if (isExpanded) {
-          btn.setAttribute('aria-expanded', 'false');
-          btn.classList.remove('is-active');
-          panel.hidden = true;
-          panel.setAttribute('hidden', '');
+      if (voiceTranscriptBox) {
+        voiceTranscriptBox.after(chipsWrap);
+      }
+    }
+
+    function startVoiceCall() {
+      isActiveCall = true;
+      if (voiceStartBtn) {
+        voiceStartBtn.setAttribute('aria-expanded', 'true');
+        voiceStartBtn.classList.add('is-active');
+      }
+      if (voiceBtnLabel) {
+        voiceBtnLabel.textContent = "Call in Progress...";
+      }
+      if (voicePanel) {
+        voicePanel.hidden = false;
+        voicePanel.removeAttribute('hidden');
+      }
+
+      var initialGreeting = "Hello! I am GuhaTech's customer voice agent. Which MacBook Air would you like to order: 13-inch M2, 13-inch M3, or 15-inch M3?";
+
+      if (voiceTranscriptBox) {
+        voiceTranscriptBox.innerHTML = '';
+      }
+      appendBubble('agent', initialGreeting);
+      conversationHistory = [{ role: 'assistant', content: initialGreeting }];
+      currentOrderDraft = {};
+
+      addQuickReplyChips();
+
+      speakText(initialGreeting, function() {
+        startListening();
+      });
+    }
+
+    function endVoiceCall() {
+      isActiveCall = false;
+      if (synth) synth.cancel();
+      stopListening();
+      setVoiceState('idle');
+
+      if (voiceStartBtn) {
+        voiceStartBtn.setAttribute('aria-expanded', 'false');
+        voiceStartBtn.classList.remove('is-active');
+      }
+      if (voiceBtnLabel) {
+        voiceBtnLabel.textContent = "Start Speaking";
+      }
+      if (voicePanel) {
+        voicePanel.hidden = true;
+        voicePanel.setAttribute('hidden', '');
+      }
+    }
+
+    if (voiceStartBtn) {
+      voiceStartBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        if (isActiveCall) {
+          endVoiceCall();
         } else {
-          btn.setAttribute('aria-expanded', 'true');
-          btn.classList.add('is-active');
-          panel.hidden = false;
-          panel.removeAttribute('hidden');
+          startVoiceCall();
         }
       });
-    });
+    }
 
-    var resetButtons = aiCardsSection.querySelectorAll('.ai-demo-reset-btn');
-    resetButtons.forEach(function (resetBtn) {
-      resetBtn.addEventListener('click', function () {
-        var card = resetBtn.closest('.ai-showcase-col') || resetBtn.closest('.ai-orb-card');
-        if (!card) return;
-        var btn = card.querySelector('.ai-glass-pill-btn');
-        var panel = card.querySelector('.ai-demo-panel');
-        if (panel) {
-          panel.hidden = true;
-          panel.setAttribute('hidden', '');
+    if (voiceResetBtn) {
+      voiceResetBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        endVoiceCall();
+      });
+    }
+
+    if (voiceMicToggle) {
+      voiceMicToggle.addEventListener('click', function(e) {
+        e.preventDefault();
+        if (!isActiveCall) {
+          startVoiceCall();
+          return;
         }
-        if (btn) {
-          btn.setAttribute('aria-expanded', 'false');
-          btn.classList.remove('is-active');
-          btn.focus();
+        if (isSpeaking) {
+          interruptAgent();
+        } else if (isListening) {
+          stopListening();
+          setVoiceState('idle');
+        } else {
+          setVoiceState('listening');
+          startListening();
         }
       });
-    });
+    }
+
+    if (voiceCopyPortalBtn && voicePortalLink) {
+      voiceCopyPortalBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        var copyTarget = voicePortalLink.href || voicePortalLink.textContent;
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(copyTarget).then(function() {
+            var copyTextSpan = voiceCopyPortalBtn.querySelector('.copy-text');
+            if (copyTextSpan) {
+              var original = copyTextSpan.textContent;
+              copyTextSpan.textContent = "Copied!";
+              setTimeout(function() { copyTextSpan.textContent = original; }, 2000);
+            }
+          });
+        }
+      });
+    }
   }
 });

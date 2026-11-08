@@ -9,5 +9,7 @@ urlpatterns = [
     path('ai-agents/', views.category_detail, {'slug': 'ai-agents'}, name='ai_agents'),
     path('contact/', views.contact_submit, name='contact_submit'),
     path('api/chat/', views.chat_api, name='chat_api'),
+    path('api/voice-agent/', views.voice_agent_api, name='voice_agent_api'),
+    path('demo/order/', views.demo_order_portal, name='demo_order_portal'),
 ]
 

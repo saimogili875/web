@@ -67,144 +67,110 @@
 
       <!-- Horizontal 3 Orbs Row -->
       <div class="ai-showcase-grid">
-        <!-- Item 1: Cart Recovery -->
-        <article class="ai-showcase-col" data-card="cart-recovery">
-          <div class="ai-showcase-orb-wrap">
-            <img src="{% static 'images/orbs/cart-recovery.png' %}" alt="Cart Recovery multilingual voice agent orb" class="ai-showcase-orb-img" width="800" height="800" loading="lazy">
+        <!-- Item 1: Call Customer Agent (Voice Agent) -->
+        <article class="ai-showcase-col voice-agent-col" data-card="voice-agent">
+          <div class="ai-showcase-orb-wrap" id="voice-agent-orb-wrap">
+            <img src="{% static 'images/orbs/ai-telecaller.png' %}" alt="Call Customer Agent AI voice orb" class="ai-showcase-orb-img" id="voice-agent-orb-img" width="800" height="800" loading="lazy">
+            <div class="ai-orb-pulse-rings" aria-hidden="true">
+              <span class="pulse-ring r1"></span>
+              <span class="pulse-ring r2"></span>
+              <span class="pulse-ring r3"></span>
+            </div>
             <div class="ai-showcase-overlay">
-              <button type="button" class="ai-glass-pill-btn" aria-expanded="false" aria-controls="ai-demo-cart">
-                <span>Start Speaking</span>
+              <button type="button" class="ai-glass-pill-btn voice-start-btn" id="voice-agent-start-btn" aria-expanded="false" aria-controls="ai-demo-voice">
+                <svg class="voice-mic-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="8" y1="22" x2="16" y2="22"/></svg>
+                <span id="voice-btn-label">Start Speaking</span>
               </button>
             </div>
           </div>
-          <h3 class="ai-showcase-title">Cart Recovery</h3>
-          <div class="ai-demo-panel" id="ai-demo-cart" hidden aria-live="polite">
+          <h3 class="ai-showcase-title">Call Customer Agent</h3>
+
+          <!-- Voice Agent Interactive Live Panel -->
+          <div class="ai-demo-panel voice-demo-panel" id="ai-demo-voice" hidden aria-live="polite">
             <div class="ai-demo-header">
               <div class="ai-demo-status">
-                <span class="ai-demo-dot" aria-hidden="true"></span>
-                <span>Active Call • Saffron Bakery #429</span>
+                <span class="ai-demo-dot" id="voice-status-dot" aria-hidden="true"></span>
+                <span id="voice-status-text">Ready • Tap Start Speaking</span>
               </div>
-              <div class="ai-demo-wave" aria-hidden="true">
+              <div class="ai-demo-wave" id="voice-wave" aria-hidden="true">
                 <span></span><span></span><span></span><span></span>
               </div>
             </div>
-            <div class="ai-demo-chat">
+
+            <!-- Live Spoken Transcript -->
+            <div class="ai-demo-chat voice-transcript-chat" id="voice-transcript-box" role="log" aria-label="Conversation Transcript">
               <div class="ai-bubble agent">
-                <span class="ai-speaker">AI Agent (Telugu)</span>
-                <p>నమస్కారం! మీ బేకరీ కార్ట్‌లో ఉన్న ఆర్డర్ పూర్తి చేయడానికి మేము సహాయం చేయగలమా?</p>
-              </div>
-              <div class="ai-bubble user">
-                <span class="ai-speaker">Customer</span>
-                <p>Yes, was there an instant discount available?</p>
-              </div>
-              <div class="ai-bubble agent">
-                <span class="ai-speaker">AI Agent (Hindi/English)</span>
-                <p>हाँ जी! 10% instant off apply ho gaya hai. Shall I send 1-tap WhatsApp payment link?</p>
-              </div>
-              <div class="ai-bubble user">
-                <span class="ai-speaker">Customer</span>
-                <p>Yes please, send it now.</p>
-              </div>
-              <div class="ai-bubble agent">
-                <span class="ai-speaker">AI Agent</span>
-                <p>Sent to your WhatsApp! ధన్యవాదాలు (Thank you)!</p>
+                <span class="ai-speaker">AI Agent (Aria)</span>
+                <p id="voice-agent-greeting">Hello! I am GuhaTech's voice agent. Which MacBook Air would you like to order: 13-inch M2, 13-inch M3, or 15-inch M3?</p>
               </div>
             </div>
-            <button type="button" class="ai-demo-reset-btn" aria-label="Close Cart Recovery demo">Close demo</button>
+
+            <!-- Status Indicator Bar -->
+            <div class="voice-state-bar">
+              <span class="voice-state-label">Agent Status:</span>
+              <span class="voice-state-pill" id="voice-state-indicator">Idle</span>
+              <button type="button" class="voice-mic-inline-toggle" id="voice-mic-toggle" aria-label="Mute or listen">
+                <span id="voice-mic-toggle-label">Tap to Speak</span>
+              </button>
+            </div>
+
+            <!-- Interruption / Microphone Controls -->
+            <div class="voice-controls-bar">
+              <button type="button" class="ai-demo-reset-btn" id="voice-demo-reset" aria-label="End call">End Call</button>
+            </div>
+
+            <!-- Portal URL Banner at Bottom of Widget -->
+            <div class="voice-portal-banner">
+              <div class="voice-portal-info">
+                <span class="voice-portal-badge">NO LOGIN</span>
+                <span class="voice-portal-label">Order without login:</span>
+                <a href="/demo/order/" id="voice-portal-link" class="voice-portal-url" target="_blank" rel="noopener">guhatech.onrender.com/demo/order/</a>
+              </div>
+              <button type="button" class="voice-copy-btn" id="voice-copy-portal" aria-label="Copy portal link" title="Copy portal link">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                <span class="copy-text">Copy</span>
+              </button>
+            </div>
           </div>
         </article>
 
-        <!-- Item 2: Appointment Booking -->
-        <article class="ai-showcase-col" data-card="appointment-booking">
+        <!-- Item 2: Try our CRM -->
+        <article class="ai-showcase-col placeholder-card" data-card="crm">
           <div class="ai-showcase-orb-wrap">
-            <img src="{% static 'images/orbs/appointment-booking.png' %}" alt="Appointment Booking multilingual voice agent orb" class="ai-showcase-orb-img" width="800" height="800" loading="lazy">
+            <img src="{% static 'images/orbs/crm-online.png' %}" alt="Try our CRM orb" class="ai-showcase-orb-img" width="800" height="800" loading="lazy">
             <div class="ai-showcase-overlay">
-              <button type="button" class="ai-glass-pill-btn" aria-expanded="false" aria-controls="ai-demo-appointment">
-                <span>Start Speaking</span>
+              <button type="button" class="ai-glass-pill-btn coming-soon-btn" disabled>
+                <span>Coming Soon</span>
               </button>
             </div>
           </div>
-          <h3 class="ai-showcase-title">Appointment Booking</h3>
-          <div class="ai-demo-panel" id="ai-demo-appointment" hidden aria-live="polite">
-            <div class="ai-demo-header">
-              <div class="ai-demo-status">
-                <span class="ai-demo-dot" aria-hidden="true"></span>
-                <span>Active Call • Dr. Rao Dental Clinic</span>
-              </div>
-              <div class="ai-demo-wave" aria-hidden="true">
-                <span></span><span></span><span></span><span></span>
-              </div>
-            </div>
-            <div class="ai-demo-chat">
-              <div class="ai-bubble agent">
-                <span class="ai-speaker">AI Agent (Telugu)</span>
-                <p>నమస్కారం! డాక్టర్ రావు క్లినిక్ నుంచి కాల్. మీ డెంటల్ చెకప్ కోసం స్లాట్ బుక్ చేయాలా?</p>
-              </div>
-              <div class="ai-bubble user">
-                <span class="ai-speaker">Customer</span>
-                <p>Yes, do you have any slot open tomorrow afternoon?</p>
-              </div>
-              <div class="ai-bubble agent">
-                <span class="ai-speaker">AI Agent (Hindi/English)</span>
-                <p>हाँ जी, kal dopahar 5:00 PM slot open hai. Kya hum confirm karein?</p>
-              </div>
-              <div class="ai-bubble user">
-                <span class="ai-speaker">Customer</span>
-                <p>Yes, 5:00 PM works best.</p>
-              </div>
-              <div class="ai-bubble agent">
-                <span class="ai-speaker">AI Agent</span>
-                <p>Confirmed for 5:00 PM! Booking pass sent to your WhatsApp. See you tomorrow!</p>
-              </div>
-            </div>
-            <button type="button" class="ai-demo-reset-btn" aria-label="Close Appointment Booking demo">Close demo</button>
+          <h3 class="ai-showcase-title">Try our CRM</h3>
+          <p class="ai-showcase-tagline">Integrated leads, WhatsApp pipeline &amp; customer sales tracking.</p>
+          <div class="ai-coming-soon-badge-wrap">
+            <button type="button" class="ai-btn-coming-soon" disabled aria-disabled="true">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              <span>Coming soon</span>
+            </button>
           </div>
         </article>
 
-        <!-- Item 3: Payment follow-ups -->
-        <article class="ai-showcase-col" data-card="payment-followups">
+        <!-- Item 3: Cyber Security & Bug Finder by AI -->
+        <article class="ai-showcase-col placeholder-card" data-card="cyber-security">
           <div class="ai-showcase-orb-wrap">
-            <img src="{% static 'images/orbs/payment-followups.png' %}" alt="Payment follow-ups automated voice reminder orb" class="ai-showcase-orb-img" width="800" height="800" loading="lazy">
+            <img src="{% static 'images/orbs/cyber-security.png' %}" alt="Cyber Security & Bug Finder by AI orb" class="ai-showcase-orb-img" width="800" height="800" loading="lazy">
             <div class="ai-showcase-overlay">
-              <button type="button" class="ai-glass-pill-btn" aria-expanded="false" aria-controls="ai-demo-payment">
-                <span>Start Speaking</span>
+              <button type="button" class="ai-glass-pill-btn coming-soon-btn" disabled>
+                <span>Coming Soon</span>
               </button>
             </div>
           </div>
-          <h3 class="ai-showcase-title">Payment follow-ups</h3>
-          <div class="ai-demo-panel" id="ai-demo-payment" hidden aria-live="polite">
-            <div class="ai-demo-header">
-              <div class="ai-demo-status">
-                <span class="ai-demo-dot" aria-hidden="true"></span>
-                <span>Active Call • Kirana Wholesale #1048</span>
-              </div>
-              <div class="ai-demo-wave" aria-hidden="true">
-                <span></span><span></span><span></span><span></span>
-              </div>
-            </div>
-            <div class="ai-demo-chat">
-              <div class="ai-bubble agent">
-                <span class="ai-speaker">AI Agent (Telugu)</span>
-                <p>నమస్కారం! శ్రీ కిరాణా స్టోర్ ఇన్వాయిస్ #1048 చెల్లింపు రిమైండర్ కోసం కాల్ చేస్తున్నాం.</p>
-              </div>
-              <div class="ai-bubble user">
-                <span class="ai-speaker">Customer</span>
-                <p>Yes, could you send the UPI payment QR?</p>
-              </div>
-              <div class="ai-bubble agent">
-                <span class="ai-speaker">AI Agent (Hindi/English)</span>
-                <p>तुरंत भेज दिया! ₹14,500 ka UPI link aapke WhatsApp par aa gaya hai.</p>
-              </div>
-              <div class="ai-bubble user">
-                <span class="ai-speaker">Customer</span>
-                <p>Got it, paying now.</p>
-              </div>
-              <div class="ai-bubble agent">
-                <span class="ai-speaker">AI Agent</span>
-                <p>Payment recorded! Receipt dispatched to WhatsApp. Thank you!</p>
-              </div>
-            </div>
-            <button type="button" class="ai-demo-reset-btn" aria-label="Close Payment follow-ups demo">Close demo</button>
+          <h3 class="ai-showcase-title">Cyber Security &amp; Bug Finder by AI</h3>
+          <p class="ai-showcase-tagline">AI scans your site for vulnerabilities and bugs</p>
+          <div class="ai-coming-soon-badge-wrap">
+            <button type="button" class="ai-btn-coming-soon" disabled aria-disabled="true">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              <span>Coming soon</span>
+            </button>
           </div>
         </article>
       </div>
