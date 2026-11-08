@@ -10,22 +10,22 @@ const MARQUEE_CONFIG = {
   wordGap: 40,       // px of space between one word and the next
   fontSize: 15,      // px
   fontWeight: 700,
-  rowBackground: "#FFFFFF",   // the scrolling strip itself is WHITE
+  rowBackground: "#101010",
   rows: {
-    "card-1": { color: "#7928CA", words: [ // Customized Websites and Apps
+    "card-1": { color: "#F59E0B", words: [ // Customized Websites and Apps
       "3D / interactive hero (the wow first impression)",
       "WhatsApp button",
       "Chatbot (instant contact)",
       "Online payment / booking CTA",
       "Trust: secure payments, reviews, support",
       "Admin dashboard, billing, analytics" ]},
-    "card-2": { color: "#1D4ED8", words: [ // Odoo-style ERP
+    "card-2": { color: "#F59E0B", words: [ // Odoo-style ERP
       "Sales and CRM", "Accounting", "Inventory and Purchase", "POS",
       "Operations", "Delivery and multi-vendor", "Industry ERPs" ]},
-    "card-3": { color: "#BE185D", words: [ // AI Marketing and Business Analysis
+    "card-3": { color: "#F59E0B", words: [ // AI Marketing and Business Analysis
       "Business analysis", "Content and social", "SEO and local SEO",
       "Lead generation", "Lead follow-up", "AI calling agent", "Reporting" ]},
-    "card-4": { color: "#047857", words: [ // Domain AI Agents
+    "card-4": { color: "#F59E0B", words: [ // Domain AI Agents
       "Exam agents", "Institution agent", "HR agent", "Finance agent",
       "Healthcare agent", "Support agent", "Specialized calling agent" ]}
   }

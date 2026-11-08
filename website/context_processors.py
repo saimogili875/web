@@ -8,8 +8,8 @@ CATEGORIES_DATA = [
         'title': 'Customized Websites and Apps',
         'short_title': 'Websites & Apps',
         'subtext': 'High-performance digital storefronts and web solutions tailored for growing enterprises.',
-        'color': '#A855F7',
-        'color_dark': '#7928CA',
+        'color': '#F59E0B',
+        'color_dark': '#D97706',
         'icon': 'i-cat1',
         'sub_services': [
             {'num': '1.1', 'title': 'Business sites', 'count': 18, 'desc': 'Show your services, address, timings and a direct phone button.', 'icon': 'i-globe', 'tags': ['Fast on mobile', 'Phone button']},
@@ -24,8 +24,8 @@ CATEGORIES_DATA = [
         'title': 'Odoo-style ERP',
         'short_title': 'ERP Systems',
         'subtext': 'Comprehensive business management suites designed for seamless workflows.',
-        'color': '#3B82F6',
-        'color_dark': '#1D4ED8',
+        'color': '#F59E0B',
+        'color_dark': '#D97706',
         'icon': 'i-cat2',
         'sub_services': [
             {'num': '2.1', 'title': 'Sales and CRM', 'count': 4, 'desc': 'Manage pipelines, leads, and customer interactions efficiently.', 'icon': 'i-users', 'tags': ['Pipeline', 'Leads']},
@@ -44,8 +44,8 @@ CATEGORIES_DATA = [
         'title': 'AI Marketing and Business Analysis',
         'short_title': 'AI Marketing',
         'subtext': 'Intelligent marketing automation and data-driven business insights.',
-        'color': '#EC4899',
-        'color_dark': '#BE185D',
+        'color': '#F59E0B',
+        'color_dark': '#D97706',
         'icon': 'i-cat3',
         'sub_services': [
             {'num': '3.1', 'title': 'Business analysis', 'count': 3, 'desc': 'Advanced data evaluation and strategic business performance insights.', 'icon': 'i-chart', 'tags': ['Analytics', 'Strategy']},
@@ -63,8 +63,8 @@ CATEGORIES_DATA = [
         'title': 'Domain AI Agents',
         'short_title': 'AI Agents',
         'subtext': 'Specialized vertical AI agents designed for automated industry tasks.',
-        'color': '#10B981',
-        'color_dark': '#047857',
+        'color': '#F59E0B',
+        'color_dark': '#D97706',
         'icon': 'i-cat4',
         'sub_services': [
             {'num': '4.1', 'title': 'Exam agents', 'count': 3, 'desc': 'Automated question paper generation, instant scoring, and student analytics.', 'icon': 'i-grad', 'tags': ['EdTech', 'Analytics']},

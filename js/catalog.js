@@ -38,7 +38,7 @@
       gridContainer.innerHTML = `
         <div class="catalog-empty" style="grid-column: 1 / -1;">
           <h3>Unable to load catalog prototypes</h3>
-          <p style="color: #64748B;">Please ensure you are viewing this via a local server (e.g. <code>python3 -m http.server 3000</code>).</p>
+          <p style="color: #888888;">Please ensure you are viewing this via a local server (e.g. <code>python3 -m http.server 3000</code>).</p>
           <button type="button" class="btn btn-primary btn-sm" onclick="location.reload()">Retry</button>
         </div>
       `;
@@ -318,7 +318,7 @@
             <div class="prototype-body">
               <div class="prototype-header-meta">
                 <span class="prototype-industry">${escapeHtml(item.industry)}</span>
-                ${hasDate ? `<span style="font-size: 0.75rem; color: #94A3B8;">${escapeHtml(item.date)}</span>` : ""}
+                ${hasDate ? `<span style="font-size: 0.75rem; color: #888888;">${escapeHtml(item.date)}</span>` : ""}
               </div>
               <h3 class="prototype-title">${escapeHtml(item.name)}</h3>
               <p class="prototype-desc">${escapeHtml(item.description)}</p>

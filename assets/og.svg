@@ -3,10 +3,10 @@
   <rect x="0" y="618" width="1200" height="12" fill="#F59E0B"/>
   <g transform="translate(100, 160)">
     <rect x="0" y="0" width="160" height="34" rx="17" fill="#F59E0B" fill-opacity="0.2" stroke="#F59E0B" stroke-width="1.5"/>
-    <text x="80" y="22" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="14" font-weight="700" fill="#FBBF24" text-anchor="middle" letter-spacing="1">HYDERABAD, INDIA</text>
+    <text x="80" y="22" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="14" font-weight="700" fill="#F59E0B" text-anchor="middle" letter-spacing="1">HYDERABAD, INDIA</text>
     <text x="0" y="110" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="76" font-weight="800" fill="#FFFFFF">GuhaTech<tspan fill="#F59E0B">.</tspan></text>
-    <text x="0" y="180" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="34" font-weight="600" fill="#E2E8F0">Your business online. Ready-made, live in days.</text>
-    <text x="0" y="235" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="22" font-weight="400" fill="#94A3B8">Websites, apps and AI marketing for small businesses. guhatech.com</text>
+    <text x="0" y="180" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="34" font-weight="600" fill="#FFFFFF">Your business online. Ready-made, live in days.</text>
+    <text x="0" y="235" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="22" font-weight="400" fill="#888888">Websites, apps and AI marketing for small businesses. guhatech.com</text>
   </g>
 </svg>
 
